@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compte rendu — RPE &amp; Mairie de Nanterre — 5 février 2026</title>
+    <style>
+        :root {
+            --blue: #1a56db;
+            --blue-light: #e8effc;
+            --blue-dark: #0f3a8e;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-400: #9ca3af;
+            --gray-600: #4b5563;
+            --gray-700: #374151;
+            --gray-800: #1f2937;
+            --gray-900: #111827;
+            --amber-50: #fffbeb;
+            --amber-600: #d97706;
+            --amber-border: #fbbf24;
+            --teal-50: #f0fdfa;
+            --teal-600: #0d9488;
+            --teal-border: #5eead4;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            color: var(--gray-800);
+            background-color: var(--gray-50);
+            line-height: 1.7;
+            font-size: 16px;
+        }
+
+        .header {
+            background: linear-gradient(135deg, var(--blue-dark), var(--blue));
+            color: white;
+            padding: 3rem 1.5rem;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+
+        .header .subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            font-weight: 400;
+        }
+
+        .header .date {
+            display: inline-block;
+            margin-top: 1rem;
+            background: rgba(255,255,255,0.2);
+            padding: 0.35rem 1.2rem;
+            border-radius: 2rem;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        .container {
+            max-width: 820px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem 4rem;
+        }
+
+        /* Table of contents */
+        .toc {
+            background: white;
+            border: 1px solid var(--gray-200);
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            margin-bottom: 2.5rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+        }
+
+        .toc h2 {
+            font-size: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--gray-400);
+            margin-bottom: 0.75rem;
+        }
+
+        .toc ol {
+            list-style: none;
+            counter-reset: toc-counter;
+        }
+
+        .toc ol li {
+            counter-increment: toc-counter;
+            padding: 0.3rem 0;
+        }
+
+        .toc ol li a {
+            color: var(--blue);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.15s;
+        }
+
+        .toc ol li a:hover {
+            color: var(--blue-dark);
+            text-decoration: underline;
+        }
+
+        .toc ol li a::before {
+            content: counter(toc-counter) ". ";
+            color: var(--gray-400);
+            font-weight: 600;
+        }
+
+        /* Sections */
+        .section {
+            background: white;
+            border: 1px solid var(--gray-200);
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+        }
+
+        .section h2 {
+            font-size: 1.4rem;
+            color: var(--gray-900);
+            margin-bottom: 1.25rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid var(--blue-light);
+            letter-spacing: -0.01em;
+        }
+
+        .section h3 {
+            font-size: 1.1rem;
+            color: var(--gray-700);
+            margin-top: 1.25rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .section h4 {
+            font-size: 1rem;
+            color: var(--gray-600);
+            margin-top: 1rem;
+            margin-bottom: 0.4rem;
+            font-weight: 600;
+        }
+
+        .section p {
+            margin-bottom: 0.75rem;
+            color: var(--gray-700);
+        }
+
+        .section ul, .section ol {
+            margin-left: 1.25rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .section li {
+            margin-bottom: 0.35rem;
+            color: var(--gray-700);
+        }
+
+        .section li ul {
+            margin-top: 0.35rem;
+        }
+
+        /* Victor Hugo specific callout */
+        .callout {
+            border-left: 4px solid var(--blue);
+            background: var(--blue-light);
+            padding: 1rem 1.25rem;
+            border-radius: 0 8px 8px 0;
+            margin: 1.25rem 0;
+        }
+
+        .callout p {
+            color: var(--blue-dark);
+            margin-bottom: 0.4rem;
+        }
+
+        .callout p:last-child {
+            margin-bottom: 0;
+        }
+
+        .callout .callout-title {
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: var(--blue);
+            margin-bottom: 0.4rem;
+        }
+
+        /* Note/remark */
+        .remark {
+            border-left: 4px solid var(--amber-border);
+            background: var(--amber-50);
+            padding: 1rem 1.25rem;
+            border-radius: 0 8px 8px 0;
+            margin: 1.25rem 0;
+            font-style: italic;
+        }
+
+        .remark p {
+            color: var(--amber-600);
+            margin-bottom: 0.3rem;
+        }
+
+        .remark p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Tip */
+        .tip {
+            border-left: 4px solid var(--teal-border);
+            background: var(--teal-50);
+            padding: 1rem 1.25rem;
+            border-radius: 0 8px 8px 0;
+            margin: 1.25rem 0;
+        }
+
+        .tip p {
+            color: var(--teal-600);
+            margin-bottom: 0.3rem;
+        }
+
+        .tip p:last-child {
+            margin-bottom: 0;
+        }
+
+        /* Key figures grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .stat-card {
+            background: var(--gray-50);
+            border: 1px solid var(--gray-200);
+            border-radius: 8px;
+            padding: 1rem 1.25rem;
+            text-align: center;
+        }
+
+        .stat-card .number {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--blue);
+            line-height: 1.2;
+        }
+
+        .stat-card .label {
+            font-size: 0.85rem;
+            color: var(--gray-600);
+            margin-top: 0.25rem;
+        }
+
+        /* Tags */
+        .tag-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 0.75rem 0;
+            list-style: none;
+            padding: 0;
+        }
+
+        .tag-list li {
+            background: var(--blue-light);
+            color: var(--blue-dark);
+            padding: 0.3rem 0.85rem;
+            border-radius: 2rem;
+            font-size: 0.88rem;
+            font-weight: 500;
+            margin-bottom: 0;
+        }
+
+        /* Contact email */
+        .email {
+            color: var(--blue);
+            text-decoration: none;
+            font-weight: 500;
+        }
+
+        .email:hover {
+            text-decoration: underline;
+        }
+
+        /* Two columns */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin: 1rem 0;
+        }
+
+        .two-col .col {
+            background: var(--gray-50);
+            border: 1px solid var(--gray-200);
+            border-radius: 8px;
+            padding: 1.25rem;
+        }
+
+        .two-col .col h3 {
+            margin-top: 0;
+            font-size: 1.05rem;
+            color: var(--blue);
+            margin-bottom: 0.75rem;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 2rem 1.5rem;
+            color: var(--gray-400);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--gray-200);
+            margin-top: 1rem;
+        }
+
+        .footer strong {
+            color: var(--gray-700);
+        }
+
+        /* Responsive */
+        @media (max-width: 640px) {
+            .header h1 {
+                font-size: 1.5rem;
+            }
+
+            .container {
+                padding: 1.25rem 1rem 3rem;
+            }
+
+            .section {
+                padding: 1.25rem;
+            }
+
+            .two-col {
+                grid-template-columns: 1fr;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1>Compte rendu</h1>
+    <div class="subtitle">Réunion des représentants de parents d'élèves avec la Ville de Nanterre</div>
+    <div class="date">5 février 2026</div>
+</div>
+
+<div class="container">
+
+    <!-- Table of contents -->
+    <nav class="toc">
+        <h2>Sommaire</h2>
+        <ol>
+            <li><a href="#competences">Répartition des compétences entre la Ville et l'Éducation nationale</a></li>
+            <li><a href="#chiffres">Quelques chiffres</a></li>
+            <li><a href="#conseil">Le conseil d'école</a></li>
+            <li><a href="#locaux">Mise à disposition de locaux</a></li>
+            <li><a href="#restauration">Le temps du midi et la restauration scolaire</a></li>
+            <li><a href="#vacances">Centres de vacances et classes de découverte</a></li>
+            <li><a href="#numerique">Le numérique dans les écoles</a></li>
+            <li><a href="#projets">Projets et activités</a></li>
+            <li><a href="#aide">Dispositifs d'aide aux familles</a></li>
+            <li><a href="#questions">Autres questions (Victor Hugo)</a></li>
+        </ol>
+    </nav>
+
+    <!-- 1. Répartition des compétences -->
+    <section class="section" id="competences">
+        <h2>1. Répartition des compétences entre la Ville et l'Éducation nationale</h2>
+
+        <div class="two-col">
+            <div class="col">
+                <h3>L'Éducation nationale</h3>
+                <p>Prend en charge l'enseignement :</p>
+                <ul>
+                    <li>Le corps enseignant</li>
+                    <li>Le RASED (Réseau d'Aide et de Soutien aux Enfants en Difficultés)</li>
+                    <li>Les infirmières scolaires</li>
+                    <li>Les programmes scolaires</li>
+                    <li>Les ouvertures et fermetures de classe</li>
+                    <li>L'âge de la scolarisation</li>
+                </ul>
+            </div>
+            <div class="col">
+                <h3>La Ville</h3>
+                <ul>
+                    <li>Détient les bâtiments scolaires, se charge de leur construction, entretien et équipement (mobilier, fournitures, manuels, matériel informatique...)</li>
+                    <li>Emploie le personnel de service et de restauration, les gardiens</li>
+                    <li>Emploie les ATSEM en maternelle et les animateurs sur les temps périscolaires</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="callout">
+            <div class="callout-title">Victor Hugo</div>
+            <p>Deux questions ont été posées sur les remplacements des enseignants absents et la continuité d'enseignement. Ce sujet relève de l'Éducation nationale et est hors du périmètre de la mairie. Aucune réponse concrète n'a pu être apportée lors de cette réunion.</p>
+            <p>La mairie recrute en revanche le personnel ATSEM et le personnel périscolaire, qui relèvent de sa compétence.</p>
+        </div>
+    </section>
+
+    <!-- 2. Quelques chiffres -->
+    <section class="section" id="chiffres">
+        <h2>2. Quelques chiffres</h2>
+
+        <h3>Nombre d'écoles</h3>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="number">20</div>
+                <div class="label">Écoles maternelles</div>
+            </div>
+            <div class="stat-card">
+                <div class="number">17</div>
+                <div class="label">Écoles élémentaires</div>
+            </div>
+            <div class="stat-card">
+                <div class="number">7</div>
+                <div class="label">Écoles primaires (maternelle + élémentaire)</div>
+            </div>
+        </div>
+
+        <h3>Effectifs à la rentrée 2025/26</h3>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="number">8 919</div>
+                <div class="label">Élèves au total</div>
+            </div>
+            <div class="stat-card">
+                <div class="number">3 427</div>
+                <div class="label">En maternelle</div>
+            </div>
+            <div class="stat-card">
+                <div class="number">5 492</div>
+                <div class="label">En élémentaire</div>
+            </div>
+        </div>
+
+        <h3>Moyenne par classe</h3>
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="number">19,09</div>
+                <div class="label">Élèves / classe en maternelle</div>
+            </div>
+            <div class="stat-card">
+                <div class="number">22,80</div>
+                <div class="label">Élèves / classe en élémentaire (hors REP)</div>
+            </div>
+            <div class="stat-card">
+                <div class="number">12,92</div>
+                <div class="label">Élèves / classe en REP (CP-CE1)</div>
+            </div>
+            <div class="stat-card">
+                <div class="number">20,71</div>
+                <div class="label">Élèves / classe en REP (CE2-CM2)</div>
+            </div>
+        </div>
+
+        <div class="remark">
+            <p><strong>Remarque :</strong> La Ville indique une baisse progressive des effectifs ces dernières années.</p>
+        </div>
+    </section>
+
+    <!-- 3. Le conseil d'école -->
+    <section class="section" id="conseil">
+        <h2>3. Le conseil d'école</h2>
+
+        <h3>Rôle</h3>
+        <ul>
+            <li>Établit et vote le règlement intérieur de l'école</li>
+            <li>Participe à l'élaboration et adopte le projet d'école</li>
+            <li>Donne son avis sur les questions concernant la vie de l'école :
+                <ul>
+                    <li>Actions pédagogiques et éducatives</li>
+                    <li>Utilisation des moyens alloués à l'école</li>
+                    <li>Conditions d'intégration des enfants handicapés</li>
+                    <li>Activités périscolaires</li>
+                    <li>Restauration scolaire</li>
+                    <li>Hygiène scolaire</li>
+                    <li>Protection et sécurité des enfants</li>
+                    <li>Respect et mise en application des valeurs de la République</li>
+                </ul>
+            </li>
+        </ul>
+
+        <p><strong>Fréquence :</strong> 3 fois par an.</p>
+
+        <h3>Composition</h3>
+        <ul>
+            <li>Directeur/trice de l'école (président du conseil)</li>
+            <li>Ensemble des enseignants affectés à l'école</li>
+            <li>Maire / Conseiller municipal</li>
+            <li>Représentants élus des parents d'élèves (autant que de classes)</li>
+            <li>Délégué départemental de l'éducation nationale (DDEN)</li>
+        </ul>
+        <p>L'ensemble de ces membres a le droit de vote. L'ordre du jour complet (questions des parents comprises) doit être transmis à la Ville par la direction de l'école au plus tard <strong>8 jours avant</strong>.</p>
+
+        <div class="callout">
+            <div class="callout-title">Victor Hugo</div>
+            <p>Nous avons signalé que des élus municipaux n'étaient pas présents et qu'il n'était pas clair qui était représentant élu pour notre école.</p>
+            <p>La Ville a indiqué qu'une mise à jour de la liste des élus serait effectuée sur le site internet. Leur présence aux conseils d'école reste variable, mais ils ont pour consigne de se mobiliser autant que possible.</p>
+        </div>
+    </section>
+
+    <!-- 4. Mise à disposition de locaux -->
+    <section class="section" id="locaux">
+        <h2>4. Mise à disposition de locaux</h2>
+        <p>Possibilité pour les représentants de parents d'élèves d'utiliser des locaux scolaires sur demande, notamment pour des réunions.</p>
+    </section>
+
+    <!-- 5. Le temps du midi et la restauration scolaire -->
+    <section class="section" id="restauration">
+        <h2>5. Le temps du midi et la restauration scolaire</h2>
+
+        <h3>Modalités d'inscription</h3>
+        <ul>
+            <li>Inscription préalable pour l'année scolaire suivante (entre mi-juin et fin août)</li>
+            <li>Choix d'un forfait entre 1 et 4 jours</li>
+            <li>Possibilité de modifier le forfait en cours d'année (délai de prise en compte : 4 semaines)</li>
+            <li>Repas non facturé en cas d'absence justifiée : enfant malade (avec justificatif médecin dès 1 jour), perte d'emploi, événement familial (avec justificatif), radiation scolaire, déménagement</li>
+        </ul>
+
+        <h3>Visites du temps du midi et de la restauration</h3>
+        <p>Il est possible pour les parents élus de visiter les cuisines des écoles, d'observer le déroulement du temps du midi ou de visiter la cuisine centrale (UCPA).</p>
+
+        <h4>Conditions pour les visites dans les écoles :</h4>
+        <ul>
+            <li>2 visites par année scolaire</li>
+            <li>2 à 3 parents par visite</li>
+            <li>Demande par mail à la directrice ou au directeur au moins 3 jours avant, avec copie à :
+                <ul>
+                    <li><a class="email" href="mailto:nadjdine.bacar@mairie-nanterre.fr">nadjdine.bacar@mairie-nanterre.fr</a></li>
+                    <li><a class="email" href="mailto:johann.leleu@mairie-nanterre.fr">johann.leleu@mairie-nanterre.fr</a></li>
+                </ul>
+                (en précisant si vous souhaitez déjeuner sur place)
+            </li>
+        </ul>
+
+        <h4>Visite de la cuisine centrale (UCPA) :</h4>
+        <p>Demande à adresser à <a class="email" href="mailto:johann.leleu@mairie-nanterre.fr">johann.leleu@mairie-nanterre.fr</a> ou <a class="email" href="mailto:ucpa@mairie-nanterre.fr">ucpa@mairie-nanterre.fr</a>.</p>
+
+        <h3>Précisions apportées</h3>
+        <p>En cas d'absence justifiée d'un enfant à la cantine (maladie par exemple), un justificatif est demandé pour permettre le remboursement du repas. La mairie se montre en pratique assez flexible : des justificatifs simples comme une capture d'écran Doctolib peuvent être acceptés.</p>
+
+        <p>Lorsque les enfants ne vont pas à la cantine pour des raisons extérieures (grève, absence d'enseignant), l'information est en principe transmise par la direction et les repas décomptés automatiquement. Il a toutefois été signalé que ces informations ne remontent pas toujours correctement.</p>
+
+        <div class="tip">
+            <p><strong>Conseil :</strong> Il est recommandé aux familles de vérifier les facturations, car des erreurs peuvent se produire.</p>
+        </div>
+
+        <div class="remark">
+            <p><strong>Expérimentation en cours :</strong> Un système de pointage sur tablette au moment du déjeuner est testé dans deux écoles, pour fiabiliser les présences et éviter les erreurs de facturation. Si les résultats sont concluants, le dispositif pourrait être étendu, mais pas avant l'année prochaine.</p>
+        </div>
+    </section>
+
+    <!-- 6. Centres de vacances et classes de découverte -->
+    <section class="section" id="vacances">
+        <h2>6. Centres de vacances et classes de découverte</h2>
+
+        <h3>5 centres de vacances</h3>
+        <p>Labellisés refuge Ligue de Protection des Oiseaux et Clé verte (engagement développement durable), capacités d'accueil de 17 à 182 lits :</p>
+        <ul>
+            <li>Hautefeuille (Yonne)</li>
+            <li>Garchy (Nièvre)</li>
+            <li>La Bourboule (Puy-de-Dôme)</li>
+            <li>Saint Hilaire de Riez (Vendée)</li>
+            <li>La Couture Boussey (Eure)</li>
+        </ul>
+
+        <h3>Classes de découverte</h3>
+        <ul>
+            <li>30 classes de découvertes organisées par la Ville en 2025, dont 24 dans les centres communaux, pour 551 élèves de la GS au CM2</li>
+            <li>Séjours entre 8 et 16 jours selon l'âge des enfants</li>
+        </ul>
+
+        <h3>Séjours de vacances</h3>
+        <ul>
+            <li>Pour les enfants et les jeunes de 4 à 15 ans</li>
+            <li>28 séjours labellisés « colo apprenantes »</li>
+            <li>En moyenne 1 500 enfants partent en séjour chaque année</li>
+            <li>Tarifs calculés en fonction de la carte famille</li>
+        </ul>
+
+        <div class="tip">
+            <p><strong>Préinscriptions séjours de Printemps :</strong> du 20 octobre au 11 février. Il est toujours possible de s'inscrire après le 11 février s'il reste des places disponibles.</p>
+        </div>
+    </section>
+
+    <!-- 7. Le numérique dans les écoles -->
+    <section class="section" id="numerique">
+        <h2>7. Le numérique dans les écoles</h2>
+
+        <p>La Ville déploie un plan d'équipement d'un socle numérique de base, en concertation avec l'Éducation nationale.</p>
+
+        <h3>À l'école élémentaire</h3>
+        <ul>
+            <li>Une classe mobile de 16 tablettes</li>
+            <li>Une classe mobile de 16 ordinateurs portables</li>
+            <li>Un vidéoprojecteur avec PC portable</li>
+            <li>Installation progressive de vidéoprojecteurs interactifs dans toutes les classes</li>
+        </ul>
+
+        <h3>Dans toutes les écoles (maternelles et élémentaires)</h3>
+        <ul>
+            <li>Mise en place de <strong>ONE</strong>, environnement numérique de travail facilitant les échanges entre l'équipe éducative et les parents</li>
+        </ul>
+
+        <div class="callout">
+            <div class="callout-title">Victor Hugo</div>
+            <p>Nous utilisons actuellement TouteMonAnnée, qui n'est pas l'outil ONE déployé par la Ville. Certaines communications peuvent nous échapper. Ce point sera abordé lors du prochain conseil d'école.</p>
+            <p>Concernant les <strong>imprimantes couleur</strong> : des enseignants demandent parfois aux parents de fournir des copies couleur (maternelle), faute d'imprimante couleur. Les parents ont exprimé leur regret. La mairie a indiqué que ce sujet ne fait pas partie des priorités actuelles (coûts d'entretien et consommables inclus).</p>
+            <p>Sur les <strong>budgets</strong> : les écoles disposent d'un budget pour les fournitures scolaires et en principe il ne devrait pas être demandé de matériel aux parents. En cas de difficulté, en discuter avec la direction de l'école.</p>
+        </div>
+    </section>
+
+    <!-- 8. Projets et activités -->
+    <section class="section" id="projets">
+        <h2>8. Projets et activités</h2>
+
+        <p>Pour l'année scolaire 2025/2026, des parcours proposés par les services municipaux bénéficient à près de <strong>4 200 élèves</strong> :</p>
+
+        <ul class="tag-list">
+            <li>Projets culturels</li>
+            <li>Parcours sportifs</li>
+            <li>Projets avec l'Agora</li>
+            <li>Classes de découverte</li>
+            <li>Maison des femmes</li>
+            <li>Environnement</li>
+            <li>Handicap</li>
+            <li>Numérique</li>
+            <li>Santé</li>
+        </ul>
+
+        <h3>Piscine pour les Grandes Sections</h3>
+        <p>Ces séances ne relèvent pas d'une obligation de l'Éducation nationale. Il s'agissait d'un dispositif volontaire de la Ville.</p>
+
+        <div class="remark">
+            <p><strong>Dispositif suspendu</strong> en raison d'une pénurie importante d'encadrants diplômés dans les piscines municipales (problème de recrutement touchant de nombreuses collectivités). Ce n'est pas une question de budget. Aucune visibilité n'a pu être donnée sur une éventuelle reprise.</p>
+        </div>
+    </section>
+
+    <!-- 10. Dispositifs d'aide aux familles -->
+    <section class="section" id="aide">
+        <h2>9. Dispositifs d'aide aux familles</h2>
+
+        <h3>Service social scolaire</h3>
+        <p>Première mission : accompagner les parents et les enfants.</p>
+        <ul>
+            <li>Dynamiser et soutenir les liens entre l'école, le quartier, les familles et les enfants</li>
+            <li>Accompagner l'exercice de la fonction parentale</li>
+            <li>Soutenir les parents dans l'organisation matérielle et familiale</li>
+            <li>Faciliter l'accès à la santé, la culture, aux loisirs et aux vacances</li>
+        </ul>
+        <p>Les travailleurs sociaux sont implantés dans les écoles.</p>
+
+        <h3>La réussite éducative (PRE)</h3>
+        <p>Le Programme de réussite éducative vise à remédier à un ensemble de fragilités rencontrées par des enfants et jeunes en leur proposant un suivi personnalisé.</p>
+        <ul>
+            <li><strong>Public :</strong> Enfants de 2 à 16 ans et leur famille, en priorité vivant ou scolarisés dans les quartiers en politique de la Ville (Parc, Chemin-de-l'Île, Université, Petit Nanterre, Anatole France)</li>
+            <li><strong>Actions :</strong> santé, accompagnement scolaire et éducatif, prévention du décrochage scolaire, soutien à la parentalité, loisirs, actions culturelles et sportives</li>
+        </ul>
+    </section>
+
+    <!-- 11. Autres questions -->
+    <section class="section" id="questions">
+        <h2>10. Autres questions (Victor Hugo)</h2>
+
+        <h3>1. Distribution de bonbons et sucreries pendant le périscolaire</h3>
+        <p>La réponse a été claire : ce type de pratique ne correspond pas à la philosophie de la mairie. Un rappel sera réalisé auprès des directeurs du centre de loisirs.</p>
+        <div class="tip">
+            <p>Nous disposons désormais d'un contact identifié pour remonter ce type de situation. Les parents sont invités à nous signaler toute situation précise.</p>
+        </div>
+
+        <h3>2. Ouverture d'un centre de loisirs à Victor Hugo pendant les vacances</h3>
+        <p>Cette demande avait déjà été étudiée et rejetée l'an dernier. Il n'est pas prévu de la réexaminer. Le nombre d'enfants concerné est jugé insuffisant pour ouvrir une structure (coûts non mutualisables). Les capacités d'accueil à Joliot Curie sont suffisantes.</p>
+
+        <h3>3. Communication entre l'école et le périscolaire</h3>
+        <p>Des difficultés de communication avec des pertes d'information ont été signalées. La mairie est déjà informée de ces dysfonctionnements à Victor Hugo et prévoit d'en échanger avec les équipes concernées.</p>
+        <div class="tip">
+            <p>Les parents qui constatent des situations précises peuvent continuer à nous les signaler afin qu'elles soient documentées et transmises.</p>
+        </div>
+
+        <h3>4. Sorties scolaires organisées avec le soutien de la mairie</h3>
+        <p>La mairie met à disposition en début d'année des propositions de spectacles, cinéma ou sorties. Les enseignants doivent s'inscrire pour en bénéficier. Pour toute question spécifique, il est possible de nous les faire remonter.</p>
+
+        <h3>5. Dérogations pour un changement d'école</h3>
+        <p>Des dérogations existent avec une procédure accessible sur le site de la mairie. Les demandes sont examinées par une commission. La période de dépôt des dossiers est en cours.</p>
+        <p>Les critères sont précis et relativement restrictifs :</p>
+        <ul>
+            <li><strong>Rapprochement de fratrie :</strong> possible principalement lorsque deux enfants sont affectés dans des secteurs scolaires différents. Ne s'applique généralement pas si les écoles relèvent du même secteur.</li>
+            <li><strong>Raisons médicales :</strong> scolarisation à proximité d'un lieu de soins.</li>
+            <li><strong>Corps éducatif :</strong> scolarisation de l'enfant sur le lieu de travail du parent enseignant.</li>
+        </ul>
+        <p>Chaque dossier est étudié individuellement. Les dérogations ne sont en principe pas accordées pour des motifs de convenance personnelle, afin de préserver l'équilibre des effectifs.</p>
+    </section>
+
+    <div class="footer">
+        <p>Nous restons à votre disposition pour toute question.</p>
+        <p><strong>Hélène et Mandana</strong> — RPE Victor Hugo</p>
+    </div>
+
+</div>
+
+</body>
+</html>
