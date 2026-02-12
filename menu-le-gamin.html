@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Le Gamin de Poissy — Menu</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;500;600&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #c5a057;
+    --gold-light: #e8d5a8;
+    --dark: #1a1a1a;
+    --dark-soft: #2a2a2a;
+    --cream: #faf7f0;
+    --cream-dark: #f0ead6;
+    --text: #333;
+    --text-light: #777;
+    --wine: #722f37;
+    --wine-light: #9b4d56;
+    --sage: #5a6e5a;
+    --navy: #2c3e50;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    line-height: 1.6;
+  }
+
+  /* HERO */
+  .hero {
+    background: linear-gradient(135deg, var(--dark) 0%, var(--dark-soft) 100%);
+    color: white;
+    text-align: center;
+    padding: 80px 20px 60px;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(ellipse at center, rgba(197,160,87,0.08) 0%, transparent 70%);
+  }
+  .hero-badge {
+    display: inline-block;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    font-family: 'Inter', sans-serif;
+    font-weight: 500;
+    font-size: 0.7rem;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    padding: 8px 24px;
+    border-radius: 30px;
+    margin-bottom: 30px;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 700;
+    letter-spacing: 2px;
+    margin-bottom: 12px;
+  }
+  .hero-sub {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.3rem;
+    font-style: italic;
+    color: var(--gold-light);
+    margin-bottom: 30px;
+  }
+  .hero-info {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.6);
+    letter-spacing: 1px;
+  }
+  .hero-info span { display: flex; align-items: center; gap: 6px; }
+
+  /* FORMULA BANNER */
+  .formula-section {
+    background: var(--dark);
+    padding: 40px 20px;
+  }
+  .formula-grid {
+    max-width: 900px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  .formula-card {
+    background: linear-gradient(135deg, var(--gold) 0%, #d4b06a 100%);
+    border-radius: 16px;
+    padding: 32px;
+    color: var(--dark);
+    text-align: center;
+  }
+  .formula-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    margin-bottom: 4px;
+  }
+  .formula-card .price {
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 8px 0;
+  }
+  .formula-card p {
+    font-size: 0.85rem;
+    line-height: 1.5;
+    opacity: 0.85;
+  }
+  .formula-card .note {
+    font-size: 0.75rem;
+    font-style: italic;
+    margin-top: 8px;
+    opacity: 0.7;
+  }
+
+  /* NAV */
+  .menu-nav {
+    background: white;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 1px solid #eee;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.04);
+  }
+  .menu-nav-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    overflow-x: auto;
+    gap: 0;
+    scrollbar-width: none;
+  }
+  .menu-nav-inner::-webkit-scrollbar { display: none; }
+  .menu-nav a {
+    text-decoration: none;
+    color: var(--text-light);
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    padding: 18px 20px;
+    white-space: nowrap;
+    border-bottom: 2px solid transparent;
+    transition: all 0.3s;
+  }
+  .menu-nav a:hover {
+    color: var(--gold);
+    border-bottom-color: var(--gold);
+  }
+
+  /* SECTIONS */
+  .menu-container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .menu-section {
+    padding: 64px 0 40px;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+  .section-header h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--dark);
+    margin-bottom: 8px;
+  }
+  .section-header .divider {
+    width: 60px;
+    height: 2px;
+    background: var(--gold);
+    margin: 16px auto;
+  }
+  .section-header p {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    font-style: italic;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  /* MENU ITEMS */
+  .menu-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px 48px;
+  }
+  .menu-grid.single { grid-template-columns: 1fr; max-width: 650px; margin: 0 auto; }
+
+  .menu-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 16px 0;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+  }
+  .menu-item:last-child { border-bottom: none; }
+  .item-info { flex: 1; padding-right: 16px; }
+  .item-name {
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--dark);
+    margin-bottom: 4px;
+  }
+  .item-desc {
+    font-size: 0.82rem;
+    color: var(--text-light);
+    line-height: 1.5;
+  }
+  .item-tag {
+    display: inline-block;
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    padding: 2px 8px;
+    border-radius: 10px;
+    margin-left: 6px;
+    vertical-align: middle;
+  }
+  .tag-veg { background: #e8f5e9; color: #2e7d32; }
+  .tag-homemade { background: #fff3e0; color: #e65100; }
+  .item-price {
+    font-weight: 600;
+    font-size: 1rem;
+    color: var(--gold);
+    white-space: nowrap;
+  }
+
+  /* WINE TABLE */
+  .wine-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 8px;
+  }
+  .wine-table thead th {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--text-light);
+    padding: 12px 8px;
+    text-align: right;
+    border-bottom: 2px solid var(--gold-light);
+  }
+  .wine-table thead th:first-child { text-align: left; }
+  .wine-table tbody tr {
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+  }
+  .wine-table tbody td {
+    padding: 14px 8px;
+    font-size: 0.9rem;
+    text-align: right;
+    color: var(--text-light);
+  }
+  .wine-table tbody td:first-child {
+    text-align: left;
+    color: var(--dark);
+    font-weight: 500;
+  }
+  .wine-table .wine-desc {
+    display: block;
+    font-size: 0.78rem;
+    color: var(--text-light);
+    font-weight: 300;
+    font-style: italic;
+    margin-top: 2px;
+  }
+  .wine-table .bottle-only {
+    font-weight: 500;
+    color: var(--gold);
+  }
+
+  /* SPECIAL CARDS — Tartare, Supplements */
+  .highlight-card {
+    background: white;
+    border-radius: 16px;
+    padding: 36px;
+    box-shadow: 0 4px 24px rgba(0,0,0,0.05);
+    margin-top: 32px;
+  }
+  .highlight-card h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    margin-bottom: 6px;
+  }
+  .highlight-card .sub {
+    font-size: 0.82rem;
+    color: var(--text-light);
+    font-style: italic;
+    margin-bottom: 20px;
+  }
+
+  /* COCKTAILS GRID */
+  .cocktail-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 16px;
+  }
+  .cocktail-card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+    transition: transform 0.2s;
+  }
+  .cocktail-card:hover { transform: translateY(-2px); }
+
+  /* BEER TABLE */
+  .beer-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  .beer-table thead th {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--text-light);
+    padding: 12px 8px;
+    text-align: right;
+    border-bottom: 2px solid var(--gold-light);
+  }
+  .beer-table thead th:first-child { text-align: left; }
+  .beer-table tbody td {
+    padding: 12px 8px;
+    font-size: 0.9rem;
+    text-align: right;
+    color: var(--text-light);
+    border-bottom: 1px solid rgba(0,0,0,0.05);
+  }
+  .beer-table tbody td:first-child { text-align: left; color: var(--dark); font-weight: 500; }
+  .beer-table .abv { font-size: 0.78rem; color: var(--text-light); font-weight: 300; }
+
+  /* SPIRITS GRID */
+  .spirits-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+    margin-top: 16px;
+  }
+  .spirits-group h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--gold-light);
+  }
+  .spirits-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    font-size: 0.9rem;
+    border-bottom: 1px solid rgba(0,0,0,0.04);
+  }
+  .spirits-item .origin { color: var(--text-light); font-size: 0.82rem; }
+
+  /* HOT DRINKS / SOFT DRINKS */
+  .drinks-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 48px;
+  }
+  .drinks-column h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    margin-bottom: 16px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--gold-light);
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--dark);
+    color: rgba(255,255,255,0.5);
+    text-align: center;
+    padding: 40px 20px;
+    font-size: 0.82rem;
+    line-height: 1.8;
+  }
+  footer strong { color: var(--gold); font-weight: 600; }
+
+  /* RESPONSIVE */
+  @media (max-width: 768px) {
+    .menu-grid { grid-template-columns: 1fr; }
+    .formula-grid { grid-template-columns: 1fr; }
+    .drinks-columns { grid-template-columns: 1fr; }
+    .spirits-grid { grid-template-columns: 1fr; }
+    .cocktail-grid { grid-template-columns: 1fr; }
+    .wine-table { font-size: 0.82rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-badge">Restaurant &amp; Brasserie</div>
+  <h1>Le Gamin de Poissy</h1>
+  <p class="hero-sub">All our dishes are homemade by our chef and his team, crafted from fresh, raw ingredients.</p>
+  <div class="hero-info">
+    <span>&#9201; Continuous service</span>
+    <span>&#128197; Tuesday to Sunday</span>
+    <span>&#127860; 12:00 pm &ndash; 10:30 pm</span>
+  </div>
+</header>
+
+<!-- FORMULAS -->
+<section class="formula-section">
+  <div class="formula-grid">
+    <div class="formula-card">
+      <h3>Le Gamin Set Lunch</h3>
+      <div class="price">&euro;19.50</div>
+      <p>Main course + Tart of the day + Organic coffee</p>
+      <div class="note">Tuesday to Friday, 12 pm &ndash; 2 pm</div>
+    </div>
+    <div class="formula-card">
+      <h3>Kids&rsquo; Menu</h3>
+      <div class="price">&euro;12.00</div>
+      <p>Bissardon fruit juice &bull; Ground beef steak, chicken tenders or fish &amp; chips with fries &bull; Artisanal ice cream scoop</p>
+    </div>
+  </div>
+</section>
+
+<!-- NAVIGATION -->
+<nav class="menu-nav">
+  <div class="menu-nav-inner">
+    <a href="#starters">Starters</a>
+    <a href="#salads">Salads</a>
+    <a href="#mains">Mains</a>
+    <a href="#fish">Fish</a>
+    <a href="#tartare">Tartare</a>
+    <a href="#cheese">Cheese</a>
+    <a href="#desserts">Desserts</a>
+    <a href="#wines">Wines</a>
+    <a href="#cocktails">Cocktails</a>
+    <a href="#beers">Beers</a>
+    <a href="#spirits">Spirits</a>
+    <a href="#soft">Soft Drinks</a>
+  </div>
+</nav>
+
+<div class="menu-container">
+
+  <!-- STARTERS -->
+  <section id="starters" class="menu-section">
+    <div class="section-header">
+      <h2>Starters</h2>
+      <div class="divider"></div>
+    </div>
+    <div class="menu-grid single">
+      <div class="menu-item">
+        <div class="item-info">
+          <div class="item-name">Organic Egg Mimosa <span class="item-tag tag-veg">V</span></div>
+        </div>
+        <div class="item-price">&euro;6.80</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-info">
+          <div class="item-name">Homemade Falafels <span class="item-tag tag-veg">V</span></div>
+          <div class="item-desc">Three pieces, homemade tahini sauce</div>
+        </div>
+        <div class="item-price">&euro;7.80</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-info">
+          <div class="item-name">Goat Cheese Bricks <span class="item-tag tag-veg">V</span></div>
+          <div class="item-desc">Onion compote, mesclun greens</div>
+        </div>
+        <div class="item-price">&euro;8.50</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-info">
+          <div class="item-name">Cod Fritters</div>
+          <div class="item-desc">Three pieces, homemade a&iuml;oli</div>
+        </div>
+        <div class="item-price">&euro;8.50</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-info">
+          <div class="item-name">Charcuterie Slate</div>
+          <div class="item-desc">Selection of cured meats</div>
+        </div>
+        <div class="item-price">&euro;12.00</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SALADS -->
+  <section id="salads" class="menu-section">
+    <div class="section-header">
+      <h2>Salads</h2>
+      <div class="divider"></div>
+    </div>
+    <div class="menu-grid single">
+      <div class="menu-item">
+        <div class="item-info">
+          <div class="item-name">La C&eacute;sar</div>
+          <div class="item-desc">Romaine lettuce, poached egg, Parmesan shavings, croutons, breaded chicken, smoked bacon, cherry tomatoes, chef&rsquo;s Caesar dressing</div>
+        </div>
+        <div class="item-price">&euro;18.00</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-info">
+          <div class="item-name">La Berger</div>
+          <div class="item-desc">Mesclun, goat cheese bricks, country ham, saut&eacute;ed potatoes, walnuts, cherry tomatoes</div>
+        </div>
+        <div class="item-price">&euro;17.50</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-info">
+          <div class="item-name">La Farfalle <span class="item-tag tag-veg">V</span></div>
+          <div class="item-desc">Mesclun, pesto farfalle, feta, red onions, black olives, cherry tomatoes, fresh basil</div>
+        </div>
+        <div class="item-price">&euro;16.50</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MAINS -->
+  <section id="mains" class="menu-section">
+    <div class="section-header">
+      <h2>Main Courses</h2>
+      <div class="divider"></div>
+    </div>
+    <div class="menu-grid">
+      <div class="menu-item">
+        <div class="item-info">
+          <div class="item-name">Duck Leg Confit <span class="item-tag tag-homemade">Homemade</span></div>
+          <div class="item-desc">Saut&eacute;ed potatoes, mesclun</div>
+        </div>
+        <div class="item-price">&euro;18.00</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-info">
+          <div class="item-name">Duck Breast</div>
+          <div class="item-desc">Four-spice honey glaze, saut&eacute;ed potatoes, mesclun</div>
+        </div>
+        <div class="item-price">&euro;19.50</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-info">
+          <div class="item-name">Andouillette &ldquo;&agrave; la Ficelle&rdquo;</div>
+          <div class="item-desc">Old-style mustard sauce, homemade fries, mesclun</div>
+        </div>
+        <div class="item-price">&euro;19.00</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-info">
+          <div class="item-name">Beef Sirloin Tataki-style</div>
+          <div class="item-desc">Marinated, homemade fries, mesclun</div>
+        </div>
+        <div class="item-price">&euro;19.00</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-info">
+          <div class="item-name">Classic Burger</div>
+          <div class="item-desc">Brioche bun, real cheddar, ground steak, homemade fries</div>
+        </div>
+        <div class="item-price">&euro;17.50</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-info">
+          <div class="item-name">BBQ Burger</div>
+          <div class="item-desc">Brioche bun, cheddar, ground steak, smoked bacon, onion compote, chef&rsquo;s BBQ sauce, fries</div>
+        </div>
+        <div class="item-price">&euro;18.90</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-info">
+          <div class="item-name">Chicken Burger</div>
+          <div class="item-desc">Ranch sauce, homemade fries, mesclun</div>
+        </div>
+        <div class="item-price">&euro;17.50</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-info">
+          <div class="item-name">Vegetarian Lasagna <span class="item-tag tag-veg">V</span></div>
+          <div class="item-desc">Eggplant, zucchini, bell pepper, onion, tomato, mesclun</div>
+        </div>
+        <div class="item-price">&euro;18.00</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-info">
+          <div class="item-name">Dauphin&eacute; Ravioli</div>
+          <div class="item-desc">Truffle cream sauce</div>
+        </div>
+        <div class="item-price">&euro;19.50</div>
+      </div>
+    </div>
+    <div style="text-align:center; margin-top:24px; font-size:0.85rem; color:var(--text-light);">Extra sauce &euro;1.00</div>
+
+    <!-- Supplements -->
+    <div class="highlight-card">
+      <h3>Sides &amp; Supplements</h3>
+      <div class="sub">Customize your plate</div>
+      <div class="menu-grid">
+        <div class="menu-item"><div class="item-info"><div class="item-name">Homemade Fries</div></div><div class="item-price">&euro;5.00</div></div>
+        <div class="menu-item"><div class="item-info"><div class="item-name">Saut&eacute;ed Potatoes</div></div><div class="item-price">&euro;5.00</div></div>
+        <div class="menu-item"><div class="item-info"><div class="item-name">Mashed Potatoes</div></div><div class="item-price">&euro;5.00</div></div>
+        <div class="menu-item"><div class="item-info"><div class="item-name">Mesclun Greens</div></div><div class="item-price">&euro;3.50</div></div>
+        <div class="menu-item"><div class="item-info"><div class="item-name">Roasted Vegetables</div></div><div class="item-price">&euro;8.50</div></div>
+        <div class="menu-item"><div class="item-info"><div class="item-name">Side Swap</div><div class="item-desc">Switch to fries, potatoes, pur&eacute;e or roasted veg</div></div><div class="item-price">+&euro;3.50</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FISH -->
+  <section id="fish" class="menu-section">
+    <div class="section-header">
+      <h2>Fish</h2>
+      <div class="divider"></div>
+    </div>
+    <div class="menu-grid single">
+      <div class="menu-item">
+        <div class="item-info">
+          <div class="item-name">Fresh Sea Bass Fillet</div>
+          <div class="item-desc">Jaboticaba-infused sauce vierge, roasted seasonal vegetables</div>
+        </div>
+        <div class="item-price">&euro;21.00</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-info">
+          <div class="item-name">Sea Bream Tartare</div>
+          <div class="item-desc">Mango, avocado, pomegranate, vegetable tagliatelle, mango vinaigrette</div>
+        </div>
+        <div class="item-price">&euro;22.50</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-info">
+          <div class="item-name">Herb-Marinated Salmon Pav&eacute;</div>
+          <div class="item-desc">Olive oil mashed potatoes</div>
+        </div>
+        <div class="item-price">&euro;21.50</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TARTARE -->
+  <section id="tartare" class="menu-section">
+    <div class="section-header">
+      <h2>Hand-Cut Tartare</h2>
+      <div class="divider"></div>
+      <p>Cut to order by our team, served with homemade fries &amp; mesclun</p>
+    </div>
+    <div class="menu-grid single">
+      <div class="menu-item">
+        <div class="item-info">
+          <div class="item-name">The Classic</div>
+          <div class="item-desc">Traditional hand-cut beef tartare</div>
+        </div>
+        <div class="item-price">&euro;18.50</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-info">
+          <div class="item-name">The Italian</div>
+          <div class="item-desc">Fresh basil and Parmesan</div>
+        </div>
+        <div class="item-price">&euro;19.50</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-info">
+          <div class="item-name">The Thai</div>
+          <div class="item-desc">Coriander, fresh mint, chef&rsquo;s sauce</div>
+        </div>
+        <div class="item-price">&euro;19.50</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CHEESE -->
+  <section id="cheese" class="menu-section">
+    <div class="section-header">
+      <h2>Cheese</h2>
+      <div class="divider"></div>
+      <p>Tome de montagne aux 7 fleurs, Camembert, Saint-Nectaire, Fourme d&rsquo;Ambert, Morbier, Crottin de ch&egrave;vre</p>
+    </div>
+    <div class="menu-grid single" style="max-width:400px;">
+      <div class="menu-item">
+        <div class="item-info"><div class="item-name">Single portion</div></div>
+        <div class="item-price">&euro;6.00</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-info"><div class="item-name">Trio of cheeses</div></div>
+        <div class="item-price">&euro;11.00</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DESSERTS -->
+  <section id="desserts" class="menu-section">
+    <div class="section-header">
+      <h2>Desserts</h2>
+      <div class="divider"></div>
+    </div>
+    <div class="menu-grid">
+      <div class="menu-item">
+        <div class="item-info">
+          <div class="item-name">Chef&rsquo;s &ldquo;Legendary&rdquo; Tiramisu</div>
+        </div>
+        <div class="item-price">&euro;9.00</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-info">
+          <div class="item-name">Brioche French Toast</div>
+          <div class="item-desc">Salted caramel, vanilla ice cream</div>
+        </div>
+        <div class="item-price">&euro;10.00</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-info">
+          <div class="item-name">Cheesecake</div>
+          <div class="item-desc">Red berry coulis</div>
+        </div>
+        <div class="item-price">&euro;9.00</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-info">
+          <div class="item-name">Chocolate Lava Cake</div>
+          <div class="item-desc">Artisanal vanilla ice cream</div>
+        </div>
+        <div class="item-price">&euro;9.00</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-info">
+          <div class="item-name">Caf&eacute; Gourmand</div>
+          <div class="item-desc">Cr&egrave;me br&ucirc;l&eacute;e, tiramisu &amp; chocolate truffle with a coffee or tea (+&euro;1.50 for cr&egrave;me)</div>
+        </div>
+        <div class="item-price">&euro;9.00</div>
+      </div>
+      <div class="menu-item">
+        <div class="item-info">
+          <div class="item-name">Champagne Gourmand</div>
+          <div class="item-desc">End on a sparkling note!</div>
+        </div>
+        <div class="item-price">&euro;16.00</div>
+      </div>
+    </div>
+    <div class="highlight-card" style="margin-top:32px;">
+      <h3>Artisanal Ice Cream &amp; Sorbet</h3>
+      <div class="sub">&euro;3.00 per scoop</div>
+      <p style="font-size:0.88rem; color:var(--text-light); line-height:1.8;">
+        Madagascar Bourbon Vanilla &bull; Sicilian Mandarin &bull; St. James Rum Raisin &bull; French Blackcurrant &bull; Colombian Coffee &bull; Senga Sengana Strawberry &bull; Mexican Lime &bull; Swiss Dark Chocolate &bull; Gu&eacute;rande Salted Caramel &bull; French Apricot &bull; Pistachio
+      </p>
+    </div>
+  </section>
+
+  <!-- WINES -->
+  <section id="wines" class="menu-section">
+    <div class="section-header">
+      <h2>Wine List</h2>
+      <div class="divider"></div>
+    </div>
+
+    <!-- RED -->
+    <h3 style="font-family:'Playfair Display',serif; font-size:1.5rem; color:var(--wine); margin-bottom:20px; margin-top:8px;">Red Wines</h3>
+    <table class="wine-table">
+      <thead><tr><th>Wine</th><th>14cl</th><th>25cl</th><th>50cl</th><th>75cl</th></tr></thead>
+      <tbody>
+        <tr><td>Ch&acirc;teau du Grand Humeau, Bordeaux<span class="wine-desc">Merlot, Cabernet Sauvignon, Cabernet Franc &mdash; supple, balanced</span></td><td>&euro;4.60</td><td>&euro;8.20</td><td>&euro;14.80</td><td>&euro;22.00</td></tr>
+        <tr><td>H&eacute;ritage du Conseiller, Bouchard A&icirc;n&eacute; et Fils<span class="wine-desc">100% Pinot Noir &mdash; harmonious, smooth finish</span></td><td>&euro;5.50</td><td>&euro;9.80</td><td>&euro;17.70</td><td>&euro;26.50</td></tr>
+        <tr><td>La Muse, Vin de France<span class="wine-desc">100% Syrah &mdash; fresh, garrigue aromas</span></td><td>&euro;5.50</td><td>&euro;9.80</td><td>&euro;17.70</td><td>&euro;26.50</td></tr>
+        <tr><td>Ch&acirc;teau des Coccinelles, C&ocirc;te du Rh&ocirc;ne<span class="wine-desc">Grenache, Syrah &mdash; intense nose, dark fruit &amp; spice</span></td><td>&euro;6.00</td><td>&euro;10.70</td><td>&euro;19.30</td><td>&euro;29.00</td></tr>
+        <tr><td>Louis T&ecirc;te, L Chatelin AOP Brouilly<span class="wine-desc">100% Gamay &mdash; supple, elegant, red fruit aromas</span></td><td>&euro;6.50</td><td>&euro;11.60</td><td>&euro;21.00</td><td>&euro;34.50</td></tr>
+        <tr><td>Domaine La Chevallerie, Saint Nicolas de Bourgueil<span class="wine-desc">100% Cabernet Franc &mdash; light, fruity notes</span></td><td>&euro;6.50</td><td>&euro;11.60</td><td>&euro;21.00</td><td>&euro;34.50</td></tr>
+        <tr><td>Les Pierres de Garrigues, Pic Saint Loup<span class="wine-desc">Syrah, Grenache &mdash; red &amp; dark fruit, balanced &amp; elegant</span></td><td>&euro;7.20</td><td>&euro;12.80</td><td>&euro;23.20</td><td>&euro;35.00</td></tr>
+        <tr><td>Domaine Miramont, Vacqueyras<span class="wine-desc">Grenache, Syrah, Mourv&egrave;dre &mdash; violet reflections, charming &amp; elegant</span></td><td colspan="3"></td><td class="bottle-only">&euro;48.00</td></tr>
+        <tr><td>Les Lauzi&egrave;res, Crozes-Hermitage<span class="wine-desc">100% Syrah &mdash; fruity, easy-drinking</span></td><td colspan="3"></td><td class="bottle-only">&euro;48.00</td></tr>
+        <tr><td>La Cave du Gamin<span class="wine-desc">Ask our team</span></td><td colspan="3"></td><td class="bottle-only">&euro;75.00</td></tr>
+      </tbody>
+    </table>
+
+    <!-- WHITE -->
+    <h3 style="font-family:'Playfair Display',serif; font-size:1.5rem; color:var(--sage); margin:48px 0 20px;">White Wines</h3>
+    <table class="wine-table">
+      <thead><tr><th>Wine</th><th>14cl</th><th>25cl</th><th>50cl</th><th>75cl</th></tr></thead>
+      <tbody>
+        <tr><td>Nova, Le Blanc Sec, IGP C&ocirc;tes de Gascogne<span class="wine-desc">Colombard, Sauvignon &mdash; simple, easy to share</span></td><td>&euro;4.60</td><td>&euro;8.20</td><td>&euro;14.80</td><td>&euro;22.00</td></tr>
+        <tr><td>H&eacute;ritage du Conseiller, Bouchard A&icirc;n&eacute; et Fils<span class="wine-desc">100% Chardonnay &mdash; balanced, refreshing, sweet notes</span></td><td>&euro;5.50</td><td>&euro;9.80</td><td>&euro;17.70</td><td>&euro;26.50</td></tr>
+        <tr><td>Rock&rsquo;M&rsquo;roll, Auguste, IGP Val de Loire<span class="wine-desc">100% Chenin &mdash; fresh, white flower aromas</span></td><td>&euro;6.00</td><td>&euro;10.70</td><td>&euro;19.30</td><td>&euro;29.00</td></tr>
+        <tr><td>Nova, Le Blanc Moelleux, IGP C&ocirc;tes de Gascogne<span class="wine-desc">Gros Manseng &mdash; sweet &amp; sugary</span></td><td>&euro;7.20</td><td>&euro;12.80</td><td>&euro;23.20</td><td>&euro;35.00</td></tr>
+        <tr><td>Domaine Durand, Sancerre<span class="wine-desc">100% Sauvignon &mdash; fresh, mentholated, citrus notes</span></td><td>&euro;8.30</td><td>&euro;14.80</td><td>&euro;26.60</td><td>&euro;40.00</td></tr>
+        <tr><td>Antoine de la Farge, Pouilly Fum&eacute;<span class="wine-desc">100% Sauvignon &mdash; orange blossom, boxwood, linden</span></td><td colspan="3"></td><td class="bottle-only">&euro;48.00</td></tr>
+        <tr><td>Domaine Passy le Clou, Famille Descombe, Chablis<span class="wine-desc">100% Chardonnay &mdash; dense, complex, aromatic richness</span></td><td colspan="3"></td><td class="bottle-only">&euro;52.00</td></tr>
+      </tbody>
+    </table>
+
+    <!-- ROSÉ -->
+    <h3 style="font-family:'Playfair Display',serif; font-size:1.5rem; color:var(--wine-light); margin:48px 0 20px;">Ros&eacute; Wines</h3>
+    <table class="wine-table">
+      <thead><tr><th>Wine</th><th>14cl</th><th>25cl</th><th>50cl</th><th>75cl</th></tr></thead>
+      <tbody>
+        <tr><td>IGP Var, Gris d&rsquo;Argent, Maison Estandon<span class="wine-desc">Grenache, Cinsault &mdash; fruity, light, fresh</span></td><td>&euro;4.60</td><td>&euro;8.20</td><td>&euro;14.80</td><td>&euro;22.00</td></tr>
+        <tr><td>C&ocirc;te de Provence, H&eacute;ritage, Maison Estandon<span class="wine-desc">Cinsault, Grenache, Syrah &mdash; pale colour, brilliant, fine &amp; elegant</span></td><td>&euro;6.50</td><td>&euro;11.60</td><td>&euro;21.00</td><td>&euro;34.50</td></tr>
+      </tbody>
+    </table>
+
+    <!-- BUBBLES -->
+    <h3 style="font-family:'Playfair Display',serif; font-size:1.5rem; color:var(--gold); margin:48px 0 20px;">Bubbles</h3>
+    <table class="wine-table">
+      <thead><tr><th>Wine</th><th>10cl</th><th>75cl</th></tr></thead>
+      <tbody>
+        <tr><td>Prosecco DOC Edoardo Rota</td><td>&euro;5.00</td><td>&euro;29.00</td></tr>
+        <tr><td>Champagne C.Mignon 1<sup>er</sup> Cru</td><td>&euro;10.00</td><td>&euro;65.00</td></tr>
+        <tr><td>Champagne Gosset Blanc de Blancs</td><td></td><td class="bottle-only">&euro;160.00</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <!-- COCKTAILS -->
+  <section id="cocktails" class="menu-section">
+    <div class="section-header">
+      <h2>Cocktails</h2>
+      <div class="divider"></div>
+    </div>
+    <div class="cocktail-grid">
+      <div class="cocktail-card"><div><div class="item-name">Mojito</div><div class="item-desc">Bacardi rum, brown sugar, lime, mint, sparkling water</div></div><div class="item-price">&euro;9.50</div></div>
+      <div class="cocktail-card"><div><div class="item-name">Aviation</div><div class="item-desc">Yu Gin, maraschino, violet liqueur, lemon juice</div></div><div class="item-price">&euro;11.00</div></div>
+      <div class="cocktail-card"><div><div class="item-name">Margarita</div><div class="item-desc">Jose Cuervo tequila, triple sec, lime juice</div></div><div class="item-price">&euro;9.50</div></div>
+      <div class="cocktail-card"><div><div class="item-name">Gin Fizz</div><div class="item-desc">Yu Gin, lime juice, cane sugar, sparkling water</div></div><div class="item-price">&euro;9.50</div></div>
+      <div class="cocktail-card"><div><div class="item-name">Disaronno Sour</div><div class="item-desc">Amaretto Disaronno, lime juice, liquid cane sugar</div></div><div class="item-price">&euro;10.00</div></div>
+      <div class="cocktail-card"><div><div class="item-name">Ca&iuml;pirinha</div><div class="item-desc">Cacha&ccedil;a Lebl&oacute;n, lime, brown sugar</div></div><div class="item-price">&euro;9.50</div></div>
+      <div class="cocktail-card"><div><div class="item-name">Ca&iuml;piroska Fraise</div><div class="item-desc">Vodka Bistro, lime, brown sugar, strawberry</div></div><div class="item-price">&euro;10.00</div></div>
+      <div class="cocktail-card"><div><div class="item-name">Moscow Mule</div><div class="item-desc">Vodka Bistro, ginger beer, lime, fresh mint</div></div><div class="item-price">&euro;9.50</div></div>
+      <div class="cocktail-card"><div><div class="item-name">Mont Blanc</div><div class="item-desc">Vodka Bistro, artisanal lime sorbet, Champagne C.Mignon 1<sup>er</sup> Cru</div></div><div class="item-price">&euro;15.00</div></div>
+      <div class="cocktail-card"><div><div class="item-name">Pina Colada</div><div class="item-desc">Trois Rivi&egrave;res amber rum, coconut, pineapple</div></div><div class="item-price">&euro;9.50</div></div>
+      <div class="cocktail-card"><div><div class="item-name">Aperol Spritz</div><div class="item-desc">Aperol, Prosecco, sparkling water</div></div><div class="item-price">&euro;8.50</div></div>
+      <div class="cocktail-card"><div><div class="item-name">Irish Coffee</div><div class="item-desc">Whisky Paddy, cane sugar, organic coffee, whipped cream</div></div><div class="item-price">&euro;10.00</div></div>
+      <div class="cocktail-card"><div><div class="item-name">Pornstar Martini</div><div class="item-desc">Vodka Bistro, passion fruit pur&eacute;e, vanilla syrup, Prosecco</div></div><div class="item-price">&euro;9.50</div></div>
+      <div class="cocktail-card"><div><div class="item-name">Saint Germain Spritz</div><div class="item-desc">Saint Germain, Prosecco, sparkling water</div></div><div class="item-price">&euro;11.00</div></div>
+      <div class="cocktail-card"><div><div class="item-name">Bloody Mary</div><div class="item-desc">Vodka Bistro, Bissardon tomato juice, seasonings</div></div><div class="item-price">&euro;9.00</div></div>
+      <div class="cocktail-card"><div><div class="item-name">Espresso Martini</div><div class="item-desc">Vodka Bistro, coffee liqueur, espresso, liquid cane sugar</div></div><div class="item-price">&euro;9.50</div></div>
+    </div>
+
+    <!-- MOCKTAILS -->
+    <div class="highlight-card" style="margin-top:40px;">
+      <h3>Mocktails</h3>
+      <div class="sub">Alcohol-free &mdash; &euro;7.50 each</div>
+      <p style="font-size:0.9rem; color:var(--text-light); line-height:2;">
+        Virgin Mojito &bull; Virgin Colada &bull; Virgin Spritz &bull; Virgin Ca&iuml;pirinha Fraise &bull; Virgin Bora-Bora
+      </p>
+    </div>
+
+    <!-- HAPPY HOUR -->
+    <div class="highlight-card" style="margin-top:24px; background:linear-gradient(135deg, var(--gold) 0%, #d4b06a 100%); color:var(--dark);">
+      <h3>Happy Hour</h3>
+      <div class="sub" style="color:var(--dark); opacity:0.7;">Tuesday to Friday, 4 pm &ndash; 7 pm</div>
+      <p style="font-size:1rem;"><strong>Happy Sirius &euro;5.50</strong> &bull; <strong>Happy &ldquo;Le Gamin&rdquo; mocktail &euro;5.50</strong></p>
+    </div>
+  </section>
+
+  <!-- BEERS -->
+  <section id="beers" class="menu-section">
+    <div class="section-header">
+      <h2>Craft Beers</h2>
+      <div class="divider"></div>
+    </div>
+    <table class="beer-table">
+      <thead><tr><th>Beer</th><th>25cl</th><th>50cl</th></tr></thead>
+      <tbody>
+        <tr><td>Sirius <span class="abv">4.9%</span></td><td>&euro;4.00</td><td>&euro;7.00</td></tr>
+        <tr><td>Parisis Magic Blonde <span class="abv">5.6%</span></td><td>&euro;4.90</td><td>&euro;9.00</td></tr>
+        <tr><td>Parisis Ambr&eacute;e <span class="abv">6.2%</span></td><td>&euro;4.90</td><td>&euro;9.00</td></tr>
+        <tr><td>Parisis Magic IPA <span class="abv">6.5%</span></td><td>&euro;4.90</td><td>&euro;9.00</td></tr>
+        <tr><td>Beer of the Moment</td><td>&euro;5.20</td><td>&euro;9.50</td></tr>
+        <tr><td>Panach&eacute;</td><td>&euro;4.00</td><td>&euro;7.00</td></tr>
+        <tr><td>Monaco</td><td>&euro;4.00</td><td>&euro;7.00</td></tr>
+        <tr><td>Tango</td><td>&euro;4.20</td><td>&euro;7.20</td></tr>
+        <tr><td>Twist</td><td>&euro;4.20</td><td>&euro;7.20</td></tr>
+        <tr><td>Peroni 0.0% <span class="abv">33cl</span></td><td colspan="2" style="text-align:center;">&euro;6.00</td></tr>
+      </tbody>
+    </table>
+
+    <!-- PLANCHES -->
+    <div class="highlight-card" style="margin-top:40px;">
+      <h3>Sharing Boards</h3>
+      <div class="sub">Perfect with a drink</div>
+      <div class="menu-grid single" style="max-width:450px;">
+        <div class="menu-item"><div class="item-info"><div class="item-name">Charcuterie or Cheese Board</div></div><div class="item-price">&euro;18.00</div></div>
+        <div class="menu-item"><div class="item-info"><div class="item-name">Mixed Board</div></div><div class="item-price">&euro;23.00</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SPIRITS -->
+  <section id="spirits" class="menu-section">
+    <div class="section-header">
+      <h2>Spirits</h2>
+      <div class="divider"></div>
+    </div>
+    <div class="spirits-grid">
+      <div class="spirits-group">
+        <h3>Whiskys <span style="font-size:0.8rem; font-weight:300; font-family:'Inter',sans-serif;">(4cl)</span></h3>
+        <div class="spirits-item"><div>J&amp;B Blended <span class="origin">&mdash; Scotland</span></div><div class="item-price">&euro;8.50</div></div>
+        <div class="spirits-item"><div>Aberlour 12yr Single Malt <span class="origin">&mdash; Scotland</span></div><div class="item-price" rowspan="9">&euro;11.00</div></div>
+        <div class="spirits-item"><div>Maker&rsquo;s Mark Bourbon <span class="origin">&mdash; USA</span></div><div class="item-price">&euro;11.00</div></div>
+        <div class="spirits-item"><div>The Glenlivet 12yr Single Malt <span class="origin">&mdash; Scotland</span></div><div class="item-price">&euro;11.00</div></div>
+        <div class="spirits-item"><div>Chivas Regal 12yr Blended <span class="origin">&mdash; Scotland</span></div><div class="item-price">&euro;11.00</div></div>
+        <div class="spirits-item"><div>The GlenGrant 12yr Single Malt <span class="origin">&mdash; Scotland</span></div><div class="item-price">&euro;11.00</div></div>
+        <div class="spirits-item"><div>Togouchi Pure Malt <span class="origin">&mdash; Japan</span></div><div class="item-price">&euro;11.00</div></div>
+        <div class="spirits-item"><div>Yushan Blended Malt <span class="origin">&mdash; Taiwan</span></div><div class="item-price">&euro;11.00</div></div>
+        <div class="spirits-item"><div>The Sexton Single Malt <span class="origin">&mdash; Ireland</span></div><div class="item-price">&euro;11.00</div></div>
+        <div class="spirits-item"><div>Woodford Reserve Bourbon <span class="origin">&mdash; USA</span></div><div class="item-price">&euro;11.00</div></div>
+        <div class="spirits-item"><div>Ardbeg Single Malt <span class="origin">&mdash; Scotland</span></div><div class="item-price">&euro;11.00</div></div>
+      </div>
+      <div class="spirits-group">
+        <h3>Rums</h3>
+        <div class="spirits-item"><div>Plantation <span class="origin">&mdash; Guatemala &amp; Belize</span></div><div class="item-price">&euro;11.00</div></div>
+        <div class="spirits-item"><div>Kraken <span class="origin">&mdash; Caribbean</span></div><div class="item-price">&euro;11.00</div></div>
+        <div class="spirits-item"><div>Hell <span class="origin">&mdash; Jamaica</span></div><div class="item-price">&euro;11.00</div></div>
+        <div class="spirits-item"><div>Botana <span class="origin">&mdash; Paraguay</span></div><div class="item-price">&euro;11.00</div></div>
+        <div class="spirits-item"><div>Doorly&rsquo;s <span class="origin">&mdash; Barbados</span></div><div class="item-price">&euro;11.00</div></div>
+        <div class="spirits-item"><div>Eminente <span class="origin">&mdash; Cuba</span></div><div class="item-price">&euro;11.00</div></div>
+        <div class="spirits-item"><div>Zacapa 23 <span class="origin">&mdash; Guatemala</span></div><div class="item-price">&euro;15.00</div></div>
+
+        <h3 style="margin-top:32px;">Ap&eacute;ritifs</h3>
+        <div class="spirits-item"><div>Ricard / Pastis <span class="origin">2cl</span></div><div class="item-price">&euro;4.50</div></div>
+        <div class="spirits-item"><div>Suze / Porto Rouge <span class="origin">5cl</span></div><div class="item-price">&euro;4.50</div></div>
+        <div class="spirits-item"><div>Martini Bianco / Rosso <span class="origin">5cl</span></div><div class="item-price">&euro;4.50</div></div>
+        <div class="spirits-item"><div>Kir au Vin Blanc <span class="origin">14cl</span></div><div class="item-price">&euro;4.90</div></div>
+        <div class="spirits-item"><div>Pineau des Charentes <span class="origin">5cl</span></div><div class="item-price">&euro;4.50</div></div>
+
+        <h3 style="margin-top:32px;">Digestifs</h3>
+        <div class="spirits-item"><div>Get 27 / Menthe</div><div class="item-price">&euro;7.00</div></div>
+        <div class="spirits-item"><div>Baileys</div><div class="item-price">&euro;7.00</div></div>
+        <div class="spirits-item"><div>Limoncello Piemme</div><div class="item-price">&euro;7.00</div></div>
+        <div class="spirits-item"><div>Amaretto Disaronno</div><div class="item-price">&euro;10.00</div></div>
+        <div class="spirits-item"><div>Cognac Hennessy V.S</div><div class="item-price">&euro;12.00</div></div>
+        <div class="spirits-item"><div>Calvados Morin V.S.O.P</div><div class="item-price">&euro;12.00</div></div>
+        <div class="spirits-item"><div>Bas-Armagnac Lafontan XO</div><div class="item-price">&euro;12.00</div></div>
+        <div class="spirits-item"><div>Vieille Prune Massenez</div><div class="item-price">&euro;12.00</div></div>
+        <div class="spirits-item"><div>Poire Williams Massenez</div><div class="item-price">&euro;12.00</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOFT DRINKS & HOT DRINKS -->
+  <section id="soft" class="menu-section">
+    <div class="section-header">
+      <h2>Beverages</h2>
+      <div class="divider"></div>
+    </div>
+    <div class="drinks-columns">
+      <div class="drinks-column">
+        <h3>Hot Drinks</h3>
+        <div class="menu-item"><div class="item-info"><div class="item-name">Organic Espresso (Bio Breo)</div></div><div class="item-price">&euro;2.40</div></div>
+        <div class="menu-item"><div class="item-info"><div class="item-name">Caf&eacute; Noisette</div></div><div class="item-price">&euro;2.50</div></div>
+        <div class="menu-item"><div class="item-info"><div class="item-name">Double Espresso</div></div><div class="item-price">&euro;4.40</div></div>
+        <div class="menu-item"><div class="item-info"><div class="item-name">Caf&eacute; Cr&egrave;me</div></div><div class="item-price">&euro;4.20</div></div>
+        <div class="menu-item"><div class="item-info"><div class="item-name">Cappuccino</div></div><div class="item-price">&euro;5.20</div></div>
+        <div class="menu-item"><div class="item-info"><div class="item-name">Caf&eacute; Viennois</div></div><div class="item-price">&euro;6.00</div></div>
+        <div class="menu-item"><div class="item-info"><div class="item-name">Homemade Hot Chocolate</div></div><div class="item-price">&euro;5.20</div></div>
+        <div class="menu-item"><div class="item-info"><div class="item-name">Chocolat Viennois</div></div><div class="item-price">&euro;7.00</div></div>
+        <div class="menu-item"><div class="item-info"><div class="item-name">Dammann Fr&egrave;res Teas</div><div class="item-desc">Gunpowder, Earl Grey, Smokey Lapsang, Nuit &agrave; Versailles, 4 Fruits Rouges, Coquelicot Gourmand</div></div><div class="item-price">&euro;4.50</div></div>
+        <div class="menu-item"><div class="item-info"><div class="item-name">Herbal Infusions</div><div class="item-desc">Chamomile, Organic Verbena, Organic Linden</div></div><div class="item-price">&euro;4.50</div></div>
+        <div class="menu-item"><div class="item-info"><div class="item-name">Mulled Wine with Cinnamon</div></div><div class="item-price">&euro;6.00</div></div>
+
+        <h3 style="margin-top:32px;">Fresh Juices <span style="font-size:0.8rem; font-weight:300; font-family:'Inter',sans-serif;">(35cl)</span></h3>
+        <div class="sub" style="font-size:0.82rem; color:var(--text-light); font-style:italic; margin-bottom:12px;">Maison Bissardon, 100% fruit</div>
+        <div class="menu-item"><div class="item-info"><div class="item-name">Apricot, Pineapple, Grape Peach, Pear, Apple or Tomato</div></div><div class="item-price">&euro;4.50</div></div>
+        <div class="menu-item"><div class="item-info"><div class="item-name">Fresh Squeezed Orange or Lemon</div></div><div class="item-price">&euro;5.50</div></div>
+      </div>
+
+      <div class="drinks-column">
+        <h3>Soft Drinks</h3>
+        <div class="menu-item"><div class="item-info"><div class="item-name">Coca-Cola / Coca-Cola Zero</div><div class="item-desc">33cl</div></div><div class="item-price">&euro;4.50</div></div>
+        <div class="menu-item"><div class="item-info"><div class="item-name">Orangina</div><div class="item-desc">25cl</div></div><div class="item-price">&euro;4.50</div></div>
+        <div class="menu-item"><div class="item-info"><div class="item-name">Sprite</div><div class="item-desc">25cl</div></div><div class="item-price">&euro;4.50</div></div>
+        <div class="menu-item"><div class="item-info"><div class="item-name">Fanta Orange</div><div class="item-desc">25cl</div></div><div class="item-price">&euro;4.50</div></div>
+        <div class="menu-item"><div class="item-info"><div class="item-name">Schweppes Tonic</div><div class="item-desc">25cl</div></div><div class="item-price">&euro;4.50</div></div>
+        <div class="menu-item"><div class="item-info"><div class="item-name">Still Water (Les Abatilles)</div><div class="item-desc">33cl / 75cl (dine-in)</div></div><div class="item-price">&euro;4.50 / &euro;6.00</div></div>
+        <div class="menu-item"><div class="item-info"><div class="item-name">Sparkling Water (Les Abatilles)</div><div class="item-desc">33cl / 75cl (dine-in)</div></div><div class="item-price">&euro;4.50 / &euro;6.00</div></div>
+
+        <h3 style="margin-top:32px;">Iced Teas <span style="font-size:0.8rem; font-weight:300; font-family:'Inter',sans-serif;">Homemade</span></h3>
+        <div class="sub" style="font-size:0.82rem; color:var(--text-light); font-style:italic; margin-bottom:12px;">&euro;5.50 each</div>
+        <div class="menu-item"><div class="item-info"><div class="item-name">Peach &amp; Hibiscus / Raspberry &amp; Hibiscus / Lemon &amp; Mint</div></div></div>
+
+        <h3 style="margin-top:32px;">Milkshakes <span style="font-size:0.8rem; font-weight:300; font-family:'Inter',sans-serif;">(40cl)</span></h3>
+        <div class="sub" style="font-size:0.82rem; color:var(--text-light); font-style:italic; margin-bottom:12px;">Made with artisanal ice cream &mdash; &euro;8.00</div>
+        <div class="menu-item"><div class="item-info"><div class="item-name">Vanilla, Strawberry, Coffee or Salted Caramel</div></div></div>
+
+        <h3 style="margin-top:32px;">Homemade Lemonades <span style="font-size:0.8rem; font-weight:300; font-family:'Inter',sans-serif;">(35cl)</span></h3>
+        <div class="sub" style="font-size:0.82rem; color:var(--text-light); font-style:italic; margin-bottom:12px;">&euro;4.80</div>
+        <div class="menu-item"><div class="item-info"><div class="item-name">Blueberry, Raspberry, Lavender, Yuzu, Peach or Rosemary</div></div></div>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <p><strong>Le Gamin de Poissy</strong></p>
+  <p>All prices in euros, taxes and service included &bull; The restaurant does not accept cheques.</p>
+</footer>
+
+</body>
+</html>
