@@ -309,6 +309,10 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
+        .mobile-close {
+            display: none;
+        }
+
         /* Responsive */
         @media (max-width: 900px) {
             .banner {
@@ -320,14 +324,61 @@
             .speech-panel {
                 max-height: none;
                 border-right: none;
-                border-bottom: 1px solid #d4cdc4;
                 padding: 2rem 1.5rem;
             }
             .comment-panel {
+                position: fixed;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                max-height: 70vh;
+                background: #fff;
+                padding: 1.5rem 1.5rem 2rem;
+                border-radius: 16px 16px 0 0;
+                box-shadow: 0 -4px 24px rgba(0,0,0,0.2);
+                z-index: 500;
+                overflow-y: auto;
+                transform: translateY(100%);
+                transition: transform 0.3s ease;
                 flex: none;
-                position: static;
-                max-height: none;
-                padding: 2rem 1.5rem;
+            }
+            .comment-panel.mobile-open {
+                transform: translateY(0);
+            }
+            .comment-panel h2 {
+                margin-bottom: 1rem;
+            }
+            .comment-placeholder {
+                display: none;
+            }
+            .mobile-close {
+                display: block;
+                position: absolute;
+                top: 0.8rem;
+                right: 1rem;
+                background: none;
+                border: none;
+                font-size: 1.5rem;
+                color: #8a7e72;
+                cursor: pointer;
+                line-height: 1;
+                padding: 0.2rem 0.5rem;
+            }
+            .mobile-close:hover {
+                color: #c9543d;
+            }
+            .mobile-backdrop {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0,0,0,0.3);
+                z-index: 499;
+            }
+            .mobile-backdrop.visible {
+                display: block;
             }
         }
     </style>
@@ -385,7 +436,9 @@
             <p style="margin-top: 2.5rem; text-align: center;"><button class="author-btn" id="author-btn">Qui est l'auteur ?</button></p>
         </div>
 
-        <div class="comment-panel">
+        <div class="mobile-backdrop" id="mobile-backdrop"></div>
+        <div class="comment-panel" id="comment-panel">
+            <button class="mobile-close" id="mobile-close">&times;</button>
             <h2>Commentaire</h2>
 
             <p class="comment-placeholder" id="placeholder">Cliquez sur un passage souligné pour afficher l'analyse.</p>
@@ -501,6 +554,15 @@
         const highlights = document.querySelectorAll('.highlight');
         const commentBoxes = document.querySelectorAll('.comment-box');
         const placeholder = document.getElementById('placeholder');
+        const commentPanel = document.getElementById('comment-panel');
+        const mobileBackdrop = document.getElementById('mobile-backdrop');
+        const mobileClose = document.getElementById('mobile-close');
+        const isMobile = () => window.innerWidth <= 900;
+
+        function closeMobilePanel() {
+            commentPanel.classList.remove('mobile-open');
+            mobileBackdrop.classList.remove('visible');
+        }
 
         highlights.forEach(el => {
             el.addEventListener('click', () => {
@@ -514,9 +576,17 @@
                 const target = document.getElementById('comment-' + id);
                 if (target) {
                     target.classList.add('visible');
+                    if (isMobile()) {
+                        commentPanel.classList.add('mobile-open');
+                        mobileBackdrop.classList.add('visible');
+                        commentPanel.scrollTop = 0;
+                    }
                 }
             });
         });
+
+        mobileClose.addEventListener('click', closeMobilePanel);
+        mobileBackdrop.addEventListener('click', closeMobilePanel);
 
         const authorBtn = document.getElementById('author-btn');
         const authorModal = document.getElementById('author-modal');
