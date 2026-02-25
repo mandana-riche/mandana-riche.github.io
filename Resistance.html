@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analyse du discours — Euthanasie et suicide assisté</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Georgia, 'Times New Roman', serif;
+            background: #f5f0eb;
+            color: #2c2c2c;
+            line-height: 1.8;
+        }
+
+        .banner {
+            background: #2c2c2c;
+            color: #e8e0d8;
+            padding: 2rem 4rem;
+            border-bottom: 3px solid #b8976a;
+        }
+
+        .banner h1 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+            color: #fff;
+            letter-spacing: 0.02em;
+        }
+
+        .banner p {
+            font-size: 0.92rem;
+            line-height: 1.7;
+            color: #c4bbb2;
+            max-width: 800px;
+        }
+
+        .banner p strong {
+            color: #e8e0d8;
+        }
+
+        .banner .method {
+            margin-top: 0.8rem;
+            font-size: 0.85rem;
+            color: #9e9689;
+            font-style: italic;
+        }
+
+        .container {
+            display: flex;
+            min-height: calc(100vh - 180px);
+        }
+
+        /* Left panel — Speech */
+        .speech-panel {
+            flex: 1;
+            padding: 3rem 4rem;
+            overflow-y: auto;
+            max-height: 100vh;
+            border-right: 1px solid #d4cdc4;
+        }
+
+        .speech-panel h1 {
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: #8a7e72;
+            margin-bottom: 0.5rem;
+        }
+
+        .speech-panel .author {
+            font-style: italic;
+            color: #8a7e72;
+            margin-bottom: 2.5rem;
+            font-size: 0.95rem;
+        }
+
+        .speech-panel .author a {
+            color: #c9543d;
+            text-decoration: none;
+        }
+
+        .speech-panel .author a:hover {
+            text-decoration: underline;
+        }
+
+        .speech-panel p {
+            margin-bottom: 1.2rem;
+            font-size: 1.05rem;
+            text-align: justify;
+        }
+
+        .speech-panel ul {
+            list-style: none;
+            margin-bottom: 1.2rem;
+            padding-left: 1.5rem;
+        }
+
+        .speech-panel ul li {
+            margin-bottom: 0.4rem;
+            font-size: 1.05rem;
+        }
+
+        .speech-panel ul li::before {
+            content: "— ";
+            color: #8a7e72;
+        }
+
+        .highlight {
+            font-weight: 700;
+            text-decoration: underline;
+            text-decoration-color: #c9543d;
+            text-underline-offset: 3px;
+            cursor: pointer;
+            transition: background 0.2s ease, color 0.2s ease;
+            border-radius: 2px;
+            padding: 0 2px;
+        }
+
+        .highlight:hover {
+            background: rgba(201, 84, 61, 0.1);
+        }
+
+        .highlight.active {
+            background: rgba(201, 84, 61, 0.15);
+            color: #9e3a27;
+        }
+
+        /* Right panel — Commentary */
+        .comment-panel {
+            flex: 0 0 480px;
+            background: #fff;
+            padding: 3rem 2.5rem;
+            overflow-y: auto;
+            max-height: 100vh;
+            position: sticky;
+            top: 0;
+        }
+
+        .comment-panel h2 {
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: #8a7e72;
+            margin-bottom: 2rem;
+        }
+
+        .comment-placeholder {
+            color: #b0a89e;
+            font-style: italic;
+            font-size: 0.95rem;
+            margin-top: 2rem;
+        }
+
+        .comment-box {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .comment-box.visible {
+            display: block;
+        }
+
+        .comment-box .quote {
+            font-style: italic;
+            color: #9e3a27;
+            border-left: 3px solid #c9543d;
+            padding-left: 1rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        .comment-box .label {
+            display: inline-block;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            padding: 0.2rem 0.6rem;
+            border-radius: 3px;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .comment-box .label.inexact {
+            background: #fef3cd;
+            color: #856404;
+        }
+
+        .comment-box .label.faux {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .comment-box .label.trompeur {
+            background: #ffe0cc;
+            color: #a14b00;
+        }
+
+        .comment-box .label.vrai {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .comment-box .label.exagere {
+            background: #e2d9f3;
+            color: #4a2d7a;
+        }
+
+        .comment-box .analysis {
+            font-size: 0.95rem;
+            line-height: 1.7;
+            color: #3c3c3c;
+        }
+
+        .comment-box .analysis p {
+            text-align: left;
+        }
+
+        .author-btn {
+            display: inline-block;
+            margin-left: 0.6rem;
+            background: none;
+            border: 1px solid #b0a89e;
+            color: #8a7e72;
+            font-family: Georgia, 'Times New Roman', serif;
+            font-size: 0.82rem;
+            padding: 0.15rem 0.6rem;
+            border-radius: 3px;
+            cursor: pointer;
+            vertical-align: middle;
+            transition: all 0.2s ease;
+        }
+
+        .author-btn:hover {
+            border-color: #c9543d;
+            color: #c9543d;
+        }
+
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-overlay.visible {
+            display: flex;
+        }
+
+        .modal {
+            background: #fff;
+            border-radius: 6px;
+            padding: 2.5rem;
+            max-width: 480px;
+            width: 90%;
+            position: relative;
+            animation: fadeIn 0.25s ease;
+        }
+
+        .modal h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.3rem;
+            color: #2c2c2c;
+        }
+
+        .modal .role {
+            font-size: 0.88rem;
+            color: #8a7e72;
+            font-style: italic;
+            margin-bottom: 1.2rem;
+        }
+
+        .modal p {
+            font-size: 0.92rem;
+            line-height: 1.7;
+            color: #3c3c3c;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            right: 1.2rem;
+            background: none;
+            border: none;
+            font-size: 1.3rem;
+            color: #8a7e72;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        .modal-close:hover {
+            color: #c9543d;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive */
+        @media (max-width: 900px) {
+            .banner {
+                padding: 1.5rem 1.5rem;
+            }
+            .container {
+                flex-direction: column;
+            }
+            .speech-panel {
+                max-height: none;
+                border-right: none;
+                border-bottom: 1px solid #d4cdc4;
+                padding: 2rem 1.5rem;
+            }
+            .comment-panel {
+                flex: none;
+                position: static;
+                max-height: none;
+                padding: 2rem 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="banner">
+        <h1>Fact-checking de propos tenus</h1>
+        <p>Cette page n'exprime aucune opinion. Elle se limite à un exercice d'<strong>objectivité</strong> : vérifier, point par point, la conformité d'affirmations publiques avec les textes officiels auxquels elles se rapportent. Chaque analyse s'appuie exclusivement sur le contenu de la loi, sans jugement de valeur ni prise de position. Les propos sont reproduits intégralement, sans aucune modification ni altération.</p>
+        <p class="method">Cliquez sur les passages soulignés pour afficher la vérification correspondante.</p>
+    </div>
+
+    <div class="container">
+        <div class="speech-panel">
+            <h1>Propos tenus sur Instagram</h1>
+            <p class="author">Sur la proposition de loi relative à l'aide à mourir</p>
+
+            <p>L'Assemblée nationale va se prononcer sur <span class="highlight" data-comment="7">une proposition de loi pour légaliser l'euthanasie et le suicide assisté.</span> Je le dis avec une gravité absolue. Ce texte constitue une rupture éthique et sociale sans précédent. <span class="highlight" data-comment="1">Il assimile l'acte de tuer à un acte de soin.</span> Il brouille une frontière fondamentale. <span class="highlight" data-comment="8">Demain, soigner pourrait vouloir dire donner la mort.</span></p>
+
+            <p><span class="highlight" data-comment="2">Ce texte rendrait potentiellement éligible à l'euthanasie plus de 5 millions de Français.</span> Parmi eux :</p>
+            <ul>
+                <li>4 millions de personnes diabétiques</li>
+                <li>1 million de malades d'Alzheimer</li>
+                <li>400 000 patients atteints de cancers métastasés</li>
+                <li>des vies fragiles, des vies déjà éprouvées</li>
+            </ul>
+
+            <p><span class="highlight" data-comment="6">Cette loi ne protège pas les plus vulnérables. Au contraire, elle les expose aux pressions les plus silencieuses, les plus insidieuses et parfois même à de véritables incitations à mourir.</span></p>
+
+            <p><span class="highlight" data-comment="3">Elle prévoit par exemple un délai de réflexion de 48 heures avant une injection letale.</span> <span class="highlight" data-comment="9">48 heures seulement pour un acte irréversible, alors que la loi prévoit 14 jours pour pouvoir se rétracter d'un simple achat en ligne.</span></p>
+
+            <p><span class="highlight" data-comment="4">Elle autorise l'euthanasie dans des unités de soins palliatifs, dans des chambres funéraires, parfois même en présence d'enfants mineurs.</span></p>
+
+            <p><span class="highlight" data-comment="5">Elle prévoit jusqu'à deux ans de prison et 30 000 € d'amende pour tous ceux qui tenteraient de dissuader un proche de mourir.</span> Demain, encourager quelqu'un à continuer de vivre pourrait devenir un délit.</p>
+
+            <p>Non, cette loi n'est pas une loi de liberté, c'est une loi d'abandon :</p>
+            <ul>
+                <li>abandon des personnes âgées isolées qui n'ont pas les moyens de se payer une maison de retraite décente</li>
+                <li>abandon des malades pauvres qui ont le sentiment d'être un poids pour leur famille et qui culpabiliseront ainsi de rester en vie</li>
+                <li>abandon de ceux qui n'ont pas accès à des soins palliatifs pour les accompagner et les soulager</li>
+            </ul>
+
+            <p><span class="highlight" data-comment="11">Pendant que certains parlent d'aides actives à mourir, des millions de Français attendent une aide active à soigner. Un médecin traitant, un hôpital qui tient debout, des soins palliatifs accessibles partout, une vraie lutte contre la souffrance et contre le suicide.</span></p>
+
+            <p>Je veux m'adresser maintenant à vous, députés de tous bords. Je sais que vous doutez. Je sais que ce débat bouscule profondément, mais je vous en supplie :</p>
+            <ul>
+                <li>Protégez les plus vulnérables</li>
+                <li>Protégez les personnes handicapées</li>
+                <li>Protégez les malades</li>
+                <li>Protégez les personnes âgées</li>
+                <li>Protégez la vie</li>
+            </ul>
+
+            <p>Votez contre la légalisation de l'euthanasie et du suicide assisté.</p>
+
+            <p style="margin-top: 2.5rem; text-align: center;"><button class="author-btn" id="author-btn">Qui est l'auteur ?</button></p>
+        </div>
+
+        <div class="comment-panel">
+            <h2>Commentaire</h2>
+
+            <p class="comment-placeholder" id="placeholder">Cliquez sur un passage souligné pour afficher l'analyse.</p>
+
+            <div class="comment-box" id="comment-1">
+                <div class="quote">« Il assimile l'acte de tuer à un acte de soin. »</div>
+                <span class="label inexact">Inexact / interprétation</span>
+                <p class="analysis">Le texte crée un « droit à l'aide à mourir » dans le code de la santé publique et précise que c'est « un acte autorisé par la loi » (au sens de l'article 122-4 du code pénal). Il ne qualifie pas explicitement l'acte de « soin ».</p>
+            </div>
+
+            <div class="comment-box" id="comment-2">
+                <div class="quote">« Ce texte rendrait potentiellement éligible à l'euthanasie plus de 5 millions de Français. Parmi eux : 4 millions de personnes diabétiques, 1 million de malades d'Alzheimer… »</div>
+                <span class="label faux">Faux / très trompeur</span>
+                <div class="analysis">
+                    <p>L'éligibilité ne dépend pas d'un diagnostic (diabète, Alzheimer, etc.) mais de <strong>conditions cumulatives très précises</strong> : affection grave et incurable engageant le pronostic vital en phase avancée ou terminale, souffrance réfractaire ou insupportable, volonté libre et éclairée, etc.</p>
+                    <p style="margin-top: 0.8rem;"><strong>Alzheimer :</strong> le texte prévoit qu'une personne dont le discernement est « gravement altéré » lors de la démarche ne peut pas être reconnue comme exprimant une volonté libre et éclairée. Présenter « 1 million de malades d'Alzheimer » comme potentiellement éligibles est globalement faux.</p>
+                    <p style="margin-top: 0.8rem;"><strong>Diabète :</strong> le texte ne cite pas le diabète, et le simple fait d'être diabétique ne remplit pas les critères (pronostic vital engagé en phase avancée/terminale + autres conditions).</p>
+                </div>
+            </div>
+
+            <div class="comment-box" id="comment-3">
+                <div class="quote">« Elle prévoit par exemple un délai de réflexion de 48 heures avant une injection létale. »</div>
+                <span class="label inexact">Partiellement vrai mais orienté</span>
+                <div class="analysis">
+                    <p><strong>Oui :</strong> un délai minimal de réflexion existe (≈ 48h).</p>
+                    <p style="margin-top: 0.8rem;"><strong>Mais :</strong></p>
+                    <ul style="margin-top: 0.4rem; padding-left: 1.2rem; list-style: disc;">
+                        <li>Il intervient après une procédure médicale longue (évaluations, confirmation, décision).</li>
+                        <li>Ce n'est pas le seul moment de réflexion.</li>
+                    </ul>
+                    <p style="margin-top: 0.8rem;">La comparaison avec un achat en ligne est une analogie émotionnelle, pas juridique.</p>
+                </div>
+            </div>
+
+            <div class="comment-box" id="comment-4">
+                <div class="quote">« Elle autorise l'euthanasie dans des unités de soins palliatifs, dans des chambres funéraires, parfois même en présence d'enfants mineurs. »</div>
+                <span class="label trompeur">Trompeur / non étayé</span>
+                <div class="analysis">
+                    <p><strong>Unités de soins palliatifs :</strong> le texte ne dit pas « unités de soins palliatifs », mais il permet que l'administration ait lieu hors domicile (sauf voies et espaces publics). Cela peut inclure un établissement de santé selon les cas, mais ce n'est pas formulé comme « autorisation en soins palliatifs ».</p>
+                    <p style="margin-top: 0.8rem;"><strong>Chambres funéraires :</strong> non étayé par le texte. Le texte ne mentionne pas les chambres funéraires. Il dit seulement « en dehors de son domicile, à l'exception des voies et espaces publics ».</p>
+                    <p style="margin-top: 0.8rem;"><strong>Présence d'enfants mineurs :</strong> non étayé par le texte. Le texte dit que la personne « peut être entourée par les personnes de son choix », sans mention spécifique des mineurs.</p>
+                </div>
+            </div>
+
+            <div class="comment-box" id="comment-5">
+                <div class="quote">« Elle prévoit jusqu'à deux ans de prison et 30 000 € d'amende pour tous ceux qui tenteraient de dissuader un proche de mourir. »</div>
+                <span class="label trompeur">Trompeur</span>
+                <div class="analysis">
+                    <p>Le texte crée un délit puni de 2 ans et 30 000 € visant le fait <strong>d'empêcher ou tenter d'empêcher</strong> de pratiquer ou de s'informer sur l'aide à mourir, notamment par diffusion d'allégations <strong>intentionnellement trompeuses</strong> « dans un but dissuasif », ou par pressions, menaces, intimidation.</p>
+                    <p style="margin-top: 0.8rem;">Une discussion, un avis, une tentative de convaincre un proche <strong>sans mensonge intentionnel ni intimidation</strong> n'est pas décrite comme telle dans l'infraction. En revanche, la partie « pressions morales ou psychologiques, menaces, intimidation » peut couvrir des comportements de coercition.</p>
+                    <p style="margin-top: 0.8rem;">Donc : <strong>vrai</strong> sur l'existence de la peine, <strong>faux</strong> sur l'idée que « dissuader un proche » au sens courant tomberait automatiquement sous le coup de la loi.</p>
+                </div>
+            </div>
+
+            <div class="comment-box" id="comment-6">
+                <div class="quote">« Cette loi ne protège pas les plus vulnérables. Au contraire, elle les expose aux pressions les plus silencieuses, les plus insidieuses et parfois même à de véritables incitations à mourir. »</div>
+                <span class="label exagere">Opinion / projection</span>
+                <div class="analysis">
+                    <p>Ce n'est pas une affirmation vérifiable directement dans le texte. Le texte contient des <strong>garde-fous</strong> : conditions cumulatives, procédure collégiale, exigence de volonté libre et éclairée, exclusion si discernement gravement altéré, etc.</p>
+                </div>
+            </div>
+
+            <div class="comment-box" id="comment-7">
+                <div class="quote">« une proposition de loi pour légaliser l'euthanasie et le suicide assisté »</div>
+                <span class="label trompeur">Terminologie orientée</span>
+                <div class="analysis">
+                    <p>Le texte de loi ne contient <strong>jamais</strong> les mots « euthanasie » ni « suicide assisté ». Il crée un <strong>« droit à l'aide à mourir »</strong> (Art. L. 1111-12-1).</p>
+                    <p style="margin-top: 0.8rem;">De plus, le mode par défaut est l'<strong>auto-administration</strong> par la personne elle-même ; l'administration par un médecin ou infirmier n'intervient que lorsque la personne « n'est pas physiquement en mesure d'y procéder ».</p>
+                    <p style="margin-top: 0.8rem;">Utiliser le terme « euthanasie » pour désigner l'ensemble du dispositif est un cadrage rhétorique.</p>
+                </div>
+            </div>
+
+            <div class="comment-box" id="comment-8">
+                <div class="quote">« Demain, soigner pourrait vouloir dire donner la mort. »</div>
+                <span class="label trompeur">Trompeur</span>
+                <div class="analysis">
+                    <p>Le texte prévoit une <strong>clause de conscience explicite</strong> (Art. L. 1111-12-12) : aucun professionnel de santé n'est tenu de participer à la procédure d'aide à mourir.</p>
+                    <p style="margin-top: 0.8rem;">Un médecin qui refuse doit simplement informer le patient et l'orienter vers un confrère volontaire. Les deux actes — soigner et aider à mourir — restent <strong>juridiquement et pratiquement distincts</strong>.</p>
+                </div>
+            </div>
+
+            <div class="comment-box" id="comment-9">
+                <div class="quote">« 48 heures seulement pour un acte irréversible, alors que la loi prévoit 14 jours pour se rétracter d'un simple achat en ligne. »</div>
+                <span class="label faux">Fausse équivalence</span>
+                <div class="analysis">
+                    <p>Les 48h ne sont <strong>pas le seul temps de réflexion</strong>. Elles interviennent après un parcours médical d'au minimum <strong>15 jours</strong> (Art. L. 1111-12-4, III : le médecin a 15 jours pour se prononcer), incluant une procédure collégiale pluriprofessionnelle.</p>
+                    <p style="margin-top: 0.8rem;">Le délai total entre la demande initiale et l'administration est donc bien supérieur à 48h.</p>
+                    <p style="margin-top: 0.8rem;">Comparer ce parcours médical encadré à un achat en ligne est une <strong>analogie émotionnelle sans pertinence juridique</strong>.</p>
+                </div>
+            </div>
+
+<div class="comment-box" id="comment-11">
+                <div class="quote">« Pendant que certains parlent d'aides actives à mourir, des millions de Français attendent une aide active à soigner. Un médecin traitant, un hôpital qui tient debout, des soins palliatifs accessibles partout… »</div>
+                <span class="label exagere">Faux dilemme</span>
+                <div class="analysis">
+                    <p>Le texte de loi prévoit explicitement que le médecin doit informer la personne qu'elle peut <strong>bénéficier de soins palliatifs</strong> et <strong>s'assurer qu'elle y ait accès de manière effective</strong> (Art. L. 1111-12-3, II, 2°).</p>
+                    <p style="margin-top: 0.8rem;">L'aide à mourir et les soins palliatifs <strong>ne sont pas présentés comme des alternatives exclusives</strong> dans le texte. Opposer les deux est une construction rhétorique.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="author-modal">
+        <div class="modal">
+            <button class="modal-close" id="modal-close">&times;</button>
+            <h3>Marion Mar&eacute;chal Le Pen</h3>
+            <p style="margin-top: 1rem;">Ces propos ont &eacute;t&eacute; publi&eacute;s sur son compte Instagram le 25 f&eacute;vrier 2026, &agrave; la veille du vote de l'Assembl&eacute;e nationale sur la proposition de loi relative au droit &agrave; l'aide &agrave; mourir.</p>
+            <p style="margin-top: 1rem;"><a href="https://www.instagram.com/reel/DVLoITNgvuF/?igsh=MWFpZzlrcWM1YjJy" target="_blank" rel="noopener" style="color: #c9543d;">Voir la vid&eacute;o originale</a></p>
+        </div>
+    </div>
+
+    <script>
+        const highlights = document.querySelectorAll('.highlight');
+        const commentBoxes = document.querySelectorAll('.comment-box');
+        const placeholder = document.getElementById('placeholder');
+
+        highlights.forEach(el => {
+            el.addEventListener('click', () => {
+                const id = el.dataset.comment;
+
+                highlights.forEach(h => h.classList.remove('active'));
+                el.classList.add('active');
+
+                placeholder.style.display = 'none';
+                commentBoxes.forEach(box => box.classList.remove('visible'));
+                const target = document.getElementById('comment-' + id);
+                if (target) {
+                    target.classList.add('visible');
+                }
+            });
+        });
+
+        const authorBtn = document.getElementById('author-btn');
+        const authorModal = document.getElementById('author-modal');
+        const modalClose = document.getElementById('modal-close');
+
+        authorBtn.addEventListener('click', () => {
+            authorModal.classList.add('visible');
+        });
+
+        modalClose.addEventListener('click', () => {
+            authorModal.classList.remove('visible');
+        });
+
+        authorModal.addEventListener('click', (e) => {
+            if (e.target === authorModal) {
+                authorModal.classList.remove('visible');
+            }
+        });
+    </script>
+</body>
+</html>
