@@ -1,0 +1,1804 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Revue de presse française — 26 février 2026</title>
+    <style>
+        :root {
+            --bg: #fafaf8;
+            --text: #1a1a1a;
+            --muted: #555;
+            --accent: #2c5282;
+            --border: #ddd;
+            --card-bg: #fff;
+            --highlight: #ebf4ff;
+            --factual: #2c5282;
+            --favorable: #276749;
+            --critical: #9b2c2c;
+            --mixed: #b7791f;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: "Georgia", "Times New Roman", serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 2rem 1.5rem 4rem;
+        }
+
+        header {
+            border-bottom: 3px double var(--text);
+            padding-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        header h1 { font-size: 1.8rem; font-weight: 700; letter-spacing: 0.02em; margin-bottom: 0.3rem; }
+        header .date { font-size: 1rem; color: var(--muted); font-style: italic; }
+
+        /* ===== TABS ===== */
+        .tab-nav {
+            display: flex;
+            gap: 0;
+            margin-top: 1.5rem;
+            border-bottom: 2px solid var(--accent);
+            font-family: sans-serif;
+        }
+
+        .tab-btn {
+            padding: 0.7rem 1.5rem;
+            background: transparent;
+            border: 2px solid transparent;
+            border-bottom: none;
+            border-radius: 6px 6px 0 0;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--muted);
+            cursor: pointer;
+            transition: all 0.2s;
+            font-family: sans-serif;
+            position: relative;
+            bottom: -2px;
+        }
+
+        .tab-btn:hover { color: var(--accent); background: var(--highlight); }
+
+        .tab-btn.active {
+            color: var(--accent);
+            background: var(--bg);
+            border-color: var(--accent);
+            border-bottom: 2px solid var(--bg);
+        }
+
+        .tab-content { display: none; max-width: 820px; }
+        .tab-content.active { display: block; }
+        #tab-carto.active { max-width: 100%; }
+
+        /* ===== REVUE ===== */
+        h2 {
+            font-size: 1.35rem;
+            margin: 2.5rem 0 1.2rem;
+            padding-bottom: 0.4rem;
+            border-bottom: 1px solid var(--border);
+            color: var(--accent);
+        }
+
+        h2 .icon { margin-right: 0.4rem; }
+
+        h3 { font-size: 1.1rem; margin: 1.8rem 0 0.6rem; color: var(--text); }
+
+        .article-number {
+            display: inline-block;
+            background: var(--accent);
+            color: #fff;
+            width: 1.6rem;
+            height: 1.6rem;
+            line-height: 1.6rem;
+            text-align: center;
+            border-radius: 50%;
+            font-size: 0.85rem;
+            font-family: sans-serif;
+            margin-right: 0.5rem;
+            vertical-align: middle;
+        }
+
+        .essentiels {
+            background: var(--highlight);
+            border-left: 4px solid var(--accent);
+            padding: 1.2rem 1.5rem;
+            border-radius: 0 6px 6px 0;
+            margin: 1rem 0 2rem;
+        }
+
+        .essentiels ol { padding-left: 1.2rem; }
+        .essentiels li { margin-bottom: 0.5rem; font-size: 0.98rem; }
+        .essentiels li:last-child { margin-bottom: 0; }
+
+        .article {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .article h3 { margin-top: 0; font-size: 1.15rem; }
+
+        .article .label {
+            display: block;
+            font-weight: 700;
+            font-size: 0.88rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            margin-top: 1rem;
+            margin-bottom: 0.25rem;
+            font-family: sans-serif;
+        }
+
+        .article .label:first-of-type { margin-top: 0.8rem; }
+        .article p { font-size: 0.95rem; margin-bottom: 0.2rem; }
+
+        .tendances ul, .bref ul { padding-left: 1.4rem; }
+        .tendances li, .bref li { margin-bottom: 0.6rem; font-size: 0.95rem; }
+
+        .lecture {
+            background: var(--highlight);
+            border-radius: 6px;
+            padding: 1.2rem 1.5rem;
+            margin: 1rem 0;
+            font-size: 0.95rem;
+        }
+
+        footer {
+            margin-top: 3rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+            font-size: 0.82rem;
+            color: var(--muted);
+            text-align: center;
+            font-family: sans-serif;
+        }
+
+        /* ===== CARTOGRAPHIE ===== */
+        .carto-intro { margin: 1.5rem 0 2rem; font-size: 0.95rem; color: var(--muted); }
+
+        .carto-legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.2rem 2rem;
+            margin: 1.5rem 0 2rem;
+            padding: 1rem 1.2rem;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            font-family: sans-serif;
+            font-size: 0.82rem;
+        }
+
+        .carto-legend-section { display: flex; flex-direction: column; gap: 0.4rem; }
+
+        .carto-legend-title {
+            font-weight: 700;
+            font-size: 0.78rem;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            color: var(--muted);
+            margin-bottom: 0.2rem;
+        }
+
+        .carto-legend-item { display: flex; align-items: center; gap: 0.5rem; }
+
+        .dot {
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .dot-major { background: var(--accent); }
+        .dot-secondary { background: var(--accent); opacity: 0.45; }
+        .dot-mention { background: transparent; border: 2px solid var(--accent); }
+        .dot-none { width: 14px; height: 2px; border-radius: 1px; background: #ccc; margin: 6px 0; }
+
+        .angle {
+            display: inline-block;
+            font-family: sans-serif;
+            font-size: 0.68rem;
+            font-weight: 700;
+            letter-spacing: 0.03em;
+            padding: 1px 6px;
+            border-radius: 3px;
+            text-transform: uppercase;
+            line-height: 1.4;
+        }
+
+        .angle-factual { background: #dbeafe; color: var(--factual); }
+        .angle-favorable { background: #d1fae5; color: var(--favorable); }
+        .angle-critical { background: #fee2e2; color: var(--critical); }
+        .angle-mixed { background: #fef3c7; color: var(--mixed); }
+
+        .matrix-wrapper {
+            overflow-x: auto;
+            margin: 0 0 2rem;
+            border-radius: 6px;
+            border: 1px solid var(--border);
+        }
+
+        .matrix {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: sans-serif;
+            font-size: 0.82rem;
+            min-width: 1050px;
+        }
+
+        .matrix thead th {
+            background: var(--accent);
+            color: #fff;
+            font-weight: 600;
+            padding: 0.6rem 0.4rem;
+            text-align: center;
+            font-size: 0.72rem;
+            letter-spacing: 0.02em;
+            position: sticky;
+            top: 0;
+            z-index: 2;
+            border-right: 1px solid rgba(255,255,255,0.15);
+        }
+
+        .matrix thead th:first-child {
+            text-align: left;
+            padding-left: 0.8rem;
+            min-width: 160px;
+            position: sticky;
+            left: 0;
+            z-index: 3;
+        }
+
+        .matrix thead th .topic-short { display: block; line-height: 1.3; }
+
+        .matrix tbody tr { border-bottom: 1px solid var(--border); }
+        .matrix tbody tr:nth-child(even) { background: #f9f9f7; }
+        .matrix tbody tr:hover { background: var(--highlight); }
+
+        .matrix tbody td {
+            padding: 0.45rem 0.35rem;
+            text-align: center;
+            vertical-align: middle;
+            border-right: 1px solid #eee;
+        }
+
+        .matrix tbody td:first-child {
+            text-align: left;
+            padding-left: 0.8rem;
+            font-weight: 500;
+            position: sticky;
+            left: 0;
+            background: inherit;
+            z-index: 1;
+            border-right: 1px solid var(--border);
+        }
+
+        .matrix .category-row td {
+            background: #f0f0ec !important;
+            font-weight: 700;
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: var(--muted);
+            padding: 0.4rem 0.8rem;
+            border-right: none;
+        }
+
+        .matrix .cell-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 3px;
+        }
+
+        .matrix td[data-tooltip] { cursor: default; position: relative; }
+
+        .matrix td[data-tooltip]:hover::after {
+            content: attr(data-tooltip);
+            position: absolute;
+            bottom: calc(100% + 6px);
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--text);
+            color: #fff;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 0.72rem;
+            z-index: 10;
+            pointer-events: none;
+            max-width: 250px;
+            white-space: normal;
+            text-align: center;
+            line-height: 1.4;
+        }
+
+        .carto-analysis {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.2rem;
+            margin: 2rem 0;
+        }
+
+        .carto-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 1.2rem;
+        }
+
+        .carto-card h4 {
+            font-family: sans-serif;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+            margin-bottom: 0.7rem;
+        }
+
+        .carto-card p, .carto-card li { font-size: 0.9rem; margin-bottom: 0.4rem; }
+        .carto-card ul { padding-left: 1.2rem; }
+
+        .coverage-bar-row {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            margin-bottom: 0.5rem;
+            font-family: sans-serif;
+            font-size: 0.8rem;
+        }
+
+        .coverage-bar-label { width: 140px; flex-shrink: 0; text-align: right; color: var(--muted); }
+
+        .coverage-bar-track {
+            flex: 1;
+            height: 18px;
+            background: #eee;
+            border-radius: 9px;
+            overflow: hidden;
+        }
+
+        .coverage-bar-fill { height: 100%; border-radius: 9px; transition: width 0.6s ease; }
+        .coverage-bar-value { width: 40px; flex-shrink: 0; font-weight: 600; color: var(--text); }
+
+        .divergence-row {
+            display: flex;
+            align-items: center;
+            gap: 0;
+            margin-bottom: 0.6rem;
+            font-family: sans-serif;
+            font-size: 0.78rem;
+        }
+
+        .divergence-label { width: 140px; flex-shrink: 0; text-align: right; padding-right: 0.6rem; color: var(--muted); }
+
+        .divergence-track { display: flex; flex: 1; height: 20px; position: relative; }
+
+        .divergence-center {
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--text);
+            z-index: 1;
+        }
+
+        .divergence-left, .divergence-right { width: 50%; display: flex; position: relative; }
+        .divergence-left { justify-content: flex-end; }
+        .divergence-bar-critical { height: 100%; background: #feb2b2; border-radius: 4px 0 0 4px; }
+        .divergence-bar-favorable { height: 100%; background: #9ae6b4; border-radius: 0 4px 4px 0; }
+
+        .filter-controls {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 1rem 0 1.5rem;
+            font-family: sans-serif;
+        }
+
+        .filter-btn {
+            padding: 0.35rem 0.8rem;
+            font-size: 0.78rem;
+            font-weight: 500;
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            background: var(--card-bg);
+            color: var(--muted);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .filter-btn:hover, .filter-btn.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+        .footnotes {
+            margin-top: 1rem;
+            font-family: sans-serif;
+            font-size: 0.78rem;
+            color: var(--muted);
+            line-height: 1.6;
+        }
+
+        .footnotes p { margin-bottom: 0.2rem; }
+
+        .sup { font-size: 0.7em; vertical-align: super; font-weight: 700; color: var(--accent); }
+
+        /* ===== VEILLE RÉSEAUX SOCIAUX ===== */
+        #tab-social.active { max-width: 100%; }
+
+        .social-intro { margin: 1.5rem 0 2rem; font-size: 0.95rem; color: var(--muted); }
+
+        .persona-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.2rem;
+            margin: 1.5rem 0;
+        }
+
+        .persona-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            padding: 1.3rem;
+            position: relative;
+        }
+
+        .persona-card.highlight-card {
+            border-color: var(--accent);
+            border-width: 2px;
+        }
+
+        .persona-header {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .persona-avatar {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: var(--accent);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: sans-serif;
+            font-weight: 700;
+            font-size: 1rem;
+            flex-shrink: 0;
+        }
+
+        .persona-avatar.rn { background: #1a365d; }
+        .persona-avatar.reconquete { background: #742a2a; }
+        .persona-avatar.souverainiste { background: #553c9a; }
+        .persona-avatar.influenceur { background: #2d3748; }
+
+        .persona-name {
+            font-weight: 700;
+            font-size: 1rem;
+            line-height: 1.2;
+        }
+
+        .persona-role {
+            font-family: sans-serif;
+            font-size: 0.75rem;
+            color: var(--muted);
+        }
+
+        .persona-accounts {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.4rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            font-family: sans-serif;
+            font-size: 0.7rem;
+            padding: 2px 8px;
+            border-radius: 12px;
+            background: #edf2f7;
+            color: var(--muted);
+            text-decoration: none;
+            transition: all 0.15s;
+        }
+
+        .social-link:hover { background: var(--accent); color: #fff; }
+
+        .persona-posts { margin-top: 0.5rem; }
+
+        .post-item {
+            border-left: 3px solid var(--border);
+            padding: 0.5rem 0 0.5rem 0.8rem;
+            margin-bottom: 0.6rem;
+            font-size: 0.88rem;
+        }
+
+        .post-item:last-child { margin-bottom: 0; }
+
+        .post-meta {
+            font-family: sans-serif;
+            font-size: 0.72rem;
+            color: var(--muted);
+            margin-bottom: 0.2rem;
+        }
+
+        .post-platform {
+            display: inline-block;
+            padding: 1px 5px;
+            border-radius: 3px;
+            font-weight: 600;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            margin-right: 0.3rem;
+        }
+
+        .platform-x { background: #1a1a1a; color: #fff; }
+        .platform-ig { background: linear-gradient(45deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); color: #fff; }
+        .platform-tt { background: #010101; color: #fff; }
+        .platform-fb { background: #1877f2; color: #fff; }
+        .platform-yt { background: #ff0000; color: #fff; }
+
+        .post-text { line-height: 1.5; }
+        .post-text em { font-style: italic; color: var(--muted); }
+
+        .post-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.3rem;
+            margin-top: 0.3rem;
+        }
+
+        .tag {
+            font-family: sans-serif;
+            font-size: 0.65rem;
+            padding: 1px 6px;
+            border-radius: 3px;
+            font-weight: 600;
+        }
+
+        .tag-agriculture { background: #c6f6d5; color: #22543d; }
+        .tag-immigration { background: #fed7d7; color: #742a2a; }
+        .tag-liberte { background: #fefcbf; color: #744210; }
+        .tag-municipales { background: #e9d8fd; color: #44337a; }
+        .tag-identite { background: #feebc8; color: #7b341e; }
+        .tag-europe { background: #bee3f8; color: #2a4365; }
+        .tag-justice { background: #fed7e2; color: #702459; }
+        .tag-souverainete { background: #e2e8f0; color: #2d3748; }
+
+        .social-analysis-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.2rem;
+            margin: 2rem 0;
+        }
+
+        .alert-box {
+            background: #fff5f5;
+            border: 1px solid #feb2b2;
+            border-radius: 6px;
+            padding: 1rem 1.2rem;
+            margin: 1.5rem 0;
+            font-size: 0.9rem;
+        }
+
+        .alert-box strong { color: var(--critical); }
+
+        .full-width { grid-column: 1 / -1; }
+
+        @media (max-width: 600px) {
+            body { padding: 1rem 1rem 3rem; }
+            header h1 { font-size: 1.4rem; }
+            h2 { font-size: 1.15rem; }
+            .article { padding: 1rem; }
+            .tab-btn { padding: 0.5rem 0.8rem; font-size: 0.82rem; }
+            .carto-analysis { grid-template-columns: 1fr; }
+            .carto-legend { flex-direction: column; gap: 0.8rem; }
+            .persona-grid { grid-template-columns: 1fr; }
+            .social-analysis-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Revue de presse française</h1>
+    <div class="date">Jeudi 26 février 2026</div>
+</header>
+
+<nav class="tab-nav">
+    <button class="tab-btn active" data-tab="tab-revue">Revue de presse</button>
+    <button class="tab-btn" data-tab="tab-carto">Cartographie des médias</button>
+    <button class="tab-btn" data-tab="tab-social">Veille extrême droite</button>
+</nav>
+
+<!-- ================================================== -->
+<!-- TAB 1 : REVUE DE PRESSE                            -->
+<!-- ================================================== -->
+<div id="tab-revue" class="tab-content active">
+
+<h2><span class="icon">&#x1F9ED;</span> Les 10 informations essentielles</h2>
+
+<div class="essentiels">
+    <ol>
+        <li>L'Assemblée nationale a adopté en deuxième lecture la proposition de loi sur l'aide à mourir (299 voix pour, 226 contre), rétablissant le principe d'auto-administration de la substance létale.</li>
+        <li>Le gouvernement Lecornu a surmonté deux motions de censure (RN et LFI) déposées contre la programmation pluriannuelle de l'énergie adoptée par décret le 12 février.</li>
+        <li>Les députés examinent depuis mardi un projet de loi controversé contre la fraude fiscale et sociale, visant à récupérer 2 milliards d'euros.</li>
+        <li>Un remaniement gouvernemental est attendu dans les prochains jours, après le départ confirmé de plusieurs ministres candidats aux municipales.</li>
+        <li>Les vigilances rouges crues sont levées dans l'Ouest, mais quatre départements restent en alerte orange après les inondations liées à la tempête Pedro.</li>
+        <li>L'influenceur d'extrême droite Papacito est jugé à Paris pour cyberharcèlement et injure discriminatoire à l'encontre de la boxeuse Imane Khelif.</li>
+        <li>Pierre Palmade aura purgé sa peine de deux ans de prison le 27 février ; il reste sous sursis probatoire trois ans.</li>
+        <li>L'Insee publie les chiffres de l'emploi salarié T4 2025 et une étude actualisée sur les écarts de rémunération femmes-hommes.</li>
+        <li>Macron annonce que 26 pays se sont engagés à déployer des troupes en Ukraine « le jour d'après » un cessez-le-feu, la France fournissant désormais les deux tiers du renseignement allié à Kiev.</li>
+        <li>Le budget 2026, validé par le Conseil constitutionnel le 19 février, vise un déficit à 5 % du PIB, mais la Cour des comptes juge cet objectif « loin d'être garanti ».</li>
+    </ol>
+</div>
+
+<h2><span class="icon">&#x1F4F0;</span> Actualités majeures</h2>
+
+<!-- 1 -->
+<div class="article">
+    <h3><span class="article-number">1</span> Aide à mourir : l'Assemblée adopte le texte en deuxième lecture</h3>
+    <span class="label">Le fait</span>
+    <p>Les députés ont voté le 25 février la proposition de loi créant un droit à l'aide à mourir, par 299 voix contre 226 et 37 abstentions. Le texte rétablit l'auto-administration de la substance létale comme règle, l'intervention d'un médecin ou infirmier n'étant prévue qu'en cas d'incapacité physique du patient. Un amendement précisant qu'une souffrance psychologique seule ne peut ouvrir ce droit a été adopté (159 contre 130). Le texte sur les soins palliatifs a été voté à l'unanimité (491 pour).</p>
+    <span class="label">Contexte</span>
+    <p>Le Sénat avait rejeté le texte en bloc en première lecture. Il devra se prononcer à nouveau en avril. Le débat sur la fin de vie oppose depuis des années partisans d'un droit nouveau et défenseurs du modèle palliatif, dans un contexte où la France reste l'un des rares grands pays européens sans forme d'aide active à mourir.</p>
+    <span class="label">Pourquoi c'est important</span>
+    <p>Il s'agit d'une avancée législative majeure sur un sujet sociétal de premier plan. L'adoption en deuxième lecture renforce la dynamique parlementaire en faveur du texte, même si l'obstacle du Sénat reste entier.</p>
+    <span class="label">Points de vue médiatiques</span>
+    <p>Le clivage dépasse les lignes partisanes traditionnelles : les votes sont très partagés au sein de chaque groupe. LCP souligne le retour au principe d'auto-administration comme un point de friction majeur avec le Sénat. France 24 et Franceinfo insistent sur le caractère historique du vote. Les médias proches de la droite conservatrice expriment des réserves sur les garanties entourant la procédure.</p>
+    <span class="label">À suivre</span>
+    <p>L'examen au Sénat en avril sera décisif. En cas de désaccord persistant, une commission mixte paritaire devra trancher, avec un risque de blocage prolongé.</p>
+</div>
+
+<!-- 2 -->
+<div class="article">
+    <h3><span class="article-number">2</span> Énergie : le gouvernement survit à deux motions de censure</h3>
+    <span class="label">Le fait</span>
+    <p>L'Assemblée nationale a rejeté le 25 février les deux motions de censure déposées par le RN et LFI contre la feuille de route énergétique du gouvernement. La motion RN a recueilli 140 voix, celle de LFI 108 voix, loin du seuil de 289 nécessaire au renversement. Les motions visaient la programmation pluriannuelle de l'énergie (PPE3) adoptée par décret le 12 février.</p>
+    <span class="label">Contexte</span>
+    <p>La PPE3, publiée après trois ans de débats et de reports, privilégie la relance du nucléaire et de l'électricité décarbonée, tout en réduisant les objectifs de déploiement de l'éolien terrestre et du solaire. Le recours au décret, contournant un vote parlementaire direct, a provoqué la colère des oppositions.</p>
+    <span class="label">Pourquoi c'est important</span>
+    <p>Ce double rejet confirme l'absence de majorité alternative à l'Assemblée et la capacité du gouvernement Lecornu à gouverner malgré une base parlementaire fragile. Il valide de facto la stratégie énergétique pro-nucléaire du gouvernement.</p>
+    <span class="label">Points de vue médiatiques</span>
+    <p>Le Figaro et Boursorama soulignent la solidité relative du gouvernement. Public Sénat note que Lecornu avait lié le vote des motions au calendrier du remaniement. Les médias de gauche critiquent le recul sur les renouvelables. Les écologistes dénoncent une stratégie insuffisante face à l'urgence climatique.</p>
+    <span class="label">À suivre</span>
+    <p>Le remaniement gouvernemental, dont Lecornu a fait un préalable au vote des motions, devrait être annoncé dans les prochains jours.</p>
+</div>
+
+<!-- 3 -->
+<div class="article">
+    <h3><span class="article-number">3</span> Fraude fiscale et sociale : un projet de loi controversé en débat à l'Assemblée</h3>
+    <span class="label">Le fait</span>
+    <p>L'Assemblée nationale examine depuis mardi 24 février un projet de loi de lutte contre les fraudes fiscales et sociales, déjà adopté par le Sénat en novembre. Le texte prévoit de nouveaux outils de détection, un renforcement des sanctions et un meilleur partage d'informations entre administrations. Il inclut l'extension de l'accès aux données fiscales pour les organismes sociaux, la géolocalisation obligatoire des transporteurs sanitaires et le renforcement des obligations contre le travail dissimulé.</p>
+    <span class="label">Contexte</span>
+    <p>Le gouvernement espère récupérer 2 milliards d'euros grâce à ce texte, dans un contexte de déficit public persistant et d'objectif de ramener le déficit sous 5 % du PIB. Environ un millier d'amendements ont été déposés, ce qui pourrait allonger les débats au-delà de la trêve parlementaire.</p>
+    <span class="label">Pourquoi c'est important</span>
+    <p>Au-delà de l'enjeu budgétaire, le texte soulève des questions sur l'équilibre entre lutte contre la fraude sociale (prestations) et lutte contre la fraude fiscale (impôts). L'opposition de gauche dénonce un déséquilibre au détriment des plus modestes.</p>
+    <span class="label">Points de vue médiatiques</span>
+    <p>Franceinfo et Les Echos présentent les mesures de façon factuelle. Mediapart et la presse de gauche pointent un projet qui cible davantage la fraude sociale que la fraude fiscale des plus aisés. La droite et le centre soutiennent globalement l'ambition du texte tout en proposant des amendements.</p>
+    <span class="label">À suivre</span>
+    <p>Le volume d'amendements rend incertain le calendrier d'adoption. Les débats pourraient s'étaler au-delà de cette semaine.</p>
+</div>
+
+<!-- 4 -->
+<div class="article">
+    <h3><span class="article-number">4</span> Remaniement : un ajustement gouvernemental imminent</h3>
+    <span class="label">Le fait</span>
+    <p>Après le rejet des motions de censure, le remaniement annoncé par Sébastien Lecornu devrait intervenir dans les prochains jours. Plusieurs départs sont confirmés : Rachida Dati (Culture), candidate aux municipales à Paris ; Marina Ferrari (Sports), candidate à Aix-les-Bains ; Charlotte Parmentier-Lecocq (Autonomie et Personnes handicapées), qui a démissionné le 10 février. Amélie de Montchalin a déjà quitté le gouvernement le 22 février pour prendre la présidence de la Cour des comptes, remplacée par David Amiel.</p>
+    <span class="label">Contexte</span>
+    <p>Le Premier ministre a insisté sur un simple « ajustement », affirmant que « les Français et les administrations veulent de la stabilité ». Ce remaniement intervient après une séquence budgétaire intense marquée par le recours au 49-3 et plusieurs motions de censure.</p>
+    <span class="label">Pourquoi c'est important</span>
+    <p>La recomposition du gouvernement, même limitée, sera scrutée comme un indicateur de la stratégie politique de Lecornu et de sa capacité à maintenir une coalition fragile à dix-huit mois de la présidentielle de 2027.</p>
+    <span class="label">Points de vue médiatiques</span>
+    <p>CNews et laminute.info suivent en détail les noms des partants et pressentis. Public Sénat note la dimension tactique du calendrier lié aux motions de censure. Les commentateurs s'interrogent sur l'ampleur réelle de l'ajustement.</p>
+    <span class="label">À suivre</span>
+    <p>L'annonce de la nouvelle composition du gouvernement, attendue d'ici la fin de la semaine.</p>
+</div>
+
+<!-- 5 -->
+<div class="article">
+    <h3><span class="article-number">5</span> Crues dans l'Ouest : décrue amorcée, quatre départements en vigilance orange</h3>
+    <span class="label">Le fait</span>
+    <p>Toutes les vigilances rouges crues ont été levées le 25 février, marquant le début de la décrue après les inondations provoquées par la tempête Pedro et des semaines de pluies excédentaires (environ 30 % au-dessus des normales). La Charente, la Charente-Maritime, la Loire-Atlantique et le Maine-et-Loire restent en vigilance orange. Cinq tronçons de cours d'eau sont encore sous surveillance renforcée.</p>
+    <span class="label">Contexte</span>
+    <p>L'ouest de la France a subi des précipitations persistantes depuis plusieurs semaines, saturant les sols et gonflant durablement les cours d'eau. Les vigilances rouges avaient été déclenchées dans plusieurs départements, causant des évacuations et des dégâts matériels importants.</p>
+    <span class="label">Pourquoi c'est important</span>
+    <p>La récurrence des épisodes de crues hivernales soulève des questions sur l'adaptation des infrastructures et des politiques d'aménagement au changement climatique. Les dégâts pour les habitants et les agriculteurs sont considérables.</p>
+    <span class="label">Points de vue médiatiques</span>
+    <p>Franceinfo assure un suivi en direct. Vigicrues et les préfectures communiquent en temps réel. Les médias locaux (France Bleu, Ouest-France) couvrent les conséquences sur le terrain. Les médias écologistes relient l'événement au réchauffement climatique.</p>
+    <span class="label">À suivre</span>
+    <p>L'évolution de la décrue et le bilan définitif des dégâts. Le maintien ou la levée des vigilances orange dans les prochaines 48 heures.</p>
+</div>
+
+<!-- 6 -->
+<div class="article">
+    <h3><span class="article-number">6</span> Procès Papacito : premier jugement pour cyberharcèlement d'Imane Khelif</h3>
+    <span class="label">Le fait</span>
+    <p>L'influenceur d'extrême droite Papacito (Ugo Gil-Jimenez) est jugé ce 26 février devant le tribunal correctionnel de Paris pour cyberharcèlement et injure discriminatoire à l'encontre de la boxeuse algérienne Imane Khelif, médaillée d'or aux JO de Paris 2024. Un second prévenu, un homme de 31 ans accusé de menaces de mort racistes contre une autre boxeuse, est également jugé.</p>
+    <span class="label">Contexte</span>
+    <p>Imane Khelif avait porté plainte le 12 août 2024 après une campagne de haine et de désinformation en ligne, dans le contexte de la polémique sur son genre aux Jeux olympiques. Elle avait été ciblée par des propos la présentant faussement comme un homme.</p>
+    <span class="label">Pourquoi c'est important</span>
+    <p>Ce procès est le premier d'une série liée au cyberharcèlement subi par Khelif. Il constitue un test judiciaire important sur la responsabilité des influenceurs en matière de harcèlement en ligne et d'incitation à la haine.</p>
+    <span class="label">Points de vue médiatiques</span>
+    <p>France 24, La Gazette France et Konbini couvrent le procès. La presse algérienne (TSA) y accorde une place importante. La défense invoque la liberté d'expression dans le cadre d'une « controverse ». Les médias proches de la droite radicale minimisent la portée des propos.</p>
+    <span class="label">À suivre</span>
+    <p>Le verdict et les éventuels autres procès liés à la plainte de Khelif, qui visait aussi des personnalités politiques.</p>
+</div>
+
+<!-- 7 -->
+<div class="article">
+    <h3><span class="article-number">7</span> Pierre Palmade : fin de peine le 27 février</h3>
+    <span class="label">Le fait</span>
+    <p>Le comédien Pierre Palmade aura purgé sa peine de deux ans de prison le 27 février. Condamné en novembre 2024 pour blessures involontaires après un accident de la route causé sous l'emprise de stupéfiants en février 2023, il portait un bracelet électronique depuis sa sortie de détention en avril 2025. Il reste cependant soumis à un sursis probatoire de trois ans avec obligations de soins, de travail et d'indemnisation des victimes.</p>
+    <span class="label">Contexte</span>
+    <p>L'accident avait causé des blessures graves à une famille, dont une femme enceinte qui avait perdu son bébé. L'affaire avait provoqué une forte émotion en France et relancé le débat sur l'addiction et la conduite sous stupéfiants.</p>
+    <span class="label">Pourquoi c'est important</span>
+    <p>Cette fin de peine relance les débats sur la proportionnalité des peines et les réductions automatiques de peine dans le système judiciaire français.</p>
+    <span class="label">Points de vue médiatiques</span>
+    <p>Franceinfo, CNews et la presse people couvrent l'information. Le ton varie entre le factuel et le commentaire sur l'indulgence supposée de la justice. France Bleu rappelle les conditions du sursis probatoire.</p>
+    <span class="label">À suivre</span>
+    <p>Le respect des obligations probatoires par le comédien au cours des trois prochaines années.</p>
+</div>
+
+<!-- 8 -->
+<div class="article">
+    <h3><span class="article-number">8</span> Insee : publications sur l'emploi et les écarts salariaux femmes-hommes</h3>
+    <span class="label">Le fait</span>
+    <p>L'Insee publie ce 26 février les chiffres détaillés de l'emploi salarié du quatrième trimestre 2025, ainsi qu'une étude actualisée sur les écarts de salaire entre femmes et hommes en 2024. Les données démographiques mensuelles de janvier 2026 (naissances et décès) sont également publiées ces jours-ci.</p>
+    <span class="label">Contexte</span>
+    <p>En 2023, le revenu salarial moyen des femmes restait inférieur de 22,2 % à celui des hommes. À poste comparable et temps de travail identique, l'écart se réduit à 3,8 %. La croissance française est estimée à environ 1 % pour 2026, portée principalement par l'investissement des entreprises.</p>
+    <span class="label">Pourquoi c'est important</span>
+    <p>Les données d'emploi du T4 2025 sont un indicateur clé de la santé économique. Les chiffres sur les écarts salariaux alimentent le débat sur l'égalité professionnelle, sujet récurrent dans le cadre de l'index d'égalité et des obligations légales des entreprises.</p>
+    <span class="label">Points de vue médiatiques</span>
+    <p>Les Echos et La Tribune analysent les données économiques. Alternatives Économiques et la presse de gauche insistent sur la persistance des inégalités. La presse économique libérale met en avant la réduction tendancielle des écarts.</p>
+    <span class="label">À suivre</span>
+    <p>L'analyse détaillée des chiffres et leur impact sur les débats parlementaires en cours.</p>
+</div>
+
+<!-- 9 -->
+<div class="article">
+    <h3><span class="article-number">9</span> Défense européenne : la France en première ligne sur l'Ukraine</h3>
+    <span class="label">Le fait</span>
+    <p>Emmanuel Macron a annoncé que 26 pays se sont engagés à déployer des troupes en Ukraine « sur le sol, en mer ou dans les airs » dès qu'un cessez-le-feu serait obtenu. Selon le président, la France fournit désormais les deux tiers du renseignement transmis à Kiev par ses partenaires, se substituant largement aux États-Unis. L'aide militaire européenne à l'Ukraine a bondi de 67 % en 2025, tandis que le soutien américain s'est quasiment arrêté.</p>
+    <span class="label">Contexte</span>
+    <p>Depuis le retour de Donald Trump à la Maison-Blanche, les États-Unis considèrent la guerre en Ukraine comme « l'affaire de l'Europe et de l'OTAN ». Lors de la conférence de Munich (13 février), Macron a appelé les partenaires européens à lever leurs réserves sur les garanties de sécurité à Kiev. La France et le Royaume-Uni poussent pour l'installation de « hubs militaires » en Ukraine, tandis que l'Allemagne freine.</p>
+    <span class="label">Pourquoi c'est important</span>
+    <p>La bascule du renseignement et du soutien militaire vers l'Europe constitue un tournant stratégique majeur. La France assume un rôle de leader qui engage des moyens considérables et redéfinit l'architecture de sécurité du continent.</p>
+    <span class="label">Points de vue médiatiques</span>
+    <p>Public Sénat relaie l'alerte du sénateur Claude Malhuret : « On est seuls pour aider l'Ukraine. » France 24 et l'Élysée mettent en avant le rôle moteur de la France. La presse souverainiste et une partie de la gauche radicale questionnent le coût de cet engagement. La presse internationale (Al Jazeera, Axios) souligne l'ampleur du transfert de responsabilité transatlantique.</p>
+    <span class="label">À suivre</span>
+    <p>Les négociations sur les garanties de sécurité, le 20e paquet de sanctions européennes contre la Russie et la réaction de Berlin face aux pressions franco-britanniques.</p>
+</div>
+
+<!-- 10 -->
+<div class="article">
+    <h3><span class="article-number">10</span> Budget 2026 : validé par le Conseil constitutionnel, mais l'objectif de déficit fragilisé</h3>
+    <span class="label">Le fait</span>
+    <p>Le Conseil constitutionnel a validé le 19 février l'essentiel de la loi de finances 2026, promulguée le 20 février au Journal officiel. Saisi par quatre recours (Premier ministre, PS, RN, LFI-écologistes-GDR), il n'a censuré aucun article sur le fond, retirant seulement quelques « cavaliers budgétaires ». En parallèle, la Cour des comptes estime que l'objectif de réduction du déficit à 5 % du PIB est « loin d'être garanti ».</p>
+    <span class="label">Contexte</span>
+    <p>Le budget a été adopté après trois recours au 49-3 par Sébastien Lecornu, malgré sa promesse initiale de ne pas « passer en force ». Il prévoit une dette à 118 % du PIB fin 2026, une hausse de 6,5 milliards pour la Défense et des coupes dans l'aide au développement et les APL. L'objectif initial de déficit à 4,7 % a été revu à la hausse.</p>
+    <span class="label">Pourquoi c'est important</span>
+    <p>La mise en garde de la Cour des comptes fragilise la crédibilité de la trajectoire budgétaire du gouvernement. Avec une dette proche de 120 % du PIB, la marge de manœuvre est étroite et la question de la soutenabilité des finances publiques reste centrale.</p>
+    <span class="label">Points de vue médiatiques</span>
+    <p>Public Sénat et LCP détaillent les réserves de la Cour des comptes. Les Echos et Boursorama se concentrent sur les implications pour les marchés. Touteleurope.eu contextualise par rapport aux engagements européens. La gauche dénonce des coupes « antisociales » ; la droite regrette un effort insuffisant de réduction des dépenses.</p>
+    <span class="label">À suivre</span>
+    <p>L'exécution réelle du budget au premier semestre et la préparation du budget 2027, qui pourrait nécessiter de nouvelles économies. L'éventuelle procédure européenne pour déficit excessif.</p>
+</div>
+
+<h2><span class="icon">&#x1F30D;</span> Tendances et signaux faibles</h2>
+
+<div class="tendances">
+    <ul>
+        <li><strong>Retour du nucléaire au centre de la politique énergétique.</strong> La PPE3 et le rejet des motions de censure confirment un virage pro-nucléaire assumé, avec un recul des objectifs sur les renouvelables terrestres.</li>
+        <li><strong>Instabilité gouvernementale chronique normalisée.</strong> Le gouvernement Lecornu gouverne sans majorité absolue depuis des mois, enchaînant 49-3 et motions de censure.</li>
+        <li><strong>Européanisation de la défense ukrainienne.</strong> La France, désormais premier fournisseur de renseignement à l'Ukraine selon Macron, s'impose comme pilier de la sécurité européenne face au désengagement américain.</li>
+        <li><strong>Multiplication des procès liés au cyberharcèlement.</strong> Le procès Papacito illustre une judiciarisation croissante des comportements en ligne.</li>
+        <li><strong>Récurrence des événements climatiques extrêmes.</strong> Les crues prolongées dans l'Ouest posent la question de la résilience des territoires.</li>
+    </ul>
+</div>
+
+<h2><span class="icon">&#x1F4A1;</span> Lecture stratégique du jour</h2>
+
+<div class="lecture">
+    <p>La journée du 25-26 février 2026 cristallise plusieurs tensions structurantes de la vie politique française. Le vote sur l'aide à mourir et le rejet des motions de censure dessinent un paradoxe : une Assemblée capable de faire avancer des réformes sociétales majeures, mais incapable de dégager une majorité alternative au gouvernement en place. Sébastien Lecornu exploite habilement cette fragmentation, liant le calendrier du remaniement aux votes de confiance pour asseoir son autorité.</p>
+    <p style="margin-top: 0.6rem;">Sur le plan économique, le débat sur la fraude fiscale et sociale révèle la tension permanente entre impératif budgétaire et justice sociale. Le gouvernement cherche à réduire un déficit encore supérieur à 5 % du PIB tout en évitant une censure, ce qui l'oblige à des arbitrages délicats. En toile de fond, la réorientation stratégique de la France vers un rôle accru en matière de défense européenne, dans un contexte de retrait américain, engage des ressources et des choix de long terme qui ne font pas encore l'objet d'un vrai débat public.</p>
+</div>
+
+<h2><span class="icon">&#x1F4CA;</span> En bref</h2>
+
+<div class="bref">
+    <ul>
+        <li>L'humoriste Pierre Palmade sera officiellement libre de tout bracelet électronique demain, le 27 février, mais reste sous sursis probatoire trois ans.</li>
+        <li>Amélie de Montchalin a pris ses fonctions à la présidence de la Cour des comptes. David Amiel la remplace au ministère de l'Action et des Comptes publics.</li>
+        <li>Météo-France maintient 34 départements en vigilance crues (dont 4 en orange : Charente, Charente-Maritime, Loire-Atlantique, Maine-et-Loire).</li>
+        <li>L'Insee publie les données détaillées de l'emploi salarié T4 2025 et une étude sur les écarts de rémunération femmes-hommes en 2024.</li>
+        <li>Le magazine « Envoyé spécial » (France 2) consacre ses reportages de ce soir au placement de nourrissons, aux freinages fantômes de voitures et aux tensions autour de l'immigration aux États-Unis.</li>
+        <li>La croissance française estimée à 1 % pour 2026, principalement portée par l'investissement des entreprises.</li>
+        <li>Les Jeux olympiques d'hiver de Milan-Cortina 2026 se sont achevés le 22 février. Le drapeau olympique a été transmis à la France pour les JO des Alpes 2030.</li>
+        <li>La Cour des comptes alerte sur le fait que l'objectif de déficit à 5 % du PIB en 2026 est « loin d'être garanti ».</li>
+    </ul>
+</div>
+
+</div><!-- /tab-revue -->
+
+<!-- ================================================== -->
+<!-- TAB 2 : CARTOGRAPHIE DES MÉDIAS                    -->
+<!-- ================================================== -->
+<div id="tab-carto" class="tab-content">
+
+<h2><span class="icon">&#x1F5FA;&#xFE0F;</span> Cartographie de la couverture médiatique</h2>
+
+<p class="carto-intro">
+    Cette cartographie croise les 10 sujets du jour avec 20 médias représentatifs du paysage français. Elle permet de visualiser <strong>qui couvre quoi</strong>, avec quelle intensité et sous quel angle éditorial. Survolez les cellules pour obtenir des précisions.
+</p>
+
+<!-- Légende -->
+<div class="carto-legend">
+    <div class="carto-legend-section">
+        <div class="carto-legend-title">Intensité de couverture</div>
+        <div class="carto-legend-item"><span class="dot dot-major"></span> Couverture majeure</div>
+        <div class="carto-legend-item"><span class="dot dot-secondary"></span> Couverture secondaire</div>
+        <div class="carto-legend-item"><span class="dot dot-mention"></span> Mention / brève</div>
+        <div class="carto-legend-item"><span class="dot-none"></span> Non couvert</div>
+    </div>
+    <div class="carto-legend-section">
+        <div class="carto-legend-title">Angle éditorial</div>
+        <div class="carto-legend-item"><span class="angle angle-factual">Factuel</span> Traitement neutre, basé sur les faits</div>
+        <div class="carto-legend-item"><span class="angle angle-favorable">Favorable</span> Tonalité positive ou de soutien</div>
+        <div class="carto-legend-item"><span class="angle angle-critical">Critique</span> Tonalité critique ou d'opposition</div>
+        <div class="carto-legend-item"><span class="angle angle-mixed">Nuancé</span> Analyse avec plusieurs perspectives</div>
+    </div>
+</div>
+
+<!-- Filtres -->
+<div class="filter-controls">
+    <button class="filter-btn active" data-filter="all">Tous les médias</button>
+    <button class="filter-btn" data-filter="generaliste">Généralistes</button>
+    <button class="filter-btn" data-filter="economique">Économiques</button>
+    <button class="filter-btn" data-filter="audiovisuel">Audiovisuel</button>
+    <button class="filter-btn" data-filter="investigation">Investigation</button>
+    <button class="filter-btn" data-filter="engage">Engagés</button>
+</div>
+
+<!-- Matrice -->
+<div class="matrix-wrapper">
+<table class="matrix" id="cartoMatrix">
+    <thead>
+        <tr>
+            <th>Média</th>
+            <th><span class="topic-short">Aide à mourir</span></th>
+            <th><span class="topic-short">Motions / PPE3</span></th>
+            <th><span class="topic-short">Fraude fiscale</span></th>
+            <th><span class="topic-short">Remanie&shy;ment</span></th>
+            <th><span class="topic-short">Crues Ouest</span></th>
+            <th><span class="topic-short">Procès Papacito</span></th>
+            <th><span class="topic-short">Palmade</span></th>
+            <th><span class="topic-short">Insee / salaires</span></th>
+            <th><span class="topic-short">Défense / Ukraine</span></th>
+            <th><span class="topic-short">Budget 2026</span></th>
+        </tr>
+    </thead>
+    <tbody>
+        <!-- GENERALISTES -->
+        <tr class="category-row"><td colspan="11">Presse nationale généraliste</td></tr>
+
+        <tr data-cat="generaliste">
+            <td>Le Monde</td>
+            <td data-tooltip="Couverture extensive, analyse du vote par groupe"><div class="cell-content"><span class="dot dot-major"></span><span class="angle angle-mixed">Nuancé</span></div></td>
+            <td data-tooltip="Analyse politique du rejet"><div class="cell-content"><span class="dot dot-major"></span><span class="angle angle-factual">Factuel</span></div></td>
+            <td data-tooltip="Présentation des mesures et critiques"><div class="cell-content"><span class="dot dot-secondary"></span><span class="angle angle-mixed">Nuancé</span></div></td>
+            <td data-tooltip="Suivi des départs et remplacements"><div class="cell-content"><span class="dot dot-secondary"></span><span class="angle angle-factual">Factuel</span></div></td>
+            <td data-tooltip="Suivi factuel de la décrue"><div class="cell-content"><span class="dot dot-secondary"></span><span class="angle angle-factual">Factuel</span></div></td>
+            <td data-tooltip="Couverture du procès avec contexte JO"><div class="cell-content"><span class="dot dot-secondary"></span><span class="angle angle-factual">Factuel</span></div></td>
+            <td data-tooltip="Mention brève"><div class="cell-content"><span class="dot dot-mention"></span><span class="angle angle-factual">Factuel</span></div></td>
+            <td data-tooltip="Analyse des données économiques"><div class="cell-content"><span class="dot dot-secondary"></span><span class="angle angle-factual">Factuel</span></div></td>
+            <td data-tooltip="Analyse géopolitique approfondie"><div class="cell-content"><span class="dot dot-major"></span><span class="angle angle-mixed">Nuancé</span></div></td>
+            <td data-tooltip="Suivi post-promulgation, angle Cour des comptes"><div class="cell-content"><span class="dot dot-secondary"></span><span class="angle angle-factual">Factuel</span></div></td>
+        </tr>
+
+        <tr data-cat="generaliste">
+            <td>Le Figaro</td>
+            <td data-tooltip="Réserves sur les garanties, positions conservatrices"><div class="cell-content"><span class="dot dot-major"></span><span class="angle angle-critical">Critique</span></div></td>
+            <td data-tooltip="Souligne la solidité du gouvernement"><div class="cell-content"><span class="dot dot-major"></span><span class="angle angle-favorable">Favorable</span></div></td>
+            <td data-tooltip="Soutien au principe, couverture des mesures"><div class="cell-content"><span class="dot dot-secondary"></span><span class="angle angle-favorable">Favorable</span></div></td>
+            <td data-tooltip="Suivi détaillé des noms et jeux politiques"><div class="cell-content"><span class="dot dot-major"></span><span class="angle angle-factual">Factuel</span></div></td>
+            <td data-tooltip="Couverture factuelle"><div class="cell-content"><span class="dot dot-mention"></span><span class="angle angle-factual">Factuel</span></div></td>
+            <td data-tooltip="Accent sur la liberté d'expression"><div class="cell-content"><span class="dot dot-secondary"></span><span class="angle angle-mixed">Nuancé</span></div></td>
+            <td data-tooltip="Angle sur la sévérité de la justice"><div class="cell-content"><span class="dot dot-secondary"></span><span class="angle angle-critical">Critique</span></div></td>
+            <td data-tooltip="Données sous angle libéral"><div class="cell-content"><span class="dot dot-mention"></span><span class="angle angle-factual">Factuel</span></div></td>
+            <td data-tooltip="Soutien à l'engagement, vigilance sur les coûts"><div class="cell-content"><span class="dot dot-major"></span><span class="angle angle-mixed">Nuancé</span></div></td>
+            <td data-tooltip="Regrette l'insuffisance des économies"><div class="cell-content"><span class="dot dot-secondary"></span><span class="angle angle-critical">Critique</span></div></td>
+        </tr>
+
+        <tr data-cat="generaliste">
+            <td>Libération</td>
+            <td data-tooltip="Favorable à l'avancée du droit"><div class="cell-content"><span class="dot dot-major"></span><span class="angle angle-favorable">Favorable</span></div></td>
+            <td data-tooltip="Critique du recul sur les renouvelables"><div class="cell-content"><span class="dot dot-secondary"></span><span class="angle angle-critical">Critique</span></div></td>
+            <td data-tooltip="Dénonce un déséquilibre fraude sociale vs fiscale"><div class="cell-content"><span class="dot dot-major"></span><span class="angle angle-critical">Critique</span></div></td>
+            <td data-tooltip="Analyse politique"><div class="cell-content"><span class="dot dot-mention"></span><span class="angle angle-factual">Factuel</span></div></td>
+            <td data-tooltip="Angle climat et résilience"><div class="cell-content"><span class="dot dot-secondary"></span><span class="angle angle-mixed">Nuancé</span></div></td>
+            <td data-tooltip="Soutien aux victimes de cyberharcèlement"><div class="cell-content"><span class="dot dot-major"></span><span class="angle angle-favorable">Favorable</span></div></td>
+            <td data-tooltip="Brève"><div class="cell-content"><span class="dot dot-mention"></span><span class="angle angle-factual">Factuel</span></div></td>
+            <td data-tooltip="Insiste sur les inégalités persistantes"><div class="cell-content"><span class="dot dot-secondary"></span><span class="angle angle-critical">Critique</span></div></td>
+            <td data-tooltip="Questionne le coût et les priorités"><div class="cell-content"><span class="dot dot-secondary"></span><span class="angle angle-mixed">Nuancé</span></div></td>
+            <td data-tooltip="Dénonce les coupes sociales"><div class="cell-content"><span class="dot dot-secondary"></span><span class="angle angle-critical">Critique</span></div></td>
+        </tr>
+
+        <tr data-cat="generaliste">
+            <td>La Croix</td>
+            <td data-tooltip="Angle éthique et religieux, prudence"><div class="cell-content"><span class="dot dot-major"></span><span class="angle angle-critical">Critique</span></div></td>
+            <td data-tooltip="Mention factuelle"><div class="cell-content"><span class="dot dot-mention"></span><span class="angle angle-factual">Factuel</span></div></td>
+            <td><div class="cell-content"><span class="dot-none"></span></div></td>
+            <td><div class="cell-content"><span class="dot-none"></span></div></td>
+            <td data-tooltip="Couverture terrain, solidarité"><div class="cell-content"><span class="dot dot-secondary"></span><span class="angle angle-mixed">Nuancé</span></div></td>
+            <td><div class="cell-content"><span class="dot-none"></span></div></td>
+            <td><div class="cell-content"><span class="dot-none"></span></div></td>
+            <td><div class="cell-content"><span class="dot-none"></span></div></td>
+            <td data-tooltip="Angle paix et diplomatie"><div class="cell-content"><span class="dot dot-secondary"></span><span class="angle angle-mixed">Nuancé</span></div></td>
+            <td><div class="cell-content"><span class="dot-none"></span></div></td>
+        </tr>
+
+        <tr data-cat="generaliste">
+            <td>Ouest-France</td>
+            <td data-tooltip="Mention"><div class="cell-content"><span class="dot dot-mention"></span><span class="angle angle-factual">Factuel</span></div></td>
+            <td data-tooltip="Mention"><div class="cell-content"><span class="dot dot-mention"></span><span class="angle angle-factual">Factuel</span></div></td>
+            <td><div class="cell-content"><span class="dot-none"></span></div></td>
+            <td><div class="cell-content"><span class="dot-none"></span></div></td>
+            <td data-tooltip="Sujet majeur, couverture terrain très détaillée"><div class="cell-content"><span class="dot dot-major"></span><span class="angle angle-factual">Factuel</span></div></td>
+            <td><div class="cell-content"><span class="dot-none"></span></div></td>
+            <td><div class="cell-content"><span class="dot-none"></span></div></td>
+            <td><div class="cell-content"><span class="dot-none"></span></div></td>
+            <td data-tooltip="Mention"><div class="cell-content"><span class="dot dot-mention"></span><span class="angle angle-factual">Factuel</span></div></td>
+            <td><div class="cell-content"><span class="dot-none"></span></div></td>
+        </tr>
+
+        <!-- ECONOMIQUES -->
+        <tr class="category-row"><td colspan="11">Presse économique</td></tr>
+
+        <tr data-cat="economique">
+            <td>Les Echos</td>
+            <td data-tooltip="Mention brève"><div class="cell-content"><span class="dot dot-mention"></span><span class="angle angle-factual">Factuel</span></div></td>
+            <td data-tooltip="Implications pour la politique industrielle"><div class="cell-content"><span class="dot dot-secondary"></span><span class="angle angle-factual">Factuel</span></div></td>
+            <td data-tooltip="Couverture majeure, angle budgétaire"><div class="cell-content"><span class="dot dot-major"></span><span class="angle angle-favorable">Favorable</span></div></td>
+            <td data-tooltip="Implications économiques"><div class="cell-content"><span class="dot dot-secondary"></span><span class="angle angle-factual">Factuel</span></div></td>
+            <td data-tooltip="Impact économique des inondations"><div class="cell-content"><span class="dot dot-mention"></span><span class="angle angle-factual">Factuel</span></div></td>
+            <td><div class="cell-content"><span class="dot-none"></span></div></td>
+            <td><div class="cell-content"><span class="dot-none"></span></div></td>
+            <td data-tooltip="Couverture majeure des données emploi"><div class="cell-content"><span class="dot dot-major"></span><span class="angle angle-factual">Factuel</span></div></td>
+            <td data-tooltip="Coût de l'effort de défense pour les finances"><div class="cell-content"><span class="dot dot-secondary"></span><span class="angle angle-factual">Factuel</span></div></td>
+            <td data-tooltip="Analyse détaillée, angle marchés financiers"><div class="cell-content"><span class="dot dot-major"></span><span class="angle angle-mixed">Nuancé</span></div></td>
+        </tr>
+
+        <tr data-cat="economique">
+            <td>La Tribune</td>
+            <td><div class="cell-content"><span class="dot-none"></span></div></td>
+            <td data-tooltip="Angle énergie et industrie"><div class="cell-content"><span class="dot dot-secondary"></span><span class="angle angle-mixed">Nuancé</span></div></td>
+            <td data-tooltip="Couverture des enjeux budgétaires"><div class="cell-content"><span class="dot dot-secondary"></span><span class="angle angle-factual">Factuel</span></div></td>
+            <td><div class="cell-content"><span class="dot-none"></span></div></td>
+            <td><div class="cell-content"><span class="dot-none"></span></div></td>
+            <td><div class="cell-content"><span class="dot-none"></span></div></td>
+            <td><div class="cell-content"><span class="dot-none"></span></div></td>
+            <td data-tooltip="Données économiques"><div class="cell-content"><span class="dot dot-major"></span><span class="angle angle-factual">Factuel</span></div></td>
+            <td data-tooltip="Industrie de défense"><div class="cell-content"><span class="dot dot-secondary"></span><span class="angle angle-favorable">Favorable</span></div></td>
+            <td data-tooltip="Suivi post-promulgation"><div class="cell-content"><span class="dot dot-secondary"></span><span class="angle angle-factual">Factuel</span></div></td>
+        </tr>
+
+        <tr data-cat="economique">
+            <td>Alternatives Éco.</td>
+            <td><div class="cell-content"><span class="dot-none"></span></div></td>
+            <td data-tooltip="Critique de la stratégie pro-nucléaire"><div class="cell-content"><span class="dot dot-secondary"></span><span class="angle angle-critical">Critique</span></div></td>
+            <td data-tooltip="Dénonce le déséquilibre du projet"><div class="cell-content"><span class="dot dot-major"></span><span class="angle angle-critical">Critique</span></div></td>
+            <td><div class="cell-content"><span class="dot-none"></span></div></td>
+            <td><div class="cell-content"><span class="dot-none"></span></div></td>
+            <td><div class="cell-content"><span class="dot-none"></span></div></td>
+            <td><div class="cell-content"><span class="dot-none"></span></div></td>
+            <td data-tooltip="Insiste sur la persistance des inégalités"><div class="cell-content"><span class="dot dot-major"></span><span class="angle angle-critical">Critique</span></div></td>
+            <td><div class="cell-content"><span class="dot-none"></span></div></td>
+            <td data-tooltip="Critique des coupes sociales"><div class="cell-content"><span class="dot dot-secondary"></span><span class="angle angle-critical">Critique</span></div></td>
+        </tr>
+
+        <!-- AUDIOVISUEL -->
+        <tr class="category-row"><td colspan="11">Audiovisuel et service public</td></tr>
+
+        <tr data-cat="audiovisuel">
+            <td>Franceinfo</td>
+            <td data-tooltip="Couverture en direct, décryptage du vote"><div class="cell-content"><span class="dot dot-major"></span><span class="angle angle-factual">Factuel</span></div></td>
+            <td data-tooltip="Direct et analyse"><div class="cell-content"><span class="dot dot-major"></span><span class="angle angle-factual">Factuel</span></div></td>
+            <td data-tooltip="Présentation détaillée du projet de loi"><div class="cell-content"><span class="dot dot-major"></span><span class="angle angle-factual">Factuel</span></div></td>
+            <td data-tooltip="Suivi en continu"><div class="cell-content"><span class="dot dot-major"></span><span class="angle angle-factual">Factuel</span></div></td>
+            <td data-tooltip="Suivi en direct, carte de vigilance"><div class="cell-content"><span class="dot dot-major"></span><span class="angle angle-factual">Factuel</span></div></td>
+            <td data-tooltip="Couverture du procès"><div class="cell-content"><span class="dot dot-secondary"></span><span class="angle angle-factual">Factuel</span></div></td>
+            <td data-tooltip="Article détaillé sur la fin de peine"><div class="cell-content"><span class="dot dot-major"></span><span class="angle angle-factual">Factuel</span></div></td>
+            <td data-tooltip="Reprise des données Insee"><div class="cell-content"><span class="dot dot-secondary"></span><span class="angle angle-factual">Factuel</span></div></td>
+            <td data-tooltip="Couverture factuelle des annonces Macron"><div class="cell-content"><span class="dot dot-major"></span><span class="angle angle-factual">Factuel</span></div></td>
+            <td data-tooltip="Suivi complet post-Conseil constitutionnel"><div class="cell-content"><span class="dot dot-major"></span><span class="angle angle-factual">Factuel</span></div></td>
+        </tr>
+
+        <tr data-cat="audiovisuel">
+            <td>France 24</td>
+            <td data-tooltip="Titre « historique », angle international"><div class="cell-content"><span class="dot dot-major"></span><span class="angle angle-factual">Factuel</span></div></td>
+            <td data-tooltip="Couverture factuelle"><div class="cell-content"><span class="dot dot-secondary"></span><span class="angle angle-factual">Factuel</span></div></td>
+            <td data-tooltip="Mention"><div class="cell-content"><span class="dot dot-mention"></span><span class="angle angle-factual">Factuel</span></div></td>
+            <td data-tooltip="Mention"><div class="cell-content"><span class="dot dot-mention"></span><span class="angle angle-factual">Factuel</span></div></td>
+            <td data-tooltip="Couverture internationale des crues"><div class="cell-content"><span class="dot dot-secondary"></span><span class="angle angle-factual">Factuel</span></div></td>
+            <td data-tooltip="Couverture détaillée, contexte JO"><div class="cell-content"><span class="dot dot-major"></span><span class="angle angle-factual">Factuel</span></div></td>
+            <td><div class="cell-content"><span class="dot-none"></span></div></td>
+            <td><div class="cell-content"><span class="dot-none"></span></div></td>
+            <td data-tooltip="Couverture majeure, dimension internationale"><div class="cell-content"><span class="dot dot-major"></span><span class="angle angle-factual">Factuel</span></div></td>
+            <td data-tooltip="Mention"><div class="cell-content"><span class="dot dot-mention"></span><span class="angle angle-factual">Factuel</span></div></td>
+        </tr>
+
+        <tr data-cat="audiovisuel">
+            <td>LCP</td>
+            <td data-tooltip="Suivi parlementaire complet, article par article"><div class="cell-content"><span class="dot dot-major"></span><span class="angle angle-factual">Factuel</span></div></td>
+            <td data-tooltip="Retransmission des débats en direct"><div class="cell-content"><span class="dot dot-major"></span><span class="angle angle-factual">Factuel</span></div></td>
+            <td data-tooltip="Présentation détaillée du projet de loi"><div class="cell-content"><span class="dot dot-major"></span><span class="angle angle-factual">Factuel</span></div></td>
+            <td data-tooltip="Suivi politique"><div class="cell-content"><span class="dot dot-secondary"></span><span class="angle angle-factual">Factuel</span></div></td>
+            <td><div class="cell-content"><span class="dot-none"></span></div></td>
+            <td><div class="cell-content"><span class="dot-none"></span></div></td>
+            <td><div class="cell-content"><span class="dot-none"></span></div></td>
+            <td><div class="cell-content"><span class="dot-none"></span></div></td>
+            <td data-tooltip="Questions au gouvernement sur la défense"><div class="cell-content"><span class="dot dot-secondary"></span><span class="angle angle-factual">Factuel</span></div></td>
+            <td data-tooltip="Détail de la validation constitutionnelle"><div class="cell-content"><span class="dot dot-major"></span><span class="angle angle-factual">Factuel</span></div></td>
+        </tr>
+
+        <tr data-cat="audiovisuel">
+            <td>Public Sénat</td>
+            <td data-tooltip="Perspective du Sénat, navette parlementaire"><div class="cell-content"><span class="dot dot-major"></span><span class="angle angle-mixed">Nuancé</span></div></td>
+            <td data-tooltip="Analyse du lien motions/remaniement"><div class="cell-content"><span class="dot dot-secondary"></span><span class="angle angle-mixed">Nuancé</span></div></td>
+            <td data-tooltip="Rappel du vote au Sénat"><div class="cell-content"><span class="dot dot-secondary"></span><span class="angle angle-factual">Factuel</span></div></td>
+            <td data-tooltip="Dimension tactique du calendrier"><div class="cell-content"><span class="dot dot-major"></span><span class="angle angle-mixed">Nuancé</span></div></td>
+            <td><div class="cell-content"><span class="dot-none"></span></div></td>
+            <td><div class="cell-content"><span class="dot-none"></span></div></td>
+            <td><div class="cell-content"><span class="dot-none"></span></div></td>
+            <td><div class="cell-content"><span class="dot-none"></span></div></td>
+            <td data-tooltip="Alerte du sénateur Malhuret sur l'isolement européen"><div class="cell-content"><span class="dot dot-major"></span><span class="angle angle-mixed">Nuancé</span></div></td>
+            <td data-tooltip="Détail réserves Cour des comptes"><div class="cell-content"><span class="dot dot-major"></span><span class="angle angle-mixed">Nuancé</span></div></td>
+        </tr>
+
+        <tr data-cat="audiovisuel">
+            <td>CNews</td>
+            <td data-tooltip="Couverture factuelle, accent sur le vote"><div class="cell-content"><span class="dot dot-secondary"></span><span class="angle angle-factual">Factuel</span></div></td>
+            <td data-tooltip="Couverture factuelle"><div class="cell-content"><span class="dot dot-major"></span><span class="angle angle-factual">Factuel</span></div></td>
+            <td data-tooltip="Mention"><div class="cell-content"><span class="dot dot-mention"></span><span class="angle angle-factual">Factuel</span></div></td>
+            <td data-tooltip="Suivi détaillé des noms"><div class="cell-content"><span class="dot dot-major"></span><span class="angle angle-factual">Factuel</span></div></td>
+            <td data-tooltip="Mention"><div class="cell-content"><span class="dot dot-mention"></span><span class="angle angle-factual">Factuel</span></div></td>
+            <td><div class="cell-content"><span class="dot-none"></span></div></td>
+            <td data-tooltip="Angle sur la clémence judiciaire"><div class="cell-content"><span class="dot dot-major"></span><span class="angle angle-critical">Critique</span></div></td>
+            <td><div class="cell-content"><span class="dot-none"></span></div></td>
+            <td data-tooltip="Couverture factuelle"><div class="cell-content"><span class="dot dot-secondary"></span><span class="angle angle-factual">Factuel</span></div></td>
+            <td data-tooltip="Mention"><div class="cell-content"><span class="dot dot-mention"></span><span class="angle angle-factual">Factuel</span></div></td>
+        </tr>
+
+        <!-- INVESTIGATION -->
+        <tr class="category-row"><td colspan="11">Investigation et indépendants</td></tr>
+
+        <tr data-cat="investigation">
+            <td>Mediapart</td>
+            <td data-tooltip="Analyse sociétale approfondie"><div class="cell-content"><span class="dot dot-secondary"></span><span class="angle angle-favorable">Favorable</span></div></td>
+            <td data-tooltip="Critique du recours au décret"><div class="cell-content"><span class="dot dot-secondary"></span><span class="angle angle-critical">Critique</span></div></td>
+            <td data-tooltip="Enquête sur le déséquilibre fraude sociale vs fiscale"><div class="cell-content"><span class="dot dot-major"></span><span class="angle angle-critical">Critique</span></div></td>
+            <td data-tooltip="Analyse des jeux de pouvoir"><div class="cell-content"><span class="dot dot-secondary"></span><span class="angle angle-critical">Critique</span></div></td>
+            <td><div class="cell-content"><span class="dot-none"></span></div></td>
+            <td data-tooltip="Contexte cyberharcèlement"><div class="cell-content"><span class="dot dot-secondary"></span><span class="angle angle-favorable">Favorable</span></div></td>
+            <td><div class="cell-content"><span class="dot-none"></span></div></td>
+            <td><div class="cell-content"><span class="dot-none"></span></div></td>
+            <td data-tooltip="Questionne la transparence de l'engagement"><div class="cell-content"><span class="dot dot-secondary"></span><span class="angle angle-critical">Critique</span></div></td>
+            <td data-tooltip="Critique des coupes et du recours au 49-3"><div class="cell-content"><span class="dot dot-major"></span><span class="angle angle-critical">Critique</span></div></td>
+        </tr>
+
+        <tr data-cat="investigation">
+            <td>Blast</td>
+            <td data-tooltip="Favorable au droit"><div class="cell-content"><span class="dot dot-mention"></span><span class="angle angle-favorable">Favorable</span></div></td>
+            <td data-tooltip="Critique du tout-nucléaire"><div class="cell-content"><span class="dot dot-secondary"></span><span class="angle angle-critical">Critique</span></div></td>
+            <td data-tooltip="Dénonce le ciblage des prestations sociales"><div class="cell-content"><span class="dot dot-secondary"></span><span class="angle angle-critical">Critique</span></div></td>
+            <td><div class="cell-content"><span class="dot-none"></span></div></td>
+            <td><div class="cell-content"><span class="dot-none"></span></div></td>
+            <td><div class="cell-content"><span class="dot-none"></span></div></td>
+            <td><div class="cell-content"><span class="dot-none"></span></div></td>
+            <td><div class="cell-content"><span class="dot-none"></span></div></td>
+            <td data-tooltip="Critique de la militarisation"><div class="cell-content"><span class="dot dot-secondary"></span><span class="angle angle-critical">Critique</span></div></td>
+            <td data-tooltip="Dénonce l'austérité"><div class="cell-content"><span class="dot dot-secondary"></span><span class="angle angle-critical">Critique</span></div></td>
+        </tr>
+
+        <!-- ENGAGÉS -->
+        <tr class="category-row"><td colspan="11">Presse engagée et opinions</td></tr>
+
+        <tr data-cat="engage">
+            <td>L'Humanité</td>
+            <td data-tooltip="Favorable au droit, angle social"><div class="cell-content"><span class="dot dot-secondary"></span><span class="angle angle-favorable">Favorable</span></div></td>
+            <td data-tooltip="Critique de la politique énergétique"><div class="cell-content"><span class="dot dot-secondary"></span><span class="angle angle-critical">Critique</span></div></td>
+            <td data-tooltip="Forte critique du déséquilibre social"><div class="cell-content"><span class="dot dot-major"></span><span class="angle angle-critical">Critique</span></div></td>
+            <td><div class="cell-content"><span class="dot-none"></span></div></td>
+            <td data-tooltip="Solidarité avec les sinistrés"><div class="cell-content"><span class="dot dot-secondary"></span><span class="angle angle-mixed">Nuancé</span></div></td>
+            <td data-tooltip="Soutien aux victimes"><div class="cell-content"><span class="dot dot-mention"></span><span class="angle angle-favorable">Favorable</span></div></td>
+            <td><div class="cell-content"><span class="dot-none"></span></div></td>
+            <td data-tooltip="Insiste sur les inégalités"><div class="cell-content"><span class="dot dot-secondary"></span><span class="angle angle-critical">Critique</span></div></td>
+            <td data-tooltip="Critique de l'escalade militaire"><div class="cell-content"><span class="dot dot-secondary"></span><span class="angle angle-critical">Critique</span></div></td>
+            <td data-tooltip="Dénonce les coupes sociales et les APL"><div class="cell-content"><span class="dot dot-major"></span><span class="angle angle-critical">Critique</span></div></td>
+        </tr>
+
+        <tr data-cat="engage">
+            <td>Valeurs Actuelles</td>
+            <td data-tooltip="Opposition au texte, angle conservateur"><div class="cell-content"><span class="dot dot-major"></span><span class="angle angle-critical">Critique</span></div></td>
+            <td data-tooltip="Soutien relatif au nucléaire"><div class="cell-content"><span class="dot dot-mention"></span><span class="angle angle-favorable">Favorable</span></div></td>
+            <td data-tooltip="Soutien, angle fraude sociale"><div class="cell-content"><span class="dot dot-secondary"></span><span class="angle angle-favorable">Favorable</span></div></td>
+            <td data-tooltip="Suivi politique"><div class="cell-content"><span class="dot dot-secondary"></span><span class="angle angle-factual">Factuel</span></div></td>
+            <td data-tooltip="Mention"><div class="cell-content"><span class="dot dot-mention"></span><span class="angle angle-factual">Factuel</span></div></td>
+            <td data-tooltip="Défense de la liberté d'expression"><div class="cell-content"><span class="dot dot-secondary"></span><span class="angle angle-critical">Critique</span></div></td>
+            <td data-tooltip="Critique de la clémence judiciaire"><div class="cell-content"><span class="dot dot-secondary"></span><span class="angle angle-critical">Critique</span></div></td>
+            <td><div class="cell-content"><span class="dot-none"></span></div></td>
+            <td data-tooltip="Sceptique sur l'engagement en Ukraine"><div class="cell-content"><span class="dot dot-secondary"></span><span class="angle angle-critical">Critique</span></div></td>
+            <td data-tooltip="Regrette le niveau de dette"><div class="cell-content"><span class="dot dot-secondary"></span><span class="angle angle-critical">Critique</span></div></td>
+        </tr>
+
+        <tr data-cat="engage">
+            <td>Causeur</td>
+            <td data-tooltip="Opposition au texte"><div class="cell-content"><span class="dot dot-secondary"></span><span class="angle angle-critical">Critique</span></div></td>
+            <td><div class="cell-content"><span class="dot-none"></span></div></td>
+            <td><div class="cell-content"><span class="dot-none"></span></div></td>
+            <td><div class="cell-content"><span class="dot-none"></span></div></td>
+            <td><div class="cell-content"><span class="dot-none"></span></div></td>
+            <td data-tooltip="Défense de Papacito, liberté d'expression"><div class="cell-content"><span class="dot dot-secondary"></span><span class="angle angle-critical">Critique</span></div></td>
+            <td><div class="cell-content"><span class="dot-none"></span></div></td>
+            <td><div class="cell-content"><span class="dot-none"></span></div></td>
+            <td data-tooltip="Critique de l'interventionnisme"><div class="cell-content"><span class="dot dot-mention"></span><span class="angle angle-critical">Critique</span></div></td>
+            <td><div class="cell-content"><span class="dot-none"></span></div></td>
+        </tr>
+
+    </tbody>
+</table>
+</div>
+
+<!-- ===== VISUALISATIONS ===== -->
+<div class="carto-analysis">
+
+    <!-- Taux de couverture par sujet -->
+    <div class="carto-card" style="grid-column: 1 / -1;">
+        <h4>Taux de couverture par sujet (sur 20 médias analysés)</h4>
+        <div class="coverage-bar-row">
+            <span class="coverage-bar-label">Aide à mourir</span>
+            <div class="coverage-bar-track"><div class="coverage-bar-fill" style="width:90%; background: var(--accent);"></div></div>
+            <span class="coverage-bar-value">18/20</span>
+        </div>
+        <div class="coverage-bar-row">
+            <span class="coverage-bar-label">Motions / PPE3</span>
+            <div class="coverage-bar-track"><div class="coverage-bar-fill" style="width:80%; background: var(--accent);"></div></div>
+            <span class="coverage-bar-value">16/20</span>
+        </div>
+        <div class="coverage-bar-row">
+            <span class="coverage-bar-label">Budget 2026</span>
+            <div class="coverage-bar-track"><div class="coverage-bar-fill" style="width:75%; background: var(--accent);"></div></div>
+            <span class="coverage-bar-value">15/20</span>
+        </div>
+        <div class="coverage-bar-row">
+            <span class="coverage-bar-label">Défense / Ukraine</span>
+            <div class="coverage-bar-track"><div class="coverage-bar-fill" style="width:75%; background: var(--accent);"></div></div>
+            <span class="coverage-bar-value">15/20</span>
+        </div>
+        <div class="coverage-bar-row">
+            <span class="coverage-bar-label">Fraude fiscale</span>
+            <div class="coverage-bar-track"><div class="coverage-bar-fill" style="width:70%; background: var(--accent);"></div></div>
+            <span class="coverage-bar-value">14/20</span>
+        </div>
+        <div class="coverage-bar-row">
+            <span class="coverage-bar-label">Remaniement</span>
+            <div class="coverage-bar-track"><div class="coverage-bar-fill" style="width:60%; background: #4299e1;"></div></div>
+            <span class="coverage-bar-value">12/20</span>
+        </div>
+        <div class="coverage-bar-row">
+            <span class="coverage-bar-label">Crues Ouest</span>
+            <div class="coverage-bar-track"><div class="coverage-bar-fill" style="width:55%; background: #4299e1;"></div></div>
+            <span class="coverage-bar-value">11/20</span>
+        </div>
+        <div class="coverage-bar-row">
+            <span class="coverage-bar-label">Procès Papacito</span>
+            <div class="coverage-bar-track"><div class="coverage-bar-fill" style="width:50%; background: #4299e1;"></div></div>
+            <span class="coverage-bar-value">10/20</span>
+        </div>
+        <div class="coverage-bar-row">
+            <span class="coverage-bar-label">Insee / salaires</span>
+            <div class="coverage-bar-track"><div class="coverage-bar-fill" style="width:40%; background: #a0aec0;"></div></div>
+            <span class="coverage-bar-value">8/20</span>
+        </div>
+        <div class="coverage-bar-row">
+            <span class="coverage-bar-label">Palmade</span>
+            <div class="coverage-bar-track"><div class="coverage-bar-fill" style="width:35%; background: #a0aec0;"></div></div>
+            <span class="coverage-bar-value">7/20</span>
+        </div>
+    </div>
+
+    <!-- Divergence éditoriale -->
+    <div class="carto-card">
+        <h4>Divergence éditoriale par sujet</h4>
+        <p style="font-size: 0.78rem; color: var(--muted); margin-bottom: 1rem; font-family: sans-serif;">
+            Plus la barre est longue, plus le traitement varie.
+            <span style="color: var(--critical);">Rouge = critique</span> &middot;
+            <span style="color: var(--favorable);">Vert = favorable</span>
+        </p>
+        <div class="divergence-row">
+            <span class="divergence-label">Aide à mourir</span>
+            <div class="divergence-track"><div class="divergence-center"></div><div class="divergence-left"><div class="divergence-bar-critical" style="width: 40%;"></div></div><div class="divergence-right"><div class="divergence-bar-favorable" style="width: 50%;"></div></div></div>
+        </div>
+        <div class="divergence-row">
+            <span class="divergence-label">Motions / PPE3</span>
+            <div class="divergence-track"><div class="divergence-center"></div><div class="divergence-left"><div class="divergence-bar-critical" style="width: 55%;"></div></div><div class="divergence-right"><div class="divergence-bar-favorable" style="width: 25%;"></div></div></div>
+        </div>
+        <div class="divergence-row">
+            <span class="divergence-label">Fraude fiscale</span>
+            <div class="divergence-track"><div class="divergence-center"></div><div class="divergence-left"><div class="divergence-bar-critical" style="width: 60%;"></div></div><div class="divergence-right"><div class="divergence-bar-favorable" style="width: 30%;"></div></div></div>
+        </div>
+        <div class="divergence-row">
+            <span class="divergence-label">Défense / Ukraine</span>
+            <div class="divergence-track"><div class="divergence-center"></div><div class="divergence-left"><div class="divergence-bar-critical" style="width: 40%;"></div></div><div class="divergence-right"><div class="divergence-bar-favorable" style="width: 35%;"></div></div></div>
+        </div>
+        <div class="divergence-row">
+            <span class="divergence-label">Budget 2026</span>
+            <div class="divergence-track"><div class="divergence-center"></div><div class="divergence-left"><div class="divergence-bar-critical" style="width: 55%;"></div></div><div class="divergence-right"><div class="divergence-bar-favorable" style="width: 15%;"></div></div></div>
+        </div>
+        <div class="divergence-row">
+            <span class="divergence-label">Procès Papacito</span>
+            <div class="divergence-track"><div class="divergence-center"></div><div class="divergence-left"><div class="divergence-bar-critical" style="width: 35%;"></div></div><div class="divergence-right"><div class="divergence-bar-favorable" style="width: 45%;"></div></div></div>
+        </div>
+        <div class="divergence-row">
+            <span class="divergence-label">Palmade</span>
+            <div class="divergence-track"><div class="divergence-center"></div><div class="divergence-left"><div class="divergence-bar-critical" style="width: 45%;"></div></div><div class="divergence-right"><div class="divergence-bar-favorable" style="width: 5%;"></div></div></div>
+        </div>
+        <div class="divergence-row">
+            <span class="divergence-label">Crues Ouest</span>
+            <div class="divergence-track"><div class="divergence-center"></div><div class="divergence-left"><div class="divergence-bar-critical" style="width: 5%;"></div></div><div class="divergence-right"><div class="divergence-bar-favorable" style="width: 5%;"></div></div></div>
+        </div>
+    </div>
+
+    <!-- Observations clés -->
+    <div class="carto-card">
+        <h4>Observations clés</h4>
+        <ul>
+            <li><strong>Sujet le plus clivant :</strong> la fraude fiscale et sociale. La gauche dénonce un texte qui cible les prestations ; la droite soutient l'effort budgétaire.</li>
+            <li><strong>Sujet le plus consensuel :</strong> les crues dans l'Ouest. Traitement quasi unanimement factuel, sans divergence éditoriale notable.</li>
+            <li><strong>Aide à mourir :</strong> clivage atypique qui ne suit pas les lignes partisanes. La Croix et Valeurs Actuelles convergent dans la critique ; Libération et Mediapart dans le soutien.</li>
+            <li><strong>Défense / Ukraine :</strong> clivage transversal — soutien à droite classique et au centre, critiques aux extrêmes (LFI et souverainistes).</li>
+            <li><strong>Budget 2026 :</strong> critiqué des deux côtés — trop de coupes pour la gauche, pas assez d'économies pour la droite. Seul l'audiovisuel public reste factuel.</li>
+            <li><strong>Franceinfo :</strong> seul média à couvrir de manière significative les 10 sujets du jour, confirmant son rôle de fil d'info de référence.</li>
+        </ul>
+    </div>
+
+</div>
+
+<!-- Répartition par famille -->
+<div class="carto-card" style="margin-bottom: 2rem;">
+    <h4>Priorités thématiques par famille de médias</h4>
+    <table class="matrix" style="min-width: auto; font-size: 0.82rem;">
+        <thead>
+            <tr>
+                <th style="text-align: left; padding-left: 0.8rem;">Famille</th>
+                <th>Sujet n°1</th>
+                <th>Sujet n°2</th>
+                <th>Angle dominant</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Généralistes <span class="sup">[1]</span></td>
+                <td>Aide à mourir</td>
+                <td>Motions de censure</td>
+                <td><span class="angle angle-mixed">Nuancé</span></td>
+            </tr>
+            <tr>
+                <td>Économiques <span class="sup">[2]</span></td>
+                <td>Fraude fiscale</td>
+                <td>Budget 2026</td>
+                <td><span class="angle angle-factual">Factuel</span></td>
+            </tr>
+            <tr>
+                <td>Audiovisuel public <span class="sup">[3]</span></td>
+                <td>Aide à mourir</td>
+                <td>Budget 2026</td>
+                <td><span class="angle angle-factual">Factuel</span></td>
+            </tr>
+            <tr>
+                <td>Investigation <span class="sup">[4]</span></td>
+                <td>Fraude fiscale</td>
+                <td>Budget 2026</td>
+                <td><span class="angle angle-critical">Critique</span></td>
+            </tr>
+            <tr>
+                <td>Engagés gauche <span class="sup">[5]</span></td>
+                <td>Fraude fiscale</td>
+                <td>Budget 2026</td>
+                <td><span class="angle angle-critical">Critique</span></td>
+            </tr>
+            <tr>
+                <td>Engagés droite <span class="sup">[6]</span></td>
+                <td>Aide à mourir</td>
+                <td>Défense / Ukraine</td>
+                <td><span class="angle angle-critical">Critique</span></td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="footnotes">
+        <p><span class="sup">[1]</span> Le Monde, Le Figaro, Libération, La Croix, Le Parisien, Ouest-France</p>
+        <p><span class="sup">[2]</span> Les Echos, La Tribune, Challenges, Capital, Alternatives Économiques</p>
+        <p><span class="sup">[3]</span> Franceinfo, France 24, France Inter, France Culture, LCP, Public Sénat, CNews</p>
+        <p><span class="sup">[4]</span> Mediapart, Blast, Disclose, StreetPress</p>
+        <p><span class="sup">[5]</span> L'Humanité, Politis</p>
+        <p><span class="sup">[6]</span> Valeurs Actuelles, Causeur, Front Populaire</p>
+    </div>
+</div>
+
+</div><!-- /tab-carto -->
+
+<!-- ================================================== -->
+<!-- TAB 3 : VEILLE RÉSEAUX SOCIAUX EXTRÊME DROITE      -->
+<!-- ================================================== -->
+<div id="tab-social" class="tab-content">
+
+<h2><span class="icon">&#x1F4F1;</span> Veille réseaux sociaux — Extrême droite</h2>
+
+<p class="social-intro">
+    Suivi des publications sur les réseaux sociaux des principales personnalités politiques de l'extrême droite française au cours des dernières 48 heures (24-26 février 2026). Cette veille couvre les comptes X (ex-Twitter), Instagram, TikTok, Facebook et YouTube. Les contenus sont présentés factuellement, sans jugement de valeur.
+</p>
+
+<!-- ===== ALERTE DU JOUR ===== -->
+<div class="alert-box">
+    <strong>Polémique en cours :</strong> Le ministre Jean-Noël Barrot a annoncé le 25 février vouloir une « mise au pas des réseaux sociaux » contre « l'internationale réactionnaire ». Réaction immédiate et massive de l'ensemble des personnalités d'extrême droite, qui dénoncent une atteinte à la liberté d'expression. Ce sujet structure la communication en ligne de la droite radicale sur cette période.
+</div>
+
+<!-- ===== PERSONNALITÉS ===== -->
+
+<h2><span class="icon">&#x1F465;</span> Rassemblement National</h2>
+
+<div class="persona-grid">
+
+    <!-- BARDELLA -->
+    <div class="persona-card highlight-card">
+        <div class="persona-header">
+            <div class="persona-avatar rn">JB</div>
+            <div>
+                <div class="persona-name">Jordan Bardella</div>
+                <div class="persona-role">Président du RN, député européen</div>
+            </div>
+        </div>
+        <div class="persona-accounts">
+            <a href="https://x.com/J_Bardella" target="_blank" class="social-link"><span class="post-platform platform-x">X</span> @J_Bardella</a>
+            <a href="https://www.instagram.com/jordanbardella/" target="_blank" class="social-link"><span class="post-platform platform-ig">IG</span> @jordanbardella</a>
+            <a href="https://www.tiktok.com/@jordanbardella" target="_blank" class="social-link"><span class="post-platform platform-tt">TT</span> 2,3M abonnés</a>
+        </div>
+        <div class="persona-posts">
+            <div class="post-item">
+                <div class="post-meta"><span class="post-platform platform-x">X</span> 26 fév. — Salon de l'agriculture</div>
+                <div class="post-text">Défend une « priorité d'accès » pour les produits français dans les marchés publics. Attaque Macron sur le Mercosur : « Aucun agriculteur ne sera dupe du changement de pied tardif du président de la République. »</div>
+                <div class="post-tags"><span class="tag tag-agriculture">Agriculture</span></div>
+            </div>
+            <div class="post-item">
+                <div class="post-meta"><span class="post-platform platform-x">X</span> 25 fév. — Réaction Barrot</div>
+                <div class="post-text">Réponse à Jean-Noël Barrot : « Les macronistes sont prêts à piétiner la démocratie pour maintenir leur influence à tout prix. » Dénonce une « dérive illibérale » du gouvernement visant à contrôler les réseaux sociaux avant 2027.</div>
+                <div class="post-tags"><span class="tag tag-liberte">Liberté d'expression</span></div>
+            </div>
+            <div class="post-item">
+                <div class="post-meta"><span class="post-platform platform-x">X</span> 25 fév. — Motions de censure</div>
+                <div class="post-text">Revendique la motion de censure RN contre la programmation énergétique, dénonce le passage en force par décret.</div>
+                <div class="post-tags"><span class="tag tag-europe">Énergie</span></div>
+            </div>
+            <div class="post-item">
+                <div class="post-meta"><span class="post-platform platform-ig">IG</span><span class="post-platform platform-tt">TT</span> 26 fév.</div>
+                <div class="post-text">Vidéos du Salon de l'agriculture : déambulation dans les allées, selfies avec les agriculteurs, mise en scène de proximité. <em>Format : coulisses / behind the scenes, ton chaleureux.</em></div>
+                <div class="post-tags"><span class="tag tag-agriculture">Agriculture</span><span class="tag tag-municipales">Municipales</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MARINE LE PEN -->
+    <div class="persona-card highlight-card">
+        <div class="persona-header">
+            <div class="persona-avatar rn">MLP</div>
+            <div>
+                <div class="persona-name">Marine Le Pen</div>
+                <div class="persona-role">Députée, ex-candidate présidentielle</div>
+            </div>
+        </div>
+        <div class="persona-accounts">
+            <a href="https://x.com/MLP_officiel" target="_blank" class="social-link"><span class="post-platform platform-x">X</span> @MLP_officiel</a>
+            <a href="https://www.instagram.com/marine_lepen/" target="_blank" class="social-link"><span class="post-platform platform-ig">IG</span> @marine_lepen</a>
+            <a href="https://www.facebook.com/MarineLePen" target="_blank" class="social-link"><span class="post-platform platform-fb">FB</span> Marine Le Pen</a>
+        </div>
+        <div class="persona-posts">
+            <div class="post-item">
+                <div class="post-meta"><span class="post-platform platform-x">X</span> 26 fév. — Salon de l'agriculture</div>
+                <div class="post-text">Propose un « prix garanti par l'État » pour les agriculteurs. S'en prend au Pacte vert européen qu'elle accuse de « surtransposition des normes » nuisant à la compétitivité agricole française. Accueil chaleureux rapporté par la presse.</div>
+                <div class="post-tags"><span class="tag tag-agriculture">Agriculture</span><span class="tag tag-europe">Europe</span></div>
+            </div>
+            <div class="post-item">
+                <div class="post-meta"><span class="post-platform platform-x">X</span> 25 fév. — Fin de vie</div>
+                <div class="post-text">Position nuancée sur le vote aide à mourir, rappelant les réserves exprimées par le groupe RN à l'Assemblée.</div>
+                <div class="post-tags"><span class="tag tag-identite">Société</span></div>
+            </div>
+            <div class="post-item">
+                <div class="post-meta"><span class="post-platform platform-ig">IG</span> 26 fév.</div>
+                <div class="post-text">Photos du Salon avec les éleveurs. <em>Ton : empathie, proximité avec le monde rural.</em></div>
+                <div class="post-tags"><span class="tag tag-agriculture">Agriculture</span></div>
+            </div>
+        </div>
+        <div style="margin-top: 0.8rem; padding: 0.6rem 0.8rem; background: #fff5f5; border-radius: 4px; font-size: 0.82rem; font-family: sans-serif;">
+            <strong style="color: var(--critical);">Contexte judiciaire :</strong> Procès en appel terminé le 12 février. Le parquet a requis 5 ans d'inéligibilité et 1 an de prison ferme. Verdict attendu à l'été 2026. Communication en ligne axée sur la victimisation et la mobilisation militante (#JeSoutiensMarine).
+        </div>
+    </div>
+
+</div>
+
+<h2><span class="icon">&#x1F465;</span> Reconquête</h2>
+
+<div class="persona-grid">
+
+    <!-- ZEMMOUR -->
+    <div class="persona-card">
+        <div class="persona-header">
+            <div class="persona-avatar reconquete">EZ</div>
+            <div>
+                <div class="persona-name">Éric Zemmour</div>
+                <div class="persona-role">Président de Reconquête</div>
+            </div>
+        </div>
+        <div class="persona-accounts">
+            <a href="https://x.com/ZemmourEric" target="_blank" class="social-link"><span class="post-platform platform-x">X</span> @ZemmourEric</a>
+            <a href="https://www.instagram.com/ericzemmour_/" target="_blank" class="social-link"><span class="post-platform platform-ig">IG</span> @ericzemmour_</a>
+            <a href="https://www.youtube.com/@ericzemmour" target="_blank" class="social-link"><span class="post-platform platform-yt">YT</span> Éric Zemmour</a>
+        </div>
+        <div class="persona-posts">
+            <div class="post-item">
+                <div class="post-meta"><span class="post-platform platform-x">X</span> 26 fév. — Salon de l'agriculture</div>
+                <div class="post-text">Qualifie les agriculteurs de « héros français que le monde nous envie ». Appelle à « négocier avec Trump » sur les droits de douane, distinguant les produits de luxe (vins) des produits sensibles.</div>
+                <div class="post-tags"><span class="tag tag-agriculture">Agriculture</span><span class="tag tag-souverainete">Souveraineté</span></div>
+            </div>
+            <div class="post-item">
+                <div class="post-meta"><span class="post-platform platform-x">X</span> 25 fév. — Réseaux sociaux</div>
+                <div class="post-text">Réaction aux propos Barrot sur la « mise au pas » des réseaux sociaux. Dénonce une volonté de censure avant 2027.</div>
+                <div class="post-tags"><span class="tag tag-liberte">Liberté d'expression</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- SARAH KNAFO -->
+    <div class="persona-card highlight-card">
+        <div class="persona-header">
+            <div class="persona-avatar reconquete">SK</div>
+            <div>
+                <div class="persona-name">Sarah Knafo</div>
+                <div class="persona-role">Députée européenne, candidate maire de Paris</div>
+            </div>
+        </div>
+        <div class="persona-accounts">
+            <a href="https://x.com/knafo_sarah" target="_blank" class="social-link"><span class="post-platform platform-x">X</span> @knafo_sarah</a>
+            <a href="https://www.instagram.com/sarahknafo1/" target="_blank" class="social-link"><span class="post-platform platform-ig">IG</span> @sarahknafo1</a>
+            <a href="https://www.tiktok.com/@sarah_knafo" target="_blank" class="social-link"><span class="post-platform platform-tt">TT</span> 4,2M vues/mois</a>
+        </div>
+        <div class="persona-posts">
+            <div class="post-item">
+                <div class="post-meta"><span class="post-platform platform-x">X</span><span class="post-platform platform-tt">TT</span> 25-26 fév. — Campagne Paris</div>
+                <div class="post-text">Communication intensive sur la campagne municipale parisienne. Se positionne comme « le vote utile » contre l'insécurité et pour la propreté de Paris. Vidéos de terrain très partagées.</div>
+                <div class="post-tags"><span class="tag tag-municipales">Municipales</span></div>
+            </div>
+            <div class="post-item">
+                <div class="post-meta"><span class="post-platform platform-x">X</span> 24 fév.</div>
+                <div class="post-text">« Trop de politiques ne pensent qu'à 2027, au lieu d'honorer leur mandat actuel. Chez Reconquête, nous menons le combat chaque jour. »</div>
+                <div class="post-tags"><span class="tag tag-municipales">Municipales</span></div>
+            </div>
+        </div>
+        <div style="margin-top: 0.8rem; padding: 0.6rem 0.8rem; background: #fefcbf; border-radius: 4px; font-size: 0.82rem; font-family: sans-serif;">
+            <strong style="color: var(--mixed);">Polémique algorithmique :</strong> Ses vidéos sur X ont généré 17,5 millions de vues en janvier, avec une visibilité 3x supérieure à son audience naturelle selon la société Arago. Le Grand Continent s'interroge sur une possible amplification algorithmique par Elon Musk. Knafo domine TikTok sur la course à Paris (4,2 M de vues/mois). Croissance explosive sur tous les réseaux : FB +326 %, IG +219 %, TT +43 %.
+        </div>
+    </div>
+
+    <!-- MARION MARÉCHAL -->
+    <div class="persona-card">
+        <div class="persona-header">
+            <div class="persona-avatar reconquete">MM</div>
+            <div>
+                <div class="persona-name">Marion Maréchal</div>
+                <div class="persona-role">Députée européenne, parti Identité-Libertés</div>
+            </div>
+        </div>
+        <div class="persona-accounts">
+            <a href="https://x.com/MarionMarechal" target="_blank" class="social-link"><span class="post-platform platform-x">X</span> @MarionMarechal</a>
+            <a href="https://www.instagram.com/marionmarechal_/" target="_blank" class="social-link"><span class="post-platform platform-ig">IG</span> @marionmarechal_</a>
+        </div>
+        <div class="persona-posts">
+            <div class="post-item">
+                <div class="post-meta"><span class="post-platform platform-x">X</span> fév. 2026</div>
+                <div class="post-text">Communication axée sur le parti Identité-Libertés fondé en octobre 2024 après son exclusion de Reconquête. Positionnement entre RN et Reconquête sur la ligne identitaire et libérale-conservatrice.</div>
+                <div class="post-tags"><span class="tag tag-identite">Identité</span></div>
+            </div>
+            <div class="post-item">
+                <div class="post-meta"><span class="post-platform platform-x">X</span> 20 fév. — Hommage Quentin Deranque</div>
+                <div class="post-text">Hommage au militant identitaire décédé à Lyon le 12 février. Ton personnel et émotif, référence au combat identitaire.</div>
+                <div class="post-tags"><span class="tag tag-identite">Identité</span></div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<h2><span class="icon">&#x1F465;</span> Souverainistes et droite radicale</h2>
+
+<div class="persona-grid">
+
+    <!-- PHILIPPE DE VILLIERS -->
+    <div class="persona-card">
+        <div class="persona-header">
+            <div class="persona-avatar souverainiste">PV</div>
+            <div>
+                <div class="persona-name">Philippe de Villiers</div>
+                <div class="persona-role">Fondateur du Mouvement pour la France</div>
+            </div>
+        </div>
+        <div class="persona-accounts">
+            <a href="https://x.com/PhdeVilliers" target="_blank" class="social-link"><span class="post-platform platform-x">X</span> @PhdeVilliers</a>
+        </div>
+        <div class="persona-posts">
+            <div class="post-item">
+                <div class="post-meta"><span class="post-platform platform-x">X</span> fév. 2026 — Pétition immigration</div>
+                <div class="post-text">Continue de promouvoir sa pétition pour un référendum sur l'immigration, qui revendique plus de 1,6 million de signatures. <em>Diffusion massive via les réseaux Bolloré (JDD, CNews).</em> Franceinfo pointe des problèmes de vérification des signatures (faux e-mails acceptés).</div>
+                <div class="post-tags"><span class="tag tag-immigration">Immigration</span><span class="tag tag-souverainete">Souveraineté</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FLORIAN PHILIPPOT -->
+    <div class="persona-card">
+        <div class="persona-header">
+            <div class="persona-avatar souverainiste">FP</div>
+            <div>
+                <div class="persona-name">Florian Philippot</div>
+                <div class="persona-role">Président des Patriotes</div>
+            </div>
+        </div>
+        <div class="persona-accounts">
+            <a href="https://x.com/f_philippot" target="_blank" class="social-link"><span class="post-platform platform-x">X</span> @f_philippot</a>
+            <a href="https://www.youtube.com/@FlorianPhilippot" target="_blank" class="social-link"><span class="post-platform platform-yt">YT</span> Florian Philippot</a>
+        </div>
+        <div class="persona-posts">
+            <div class="post-item">
+                <div class="post-meta"><span class="post-platform platform-x">X</span><span class="post-platform platform-yt">YT</span> fév. 2026 — Alliance souverainiste</div>
+                <div class="post-text">Conférence commune avec Dupont-Aignan le 14 février à Paris via le MPC (Mouvement Politique Citoyen). Refuse « l'illusion Bardella » et se positionne comme alternative patriote hors RN. Évoque Philippe de Villiers comme recours possible pour 2027.</div>
+                <div class="post-tags"><span class="tag tag-souverainete">Souveraineté</span><span class="tag tag-europe">Anti-UE</span></div>
+            </div>
+            <div class="post-item">
+                <div class="post-meta"><span class="post-platform platform-yt">YT</span> fév. 2026</div>
+                <div class="post-text">Vidéos régulières sur YouTube dénonçant l'Union européenne, les sanctions contre la Russie et la politique sanitaire. Ton très offensif contre le « système ».</div>
+                <div class="post-tags"><span class="tag tag-europe">Anti-UE</span><span class="tag tag-souverainete">Souveraineté</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- NICOLAS DUPONT-AIGNAN -->
+    <div class="persona-card">
+        <div class="persona-header">
+            <div class="persona-avatar souverainiste">NDA</div>
+            <div>
+                <div class="persona-name">Nicolas Dupont-Aignan</div>
+                <div class="persona-role">Président de Debout la France</div>
+            </div>
+        </div>
+        <div class="persona-accounts">
+            <a href="https://x.com/dupontaignan" target="_blank" class="social-link"><span class="post-platform platform-x">X</span> @dupontaignan</a>
+            <a href="https://www.youtube.com/@duaborttaignan" target="_blank" class="social-link"><span class="post-platform platform-yt">YT</span> N. Dupont-Aignan</a>
+        </div>
+        <div class="persona-posts">
+            <div class="post-item">
+                <div class="post-meta"><span class="post-platform platform-x">X</span> fév. 2026 — Alliance souverainiste</div>
+                <div class="post-text">Participation à la conférence MPC du 14 février avec Philippot. Se positionne comme gaulliste souverainiste, critique du RN jugé « pas assez radical sur l'UE ».</div>
+                <div class="post-tags"><span class="tag tag-souverainete">Souveraineté</span><span class="tag tag-europe">Anti-UE</span></div>
+            </div>
+            <div class="post-item">
+                <div class="post-meta"><span class="post-platform platform-x">X</span> 25 fév. — Agriculture</div>
+                <div class="post-text">Dénonce le Mercosur et les accords de libre-échange. Appelle à un « patriotisme alimentaire » et à la protection des agriculteurs français.</div>
+                <div class="post-tags"><span class="tag tag-agriculture">Agriculture</span><span class="tag tag-souverainete">Souveraineté</span></div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<h2><span class="icon">&#x1F465;</span> Influenceurs et médias proches</h2>
+
+<div class="persona-grid">
+
+    <!-- BOULEVARD VOLTAIRE / MEDIA DROITE -->
+    <div class="persona-card">
+        <div class="persona-header">
+            <div class="persona-avatar influenceur">BV</div>
+            <div>
+                <div class="persona-name">Boulevard Voltaire / Fdesouche</div>
+                <div class="persona-role">Médias en ligne, droite radicale</div>
+            </div>
+        </div>
+        <div class="persona-accounts">
+            <a href="https://www.bvoltaire.fr" target="_blank" class="social-link"><span class="post-platform platform-x">X</span> @BVoltaire</a>
+            <a href="https://www.fdesouche.com" target="_blank" class="social-link"><span class="post-platform platform-x">X</span> @F_Desouche</a>
+        </div>
+        <div class="persona-posts">
+            <div class="post-item">
+                <div class="post-meta"><span class="post-platform platform-x">X</span> 25-26 fév.</div>
+                <div class="post-text">Boulevard Voltaire publie un reportage enthousiaste sur Bardella au Salon de l'agriculture (« l'espoir Bardella »). Fdesouche relaie les propos de Barrot sur la « mise au pas » des réseaux sociaux et les dénonce comme une atteinte aux libertés. Forte activité de partage et de commentaires sur ces deux sujets.</div>
+                <div class="post-tags"><span class="tag tag-liberte">Liberté d'expression</span><span class="tag tag-agriculture">Agriculture</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- INFLUENCEURS -->
+    <div class="persona-card">
+        <div class="persona-header">
+            <div class="persona-avatar influenceur">INF</div>
+            <div>
+                <div class="persona-name">Influenceurs identitaires</div>
+                <div class="persona-role">Thaïs d'Escufon, Psyhodelik, « Où va ma France »</div>
+            </div>
+        </div>
+        <div class="persona-accounts">
+            <span class="social-link"><span class="post-platform platform-yt">YT</span> Psyhodelik (236K)</span>
+            <span class="social-link"><span class="post-platform platform-tt">TT</span> Thaïs d'Escufon</span>
+            <span class="social-link"><span class="post-platform platform-yt">YT</span> Où va ma France</span>
+        </div>
+        <div class="persona-posts">
+            <div class="post-item">
+                <div class="post-meta"><span class="post-platform platform-yt">YT</span><span class="post-platform platform-tt">TT</span> fév. 2026</div>
+                <div class="post-text">Blast signale une nouvelle vague d'influenceurs d'extrême droite utilisant des graphiques pseudo-scientifiques pour accréditer des thèses identitaires (« Où va ma France », « Lebracq »). Thaïs d'Escufon reste active sur TikTok avec du contenu identitaire. Psyhodelik (236 000 abonnés) produit des vidéos longues sur l'immigration et l'identité.</div>
+                <div class="post-tags"><span class="tag tag-identite">Identité</span><span class="tag tag-immigration">Immigration</span></div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<!-- ===== ANALYSE ===== -->
+<h2><span class="icon">&#x1F4CA;</span> Analyse de la communication</h2>
+
+<div class="social-analysis-grid">
+
+    <div class="carto-card">
+        <h4>Thèmes dominants (24-26 fév.)</h4>
+        <div class="coverage-bar-row">
+            <span class="coverage-bar-label">Salon agriculture</span>
+            <div class="coverage-bar-track"><div class="coverage-bar-fill" style="width:90%; background: #48bb78;"></div></div>
+        </div>
+        <div class="coverage-bar-row">
+            <span class="coverage-bar-label">Liberté d'expression</span>
+            <div class="coverage-bar-track"><div class="coverage-bar-fill" style="width:80%; background: #ecc94b;"></div></div>
+        </div>
+        <div class="coverage-bar-row">
+            <span class="coverage-bar-label">Municipales 2026</span>
+            <div class="coverage-bar-track"><div class="coverage-bar-fill" style="width:60%; background: #9f7aea;"></div></div>
+        </div>
+        <div class="coverage-bar-row">
+            <span class="coverage-bar-label">Immigration</span>
+            <div class="coverage-bar-track"><div class="coverage-bar-fill" style="width:50%; background: #fc8181;"></div></div>
+        </div>
+        <div class="coverage-bar-row">
+            <span class="coverage-bar-label">Souveraineté / anti-UE</span>
+            <div class="coverage-bar-track"><div class="coverage-bar-fill" style="width:40%; background: #a0aec0;"></div></div>
+        </div>
+        <div class="coverage-bar-row">
+            <span class="coverage-bar-label">Identité</span>
+            <div class="coverage-bar-track"><div class="coverage-bar-fill" style="width:35%; background: #ed8936;"></div></div>
+        </div>
+    </div>
+
+    <div class="carto-card">
+        <h4>Stratégies de communication observées</h4>
+        <ul>
+            <li><strong>Bardella :</strong> double registre — vidéos TikTok/Instagram (proximité, coulisses) + X (confrontation politique directe). Roi incontesté du format court sur TikTok (1,7M abonnés).</li>
+            <li><strong>Knafo :</strong> stratégie « à l'américaine » inspirée de Trump. Contenus viraux sur toutes plateformes. Polémique sur l'amplification algorithmique par X/Musk.</li>
+            <li><strong>Le Pen :</strong> communication plus institutionnelle, centrée sur le terrain (Salon) et la défense de son bilan. Mobilisation via #JeSoutiensMarine autour du procès.</li>
+            <li><strong>Zemmour :</strong> ton déclaratif, positionnement clivant. Moins de viralité que Knafo ou Bardella.</li>
+        </ul>
+    </div>
+
+    <div class="carto-card">
+        <h4>Éléments de vigilance</h4>
+        <ul>
+            <li><strong>Amplification algorithmique :</strong> L'étude Arago et l'analyse du Grand Continent documentent une surexposition des contenus Knafo sur X, potentiellement liée à l'algorithme de Musk. Enjeu d'ingérence dans les municipales.</li>
+            <li><strong>Pétition Villiers :</strong> 1,6 M de signatures revendiquées mais aucun mécanisme de vérification d'identité. Collecte de données personnelles au profit de médias Bolloré (JDD, JDNews).</li>
+            <li><strong>Pseudo-science identitaire :</strong> Nouvelle vague d'influenceurs utilisant des graphiques pour donner un vernis scientifique à des thèses nativistes (signalé par Blast, Sciences Po).</li>
+            <li><strong>Affaire Deranque :</strong> La mort du militant identitaire à Lyon (12 fév.) instrumentalisée en ligne malgré l'appel de Bardella à la distance. Marche de « plusieurs milliers » à Lyon le 22 février malgré la consigne RN.</li>
+        </ul>
+    </div>
+
+    <div class="carto-card">
+        <h4>Divergences internes à l'extrême droite</h4>
+        <ul>
+            <li><strong>RN vs Reconquête :</strong> Bardella maintient une ligne de « dédiabolisation » (refus de côtoyer l'ultradroite aux hommages Deranque) ; Reconquête/Maréchal assument la proximité identitaire.</li>
+            <li><strong>RN vs Souverainistes :</strong> Philippot et Dupont-Aignan rejettent « l'illusion Bardella » et construisent une alliance alternative pour 2027.</li>
+            <li><strong>Knafo vs Dati :</strong> Sur la course à Paris, guerre numérique totale. Knafo surpasse Dati sur TikTok (+48 % de vues) malgré un écart dans les sondages traditionnels.</li>
+        </ul>
+    </div>
+
+</div>
+
+<!-- Tableau récapitulatif des comptes -->
+<div class="carto-card full-width" style="margin-bottom: 2rem;">
+    <h4>Répertoire des comptes suivis</h4>
+    <div class="matrix-wrapper">
+    <table class="matrix" style="min-width: 700px; font-size: 0.8rem;">
+        <thead>
+            <tr>
+                <th style="text-align:left; padding-left:0.8rem;">Personnalité</th>
+                <th>Parti</th>
+                <th>X (ex-Twitter)</th>
+                <th>Instagram</th>
+                <th>TikTok</th>
+                <th>Autres</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>Jordan Bardella</td><td>RN</td><td>@J_Bardella</td><td>@jordanbardella</td><td>@jordanbardella (2,3M)</td><td>Facebook, YouTube</td></tr>
+            <tr><td>Marine Le Pen</td><td>RN</td><td>@MLP_officiel</td><td>@marine_lepen</td><td>—</td><td>Facebook (8M+)</td></tr>
+            <tr><td>Éric Zemmour</td><td>Reconquête</td><td>@ZemmourEric</td><td>@ericzemmour_</td><td>—</td><td>YouTube</td></tr>
+            <tr><td>Sarah Knafo</td><td>Reconquête</td><td>@knafo_sarah</td><td>@sarahknafo1</td><td>@sarah_knafo (4,2M vues/mois)</td><td>LinkedIn, Facebook</td></tr>
+            <tr><td>Marion Maréchal</td><td>Identité-Libertés</td><td>@MarionMarechal</td><td>@marionmarechal_</td><td>—</td><td>—</td></tr>
+            <tr><td>Philippe de Villiers</td><td>MPF</td><td>@PhdeVilliers</td><td>—</td><td>—</td><td>—</td></tr>
+            <tr><td>Florian Philippot</td><td>Les Patriotes</td><td>@f_philippot</td><td>—</td><td>—</td><td>YouTube</td></tr>
+            <tr><td>N. Dupont-Aignan</td><td>Debout la France</td><td>@dupontaignan</td><td>—</td><td>—</td><td>Facebook, YouTube</td></tr>
+        </tbody>
+    </table>
+    </div>
+</div>
+
+</div><!-- /tab-social -->
+
+<footer>
+    <p>Revue de presse compilée le 26 février 2026. Sources : AFP, Franceinfo, France 24, LCP, Public Sénat, Le Figaro, Le Monde, Boursorama, CNews, Insee, Vigicrues, France Bleu, Élysée.</p>
+    <p>Analyse réalisée dans le respect du pluralisme éditorial. Les faits présentés sont confirmés par au moins deux sources lorsque possible.</p>
+</footer>
+
+<script>
+    // Tab switching
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            btn.classList.add('active');
+            document.getElementById(btn.dataset.tab).classList.add('active');
+        });
+    });
+
+    // Category filter
+    document.querySelectorAll('.filter-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            const filter = btn.dataset.filter;
+            const rows = document.querySelectorAll('#cartoMatrix tbody tr');
+            rows.forEach(row => {
+                if (filter === 'all') {
+                    row.style.display = '';
+                } else if (row.classList.contains('category-row')) {
+                    const nextRow = row.nextElementSibling;
+                    row.style.display = (nextRow && nextRow.dataset.cat === filter) ? '' : 'none';
+                } else if (row.dataset.cat) {
+                    row.style.display = row.dataset.cat === filter ? '' : 'none';
+                }
+            });
+        });
+    });
+</script>
+
+</body>
+</html>
