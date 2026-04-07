@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Compte rendu — RPE &amp; Mairie de Nanterre — 5 février 2026</title>
+    <title>Comptes rendus — RPE Victor Hugo</title>
     <style>
         :root {
             --blue: #1a56db;
@@ -23,6 +23,9 @@
             --teal-50: #f0fdfa;
             --teal-600: #0d9488;
             --teal-border: #5eead4;
+            --red-50: #fef2f2;
+            --red-600: #dc2626;
+            --red-border: #f87171;
         }
 
         * {
@@ -42,7 +45,7 @@
         .header {
             background: linear-gradient(135deg, var(--blue-dark), var(--blue));
             color: white;
-            padding: 3rem 1.5rem;
+            padding: 3rem 1.5rem 1.5rem;
             text-align: center;
         }
 
@@ -59,14 +62,48 @@
             font-weight: 400;
         }
 
-        .header .date {
-            display: inline-block;
-            margin-top: 1rem;
-            background: rgba(255,255,255,0.2);
-            padding: 0.35rem 1.2rem;
-            border-radius: 2rem;
+        /* Tabs */
+        .tabs-nav {
+            display: flex;
+            gap: 0.5rem;
+            max-width: 820px;
+            margin: 0 auto;
+            padding: 0 1.5rem;
+            transform: translateY(50%);
+        }
+
+        .tab-btn {
+            flex: 1;
+            padding: 0.85rem 1.25rem;
+            border: none;
+            border-radius: 12px 12px 0 0;
             font-size: 0.95rem;
-            font-weight: 500;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: rgba(255,255,255,0.25);
+            color: rgba(255,255,255,0.8);
+            text-align: center;
+            line-height: 1.3;
+        }
+
+        .tab-btn.active {
+            background: var(--gray-50);
+            color: var(--blue-dark);
+            box-shadow: 0 -2px 8px rgba(0,0,0,0.08);
+        }
+
+        .tab-btn:not(.active):hover {
+            background: rgba(255,255,255,0.4);
+            color: white;
+        }
+
+        .tab-panel {
+            display: none;
+        }
+
+        .tab-panel.active {
+            display: block;
         }
 
         .container {
@@ -174,7 +211,7 @@
             margin-top: 0.35rem;
         }
 
-        /* Victor Hugo specific callout */
+        /* Callouts */
         .callout {
             border-left: 4px solid var(--blue);
             background: var(--blue-light);
@@ -234,6 +271,30 @@
 
         .tip p:last-child {
             margin-bottom: 0;
+        }
+
+        /* Alert (important) */
+        .alert {
+            border-left: 4px solid var(--red-border);
+            background: var(--red-50);
+            padding: 1rem 1.25rem;
+            border-radius: 0 8px 8px 0;
+            margin: 1.25rem 0;
+        }
+
+        .alert p {
+            color: var(--red-600);
+            margin-bottom: 0.3rem;
+        }
+
+        .alert p:last-child {
+            margin-bottom: 0;
+        }
+
+        .alert .alert-title {
+            font-weight: 700;
+            font-size: 0.95rem;
+            margin-bottom: 0.4rem;
         }
 
         /* Key figures grid */
@@ -318,6 +379,53 @@
             margin-bottom: 0.75rem;
         }
 
+        /* Q&A block */
+        .qa-block {
+            background: var(--gray-50);
+            border: 1px solid var(--gray-200);
+            border-radius: 8px;
+            padding: 1.25rem;
+            margin: 1rem 0;
+        }
+
+        .qa-block .question {
+            font-weight: 600;
+            color: var(--gray-800);
+            margin-bottom: 0.75rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .qa-block .question::before {
+            content: "Q";
+            position: absolute;
+            left: 0;
+            color: var(--blue);
+            font-weight: 700;
+        }
+
+        .qa-block .answer {
+            color: var(--gray-700);
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .qa-block .answer::before {
+            content: "R";
+            position: absolute;
+            left: 0;
+            color: var(--teal-600);
+            font-weight: 700;
+        }
+
+        .qa-block .answer p {
+            margin-bottom: 0.5rem;
+        }
+
+        .qa-block .answer p:last-child {
+            margin-bottom: 0;
+        }
+
         /* Footer */
         .footer {
             text-align: center;
@@ -336,6 +444,16 @@
         @media (max-width: 640px) {
             .header h1 {
                 font-size: 1.5rem;
+            }
+
+            .tabs-nav {
+                padding: 0 1rem;
+                gap: 0.35rem;
+            }
+
+            .tab-btn {
+                font-size: 0.82rem;
+                padding: 0.7rem 0.75rem;
             }
 
             .container {
@@ -359,63 +477,338 @@
 <body>
 
 <div class="header">
-    <h1>Compte rendu</h1>
-    <div class="subtitle">Réunion des représentants de parents d'élèves avec la Ville de Nanterre</div>
-    <div class="date">5 février 2026</div>
+    <h1>Comptes rendus</h1>
+    <div class="subtitle">RPE Victor Hugo &mdash; Nanterre</div>
+
+    <nav class="tabs-nav">
+        <button class="tab-btn active" onclick="switchTab('conseil-ecole')">Conseil d'&eacute;cole &mdash; 2 avril 2026</button>
+        <button class="tab-btn" onclick="switchTab('mairie')">RPE &amp; Mairie &mdash; 5 f&eacute;vrier 2026</button>
+        <button class="tab-btn" onclick="switchTab('conseil-nov')">Conseil d'&eacute;cole &mdash; 6 novembre 2025</button>
+    </nav>
 </div>
 
+<!-- ======================= TAB 1 : Conseil d'école — 2 avril 2026 ======================= -->
+<div id="tab-conseil-ecole" class="tab-panel active">
+<div class="container">
+
+    <div class="remark">
+        <p><strong>Personnes pr&eacute;sentes</strong></p>
+        <p><strong>Repr&eacute;sentants des parents d'&eacute;l&egrave;ves (RPE) :</strong> Samira, Ana&iuml;s, Juliette, H&eacute;l&egrave;ne, Mandana</p>
+        <p><strong>Enseignants :</strong> Doroth&eacute;e (classe Verte), Christophe (directeur et classe Violette), Yasmine (classe Bleue), Marie-Laure (classe Jaune)</p>
+    </div>
+
+    <div class="alert">
+        <p class="alert-title">Nouveau num&eacute;ro de l'&eacute;cole</p>
+        <p><strong>01.70.16.03.40</strong> / loge : <strong>01.70.16.03.41</strong></p>
+        <p>Les anciens num&eacute;ros ne fonctionnent plus.</p>
+    </div>
+
+    <nav class="toc">
+        <h2>Ordre du jour</h2>
+        <ol>
+            <li><a href="#ce-evaluations">R&eacute;sultats &eacute;valuation entr&eacute;e s&eacute;curis&eacute;e au CP</a></li>
+            <li><a href="#ce-projets">Projets et &eacute;v&egrave;nements</a></li>
+            <li><a href="#ce-remplacements">Les remplacements</a></li>
+            <li><a href="#ce-violence">Violence en r&eacute;cr&eacute;ation</a></li>
+            <li><a href="#ce-fermeture">Fermeture de classe</a></li>
+            <li><a href="#ce-questions">Questions diverses</a></li>
+        </ol>
+    </nav>
+
+    <!-- 1. Évaluations -->
+    <section class="section" id="ce-evaluations">
+        <h2>1. R&eacute;sultats &eacute;valuation entr&eacute;e s&eacute;curis&eacute;e au CP</h2>
+
+        <p>Ces &eacute;valuations s'inscrivent dans le protocole acad&eacute;mique de l'Acad&eacute;mie de Versailles. Elles ont pour objectif de faire un point &agrave; mi-ann&eacute;e sur le niveau des enfants de grande section, afin d'anticiper d'&eacute;ventuelles difficult&eacute;s avant leur entr&eacute;e en CP. &Eacute;valuations r&eacute;alis&eacute;es entre novembre et janvier.</p>
+
+        <h3>Classe verte</h3>
+        <p>20 &eacute;l&egrave;ves, dont 1 en difficult&eacute;.</p>
+        <p>Les difficult&eacute;s observ&eacute;es portaient principalement sur des notions qui n'avaient pas encore &eacute;t&eacute; travaill&eacute;es en classe au moment de l'&eacute;valuation, ce qui relativise en partie les r&eacute;sultats.</p>
+        <ul>
+            <li>Phonologie (manipulation des syllabes) : environ la moiti&eacute; des &eacute;l&egrave;ves</li>
+            <li>Math&eacute;matiques : comparaison des nombres, notions &laquo;&nbsp;autant que&nbsp;&raquo;, &laquo;&nbsp;plus/moins&nbsp;&raquo;</li>
+            <li>Compr&eacute;hension d'un texte</li>
+        </ul>
+        <p>Ces &eacute;l&eacute;ments ont &eacute;t&eacute; travaill&eacute;s depuis et ne pr&eacute;sentent plus de difficult&eacute;s particuli&egrave;res. Retours individuels pr&eacute;vus prochainement avec les parents.</p>
+
+        <h3>Classe jaune</h3>
+        <p>Les r&eacute;sultats sont globalement satisfaisants :</p>
+        <ul>
+            <li>5 &eacute;l&egrave;ves ont obtenu 100&nbsp;% de r&eacute;ussite</li>
+            <li>La grande majorit&eacute; se situe entre 93&nbsp;% et 100&nbsp;%</li>
+            <li>Seuls 2 &eacute;l&egrave;ves sont sous la moyenne (29&nbsp;% et 45&nbsp;%), et un troisi&egrave;me est en limite &agrave; 58&nbsp;%</li>
+        </ul>
+        <p><strong>Points forts :</strong> phonologie.</p>
+        <p><strong>Points &agrave; renforcer :</strong></p>
+        <ul>
+            <li>Compr&eacute;hension du r&eacute;cit (r&eacute;pondre &agrave; des questions)</li>
+            <li>Notions &laquo;&nbsp;plus/moins&nbsp;&raquo;</li>
+        </ul>
+        <p>Ces r&eacute;sultats sont coh&eacute;rents avec ce que les enseignantes observent au quotidien en classe. Les familles ont re&ccedil;u un retour individuel.</p>
+
+        <h3>Constats g&eacute;n&eacute;raux</h3>
+        <ul>
+            <li>Difficult&eacute;s nationales en compr&eacute;hension (implicite, vocabulaire)</li>
+            <li>Probl&egrave;mes de concentration et d'&eacute;coute</li>
+        </ul>
+
+        <div class="tip">
+            <p><strong>Recommandations aux familles</strong></p>
+            <p>Lire r&eacute;guli&egrave;rement des histoires (albums). Fr&eacute;quenter la m&eacute;diath&egrave;que et emprunter des livres. Limiter les &eacute;crans. Apr&egrave;s une lecture ou m&ecirc;me un visionnage de dessin anim&eacute; : poser des questions &agrave; l'enfant, &eacute;changer sur l'histoire. Favoriser une &eacute;coute active et valoriser l'objet livre.</p>
+        </div>
+    </section>
+
+    <!-- 2. Projets -->
+    <section class="section" id="ce-projets">
+        <h2>2. Projets et &eacute;v&egrave;nements</h2>
+
+        <h3>Sortie de fin d'ann&eacute;e</h3>
+        <p>Pr&eacute;vue le <strong>vendredi 19 juin</strong> au parc H&eacute;ouval, financ&eacute;e en partie par la coop&eacute;rative scolaire.</p>
+
+        <h3>Kermesse</h3>
+        <p>Date non fix&eacute;e. Pour &eacute;viter une p&eacute;riode de canicule, deux options sont envisag&eacute;es : un vendredi soir ou un samedi matin. La piste du samedi matin n&eacute;cessite de confirmer la disponibilit&eacute; des animateurs.</p>
+
+        <h3>F&ecirc;te du livre</h3>
+        <p>Le <strong>29 mai ou le 5 juin</strong> (date &agrave; confirmer). Au programme : une vente de livres et des conteuses qui viennent raconter des histoires en classe. 10&nbsp;% des ventes g&eacute;n&egrave;rent un bon d'achat au b&eacute;n&eacute;fice de l'&eacute;cole.</p>
+
+        <h3>Visites des &eacute;coles pour les grandes sections</h3>
+        <p>Les grandes sections vont d&eacute;couvrir leurs futures &eacute;coles dans le cadre de la transition CP :</p>
+        <ul>
+            <li><strong>&Eacute;cole Joliot-Curie :</strong> visite &eacute;cole (d&eacute;j&agrave; effectu&eacute;e) + immersion en CP (date &agrave; venir)</li>
+            <li><strong>&Eacute;cole Balzac :</strong>
+                <ul>
+                    <li>13 avril apr&egrave;s-midi (visite compl&egrave;te)</li>
+                    <li>21 mai matin (immersion en CP)</li>
+                    <li>8 juin &agrave; 18h (r&eacute;union parents info/&eacute;change)</li>
+                </ul>
+            </li>
+        </ul>
+
+        <h3>Photo de classe</h3>
+        <p>Pas encore de date arr&ecirc;t&eacute;e &mdash; probablement fin mai ou d&eacute;but juin.</p>
+    </section>
+
+    <!-- 3. Remplacements -->
+    <section class="section" id="ce-remplacements">
+        <h2>3. Les remplacements</h2>
+
+        <p>Le manque de rempla&ccedil;ants est un probl&egrave;me qui &eacute;chappe largement &agrave; la direction de l'&eacute;cole : toutes les demandes sont faites, mais les d&eacute;cisions appartiennent &agrave; l'&Eacute;ducation nationale. Il s'inscrit dans un contexte plus large d'absent&eacute;isme &eacute;lev&eacute; du corps enseignant et de p&eacute;nurie structurelle de rempla&ccedil;ants.</p>
+
+        <p>L'&Eacute;ducation nationale fait souvent appel &agrave; des contractuels, qui sont par nature des situations non p&eacute;rennes, et ces personnels ont souvent leurs propres exigences quant aux classes et aux &eacute;tablissements dans lesquels ils acceptent d'intervenir. Le m&eacute;tier &eacute;tant en forte tension, ils sont souvent en position de n&eacute;gocier et les maternelles &agrave; Nanterre ne figurent probablement pas parmi les affectations les plus recherch&eacute;es.</p>
+
+        <div class="alert">
+            <p class="alert-title">Situations particuli&egrave;rement difficiles en ce moment</p>
+            <p><strong>Meriem</strong>, enseignante de la classe rose, est absente depuis pr&egrave;s d'un mois sans remplacement.</p>
+            <p><strong>Doroth&eacute;e</strong>, classe verte, est &agrave; mi-temps ; les deux autres jours restent sans enseignant. Pour limiter l'impact, Doroth&eacute;e pr&eacute;pare syst&eacute;matiquement deux versions de programme : une avec remplacement, une sans, afin que les enfants, lorsqu'ils sont r&eacute;partis dans les autres classes, continuent &agrave; travailler.</p>
+        </div>
+
+        <p>La communication est elle-m&ecirc;me source de frustration : il arrive que l'&eacute;cole soit inform&eacute;e de l'arriv&eacute;e d'un rempla&ccedil;ant, et que celui-ci ne se pr&eacute;sente finalement pas, r&eacute;orient&eacute; au dernier moment vers une autre &eacute;cole, probablement parce que les remplacements sont prioris&eacute;s dans les niveaux sup&eacute;rieurs (CM2, primaire). Le directeur lui-m&ecirc;me n'apprend parfois la situation que le jour m&ecirc;me, ce qui est d&eacute;stabilisant pour toute l'&eacute;quipe, et &eacute;videmment pour les enfants.</p>
+
+        <h3>Actions envisag&eacute;es</h3>
+        <p>Face &agrave; cette situation, plusieurs actions sont envisag&eacute;es ou en cours :</p>
+        <ul>
+            <li><strong>Sur le plan juridique :</strong> nous r&eacute;fl&eacute;chissons &agrave; engager un recours en r&eacute;f&eacute;r&eacute; devant le tribunal administratif, pour exiger un remplacement fixe sur le mi-temps de Doroth&eacute;e et un remplacement p&eacute;renne pour la classe rose, au titre de l'obligation de continuit&eacute; p&eacute;dagogique.</li>
+            <li><strong>Soutien de la mairie :</strong> parall&egrave;lement, une demande sera faite aupr&egrave;s de la mairie pour obtenir le soutien d'animateurs de la ville en renfort. En effet, lorsque les enfants sont r&eacute;partis dans les autres classes, cela cr&eacute;e des surcharges d'effectifs qui rendent l'enseignement moins efficace pour tout le monde ; avoir un adulte suppl&eacute;mentaire en soutien, m&ecirc;me non enseignant, permettrait de soulager l'&eacute;quipe en place.</li>
+            <li><strong>Communication parents :</strong> enfin, pour am&eacute;liorer le flux d'information c&ocirc;t&eacute; parents, les RPE mettent en place un point de contact d&eacute;di&eacute; : Samira sera l'interlocutrice privil&eacute;gi&eacute;e pour faire le lien entre l'&eacute;cole et les familles. Elle relayera via les groupes WhatsApp une communication r&eacute;guli&egrave;re, id&eacute;alement quotidienne, sur l'&eacute;tat des absences et des remplacements, en sachant que les informations peuvent &eacute;voluer dans la journ&eacute;e, sans que personne n'y puisse grand-chose.</li>
+        </ul>
+        <p>Ce sont des pistes que nous explorons, nous ne savons pas encore si elles aboutiront, mais nous tenons &agrave; ce que les parents sachent que des d&eacute;marches sont engag&eacute;es.</p>
+
+        <div class="remark">
+            <p><strong>Consignes aux parents</strong></p>
+            <p><strong>Petite section (PS) :</strong> si possible, garder les enfants si l'enseignant est absent.</p>
+            <p><strong>Grande section (GS) :</strong> maintien possible &agrave; l'&eacute;cole avec des activit&eacute;s en mode d&eacute;grad&eacute;.</p>
+        </div>
+    </section>
+
+    <!-- 4. Violence en récréation -->
+    <section class="section" id="ce-violence">
+        <h2>4. Violence en r&eacute;cr&eacute;ation</h2>
+
+        <h3>Am&eacute;lioration constat&eacute;e</h3>
+        <ul>
+            <li>Moins de jeux de bagarre</li>
+            <li>Diminution des conflits de vengeance</li>
+        </ul>
+
+        <h3>Probl&egrave;mes persistants</h3>
+        <ul>
+            <li>Non-respect du mat&eacute;riel (classe et cour)</li>
+            <li>Jeux pouvant engendrer de la violence par la suite ou de mani&egrave;re non consciente</li>
+        </ul>
+    </section>
+
+    <!-- 5. Fermeture de classe -->
+    <section class="section" id="ce-fermeture">
+        <h2>5. Fermeture de classe</h2>
+
+        <p>Pour l'ann&eacute;e prochaine, on aura <strong>quatre classes pour 96 &eacute;l&egrave;ves</strong>, ce qui nous fait perdre une classe. C'est parce qu'on perd des &eacute;l&egrave;ves et, au regard des effectifs, on ne pourra pas se permettre de garder une classe suppl&eacute;mentaire. Il peut toujours y avoir des nouvelles inscriptions, mais &agrave; date, &ccedil;a sera difficile d'aller se battre pour garder une classe ouverte.</p>
+
+        <h3>R&eacute;partition pr&eacute;vue</h3>
+        <ul>
+            <li>Environ <strong>23 &eacute;l&egrave;ves</strong> en moyens/grands r&eacute;partis dans deux classes</li>
+            <li>Environ <strong>25 &eacute;l&egrave;ves</strong> petits/moyens r&eacute;partis dans deux classes</li>
+        </ul>
+        <p>Classes en double niveau. Nouvelle commission en juin.</p>
+    </section>
+
+    <!-- 6. Questions diverses -->
+    <section class="section" id="ce-questions">
+        <h2>6. Questions diverses</h2>
+
+        <!-- Absences -->
+        <h3>Questions relatives aux absences</h3>
+        <ul>
+            <li>Comment rattraper les jours perdus pour les enfants ?</li>
+            <li>Remplacement des professeurs : serait-il possible d'avoir des informations sur les moyens mis en place pour s'assurer d'avoir des remplacements durables ? Nous remercions la direction et toute l'&eacute;quipe p&eacute;dagogique de faire leur maximum, mais nous aimerions avoir plus de communication sur les raisons des non remplacements, et sur la mani&egrave;re dont les enfants sont g&eacute;r&eacute;s. Aujourd'hui, nous laissons nos enfants sans savoir comment ils sont r&eacute;partis, si toujours dans les m&ecirc;mes groupes ou pas.</li>
+            <li>Absences et turnover beaucoup trop important des instituteurs.trices. C'est inacceptable que la situation ne soit pas encore stabilis&eacute;e au mois d'avril (!)</li>
+            <li>Les absences r&eacute;guli&egrave;res des enseignants des autres classes perturbent r&eacute;guli&egrave;rement le rythme des enfants. Ceci, m&ecirc;me si l'&eacute;quipe fait de son mieux, n'est pas rassurant &eacute;motionnellement et scolairement pour les enfants.</li>
+            <li>Classe rose depuis 3+1/2 semaines sans ma&icirc;tresse et sans remplacement d'enseignant, d&eacute;j&agrave; &eacute;t&eacute; le cas l'ann&eacute;e derni&egrave;re apr&egrave;s les vacances d'automne</li>
+            <li>Presque aucune information sur les absences/remplacements d'enseignant &mdash; manque de communication de la part de la direction</li>
+            <li>Pour quelles raisons l'&eacute;cole a des difficult&eacute;s &agrave; faire venir des rempla&ccedil;ants alors que d'autres &eacute;coles &agrave; Nanterre n'ont aucun souci &agrave; ce niveau-l&agrave; ? Un rempla&ccedil;ant(e) est envoy&eacute; dans la journ&eacute;e ou le lendemain.</li>
+        </ul>
+        <div class="callout">
+            <div class="callout-title">R&eacute;ponses</div>
+            <p>L'ensemble de ces sujets est trait&eacute; dans la <a href="#ce-remplacements">section 3 (les remplacements)</a>.</p>
+        </div>
+
+        <!-- Communication -->
+        <h3>Communication enseignants / parents</h3>
+        <div class="qa-block">
+            <div class="question">Serait-il possible d'adopter un moyen de communication unique ? Entre le cahier de liaison, les groupes WhatsApp et l'appli Toute Mon Ann&eacute;e, on peut passer &agrave; c&ocirc;t&eacute; d'une info.</div>
+            <div class="answer">
+                <p>Ces trois outils n'ont pas le m&ecirc;me usage et sont compl&eacute;mentaires. Le <strong>cahier de liaison</strong> reste le moyen de communication privil&eacute;gi&eacute;, car il constitue le canal officiel et le plus fiable pour la transmission des informations. Les <strong>groupes WhatsApp</strong> ont un r&ocirc;le diff&eacute;rent : ils servent surtout &agrave; une communication rapide entre parents et &agrave; la diffusion d'informations de derni&egrave;re minute, lorsque la r&eacute;activit&eacute; est essentielle. L'application <strong>Toute Mon Ann&eacute;e</strong> a vocation &agrave; &ecirc;tre un outil digital central, mais, en pratique, tous les parents ne s'y connectent pas r&eacute;guli&egrave;rement.</p>
+                <p>Tant que son usage n'est pas partag&eacute; par tous, il est n&eacute;cessaire de maintenir le cahier de liaison. Dans ce contexte, certaines informations sont volontairement transmises &agrave; la fois via l'application et par un mot dans le cahier, afin de garantir que chacun en prenne connaissance et qu'aucune information ne soit perdue.</p>
+            </div>
+        </div>
+
+        <!-- Sorties scolaires -->
+        <h3>Sorties scolaires</h3>
+        <div class="qa-block">
+            <div class="question">Est-il envisageable d'organiser plus de sorties pour les enfants ? Pas n&eacute;cessairement des choses compliqu&eacute;es ou co&ucirc;teuses mais pour leur ouvrir l'esprit : petites pi&egrave;ces de th&eacute;&acirc;tres, spectacles musicaux, mus&eacute;es&hellip; Les sorties depuis 2 ans sont La Ferme ou le cin&eacute;ma, et c'est super mais une autre sortie culturelle pourrait &ecirc;tre int&eacute;ressante. Pourquoi ne pas faire un travail autour du Cirque ou de l'art de rue avec Parades ?</div>
+            <div class="answer">
+                <p>Les enseignants sont tout &agrave; fait favorables &agrave; l'organisation de sorties suppl&eacute;mentaires, notamment culturelles, et partagent l'int&eacute;r&ecirc;t de diversifier les exp&eacute;riences propos&eacute;es aux enfants. Plusieurs initiatives sont envisag&eacute;es d&egrave;s que les conditions le permettent.</p>
+                <p>L'organisation de ces sorties d&eacute;pend toutefois de contraintes logistiques importantes, en particulier pour le transport des classes. Les d&eacute;placements avec de jeunes enfants n&eacute;cessitent des conditions adapt&eacute;es, et le recours aux cars, mis &agrave; disposition par la mairie, est aujourd'hui limit&eacute; &agrave; une &agrave; deux sorties par an. Cette contrainte conduit &agrave; prioriser certains projets.</p>
+                <p>Dans ce contexte, l'&eacute;cole reste attentive &agrave; toutes les opportunit&eacute;s de sorties ou d'interventions culturelles &agrave; proximit&eacute;, plus faciles &agrave; mettre en &oelig;uvre. Les &eacute;quipes p&eacute;dagogiques sont mobilis&eacute;es pour proposer des projets enrichissants, en coh&eacute;rence avec les moyens disponibles.</p>
+            </div>
+        </div>
+
+        <!-- Bonbons -->
+        <h3>Bonbons sur temps scolaire et p&eacute;riscolaire</h3>
+        <div class="qa-block">
+            <div class="question">Il semblerait que des bonbons soient donn&eacute;s aux enfants tant sur le temps scolaire que p&eacute;riscolaire en r&eacute;compense de leur &laquo;&nbsp;sagesse&nbsp;&raquo;. Cette attention qui part d'un bon sentiment ne pourrait-elle pas &ecirc;tre remplac&eacute;e par des gommettes ou dessins de coloriage ?</div>
+            <div class="answer">
+                <p><strong>Temps p&eacute;riscolaire :</strong> ce sujet rel&egrave;ve des &eacute;quipes d'animation, qui sont sous la responsabilit&eacute; de la mairie. Le point sera de nouveau remont&eacute; &agrave; la mairie ; il avait d'ailleurs d&eacute;j&agrave; &eacute;t&eacute; &eacute;voqu&eacute; lors de la r&eacute;union de f&eacute;vrier 2026 entre les repr&eacute;sentants de parents d'&eacute;l&egrave;ves et la mairie.</p>
+                <p><strong>Temps scolaire :</strong> la question a &eacute;t&eacute; abord&eacute;e lors du conseil d'&eacute;cole avec les enseignants pr&eacute;sents ainsi qu'avec le directeur. En principe, aucun bonbon n'est distribu&eacute; pendant le temps scolaire. Si des situations contraires sont constat&eacute;es, il est important de les signaler imm&eacute;diatement (aupr&egrave;s de l'enseignant ou des RPE si besoin).</p>
+                <p>Les seules occasions o&ugrave; des produits sucr&eacute;s peuvent &ecirc;tre propos&eacute;s sont les anniversaires. Toutefois, il est demand&eacute; aux parents de ne pas apporter de bonbons &agrave; cette occasion. Les enfants &eacute;tant d&eacute;j&agrave; expos&eacute;s &agrave; des produits sucr&eacute;s (g&acirc;teaux, boissons), il est pr&eacute;f&eacute;rable de r&eacute;server les bonbons au cadre priv&eacute;, d'autant plus que certaines familles ne souhaitent pas que leurs enfants en consomment.</p>
+            </div>
+        </div>
+
+        <!-- Cour -->
+        <h3>Am&eacute;nagements et jeux pour la cour</h3>
+        <div class="qa-block">
+            <div class="question">Verdissement de la cour et nouveaux &eacute;quipements de jeux possibles ?</div>
+            <div class="answer">
+                <p>Concernant le verdissement de la cour, une initiative avait &eacute;t&eacute; men&eacute;e &agrave; l'&eacute;chelle de l'&eacute;cole en utilisant les grands bacs d&eacute;j&agrave; pr&eacute;sents, qui permettaient aux &eacute;l&egrave;ves de jardiner, notamment en plantant des fleurs. Les enseignants s'&eacute;taient investis dans ce projet, mais celui-ci a &eacute;t&eacute; progressivement abandonn&eacute;, les plantations &eacute;tant r&eacute;guli&egrave;rement arrach&eacute;es par les enfants, ce qui a frein&eacute; la poursuite de l'initiative. Aujourd'hui, quelques activit&eacute;s de jardinage subsistent de mani&egrave;re ponctuelle.</p>
+                <p>S'agissant des nouveaux &eacute;quipements de jeux, aucun projet sp&eacute;cifique n'est pr&eacute;vu &agrave; ce stade. Un point d'attention demeure toutefois sur l'entretien du mat&eacute;riel existant, qui se d&eacute;t&eacute;riore relativement rapidement. &Agrave; ce titre, une balan&ccedil;oire est actuellement hors service et devait &ecirc;tre remplac&eacute;e, sans que cela n'ait encore &eacute;t&eacute; r&eacute;alis&eacute; (nous remontons le point &agrave; la mairie).</p>
+                <p>&Agrave; une &eacute;chelle plus large, il est pr&eacute;vu de se rapprocher de la mairie afin d'obtenir le planning de r&eacute;novation des cours d'&eacute;cole et d'identifier les &eacute;ventuels am&eacute;nagements &agrave; venir, notamment en ce qui concerne le remplacement des &eacute;quipements d&eacute;fectueux. Nous vous tiendrons au courant.</p>
+            </div>
+        </div>
+
+        <!-- Victor Hugo vacances -->
+        <h3>Ouverture Victor Hugo pendant les vacances scolaires</h3>
+        <div class="qa-block">
+            <div class="question">Serait-il possible d'ouvrir l'accueil pendant les vacances scolaires ? Joliot-Curie est trop grand pour les petits.</div>
+            <div class="answer">
+                <p>La question avait &eacute;t&eacute; soulev&eacute;e lors de la r&eacute;union entre les Repr&eacute;sentants des parents d'&eacute;l&egrave;ves et la mairie en f&eacute;vrier 2026. La mairie a indiqu&eacute; que cette demande avait d&eacute;j&agrave; &eacute;t&eacute; &eacute;tudi&eacute;e l'an dernier et qu'elle avait &eacute;t&eacute; rejet&eacute;e. Il n'est pas pr&eacute;vu de la r&eacute;examiner pour le moment.</p>
+                <p>La raison principale est le nombre d'enfants concern&eacute;, jug&eacute; insuffisant pour ouvrir une structure, car certains co&ucirc;ts (gardiennage, entretien, fonctionnement) ne peuvent pas &ecirc;tre mutualis&eacute;s. Victor Hugo n'est pas un cas isol&eacute; : plusieurs petites &eacute;coles sont regroup&eacute;es dans des centres de loisirs communs.</p>
+                <p>La mairie a pr&eacute;cis&eacute; que les capacit&eacute;s d'accueil &agrave; Joliot Curie sont suffisantes, m&ecirc;me si elle comprend que cela puisse &ecirc;tre moins pratique pour certaines familles.</p>
+            </div>
+        </div>
+
+        <!-- Cantine -->
+        <h3>Cantine lorsque l'enseignant est absent</h3>
+        <div class="qa-block">
+            <div class="question">Qu'en est-il de la facturation de la cantine quand on garde nos enfants &agrave; la maison en cas d'absence d'enseignant ?</div>
+            <div class="answer">
+                <p>En principe, lorsque les parents sont invit&eacute;s &agrave; garder leurs enfants &agrave; la maison en raison d'absences d'enseignants, c'est au directeur de l'&eacute;cole de faire la demande aupr&egrave;s de la mairie afin que la situation soit prise en compte, notamment pour la cantine. Toutefois, au vu du nombre important d'absences ces derniers temps et de leur caract&egrave;re quasi quotidien, il a &eacute;t&eacute; difficile de formaliser ces demandes de mani&egrave;re syst&eacute;matique.</p>
+                <p>De votre c&ocirc;t&eacute;, il est possible de signaler l'absence de votre enfant via le site d&eacute;di&eacute;, en pr&eacute;cisant le motif li&eacute; &agrave; la demande de le garder &agrave; la maison. L'information sera &eacute;galement transmise &agrave; la mairie afin de les informer de la situation. Nous esp&eacute;rons que la mairie saura faire preuve de souplesse lorsqu'elle sera inform&eacute;e du contexte.</p>
+            </div>
+        </div>
+
+        <!-- Remerciements -->
+        <h3>Commentaires et remerciements</h3>
+        <div class="tip">
+            <p><strong>Merci aux &eacute;quipes du p&eacute;riscolaire et de l'&eacute;cole pour leur travail !</strong></p>
+            <p>Message transmis ;-)</p>
+        </div>
+        <div class="tip">
+            <p><strong>Reprise de la classe Bleue par Yasmine</strong></p>
+            <p>Parmi les choses positives &agrave; souligner, la reprise de la classe Bleue par Yasmine est tr&egrave;s positive. &Ccedil;a se passe tr&egrave;s bien pour les enfants. Yasmine est une enseignante tr&egrave;s investie, tr&egrave;s contente de la classe et tr&egrave;s contente de travailler &agrave; Victor Hugo. Dans le contexte de toutes ces absences, c'est un remplacement qui est largement r&eacute;ussi, avec une belle transition pour les &eacute;l&egrave;ves, et nous tenions &agrave; le souligner.</p>
+        </div>
+    </section>
+
+    <div class="footer">
+        <p>Nous restons &agrave; votre disposition pour toute question.</p>
+        <p>RPE Victor Hugo</p>
+    </div>
+
+</div>
+</div>
+
+<!-- ======================= TAB 2 : RPE & Mairie — 5 février 2026 ======================= -->
+<div id="tab-mairie" class="tab-panel">
 <div class="container">
 
     <!-- Table of contents -->
     <nav class="toc">
         <h2>Sommaire</h2>
         <ol>
-            <li><a href="#competences">Répartition des compétences entre la Ville et l'Éducation nationale</a></li>
+            <li><a href="#competences">R&eacute;partition des comp&eacute;tences entre la Ville et l'&Eacute;ducation nationale</a></li>
             <li><a href="#chiffres">Quelques chiffres</a></li>
-            <li><a href="#conseil">Le conseil d'école</a></li>
-            <li><a href="#locaux">Mise à disposition de locaux</a></li>
+            <li><a href="#conseil">Le conseil d'&eacute;cole</a></li>
+            <li><a href="#locaux">Mise &agrave; disposition de locaux</a></li>
             <li><a href="#restauration">Le temps du midi et la restauration scolaire</a></li>
-            <li><a href="#vacances">Centres de vacances et classes de découverte</a></li>
-            <li><a href="#numerique">Le numérique dans les écoles</a></li>
-            <li><a href="#projets">Projets et activités</a></li>
+            <li><a href="#vacances">Centres de vacances et classes de d&eacute;couverte</a></li>
+            <li><a href="#numerique">Le num&eacute;rique dans les &eacute;coles</a></li>
+            <li><a href="#projets">Projets et activit&eacute;s</a></li>
             <li><a href="#aide">Dispositifs d'aide aux familles</a></li>
-            <li><a href="#questions">Autres questions (Victor Hugo)</a></li>
+            <li><a href="#questions-mairie">Autres questions (Victor Hugo)</a></li>
         </ol>
     </nav>
 
     <!-- 1. Répartition des compétences -->
     <section class="section" id="competences">
-        <h2>1. Répartition des compétences entre la Ville et l'Éducation nationale</h2>
+        <h2>1. R&eacute;partition des comp&eacute;tences entre la Ville et l'&Eacute;ducation nationale</h2>
 
         <div class="two-col">
             <div class="col">
-                <h3>L'Éducation nationale</h3>
-                <p>L'Éducation nationale prend en charge l'Enseignement:</p>
+                <h3>L'&Eacute;ducation nationale</h3>
+                <p>L'&Eacute;ducation nationale prend en charge l'Enseignement:</p>
                 <ul>
                     <li>le corps enseignant,</li>
-                    <li>le RASED (Réseau d'Aide et de Soutien aux Enfants en Difficultés),</li>
-                    <li>les infirmières scolaires,</li>
+                    <li>le RASED (R&eacute;seau d'Aide et de Soutien aux Enfants en Difficult&eacute;s),</li>
+                    <li>les infirmi&egrave;res scolaires,</li>
                     <li>les programmes scolaires,</li>
                     <li>les ouvertures et fermetures de classe,</li>
-                    <li>l'âge de la scolarisation</li>
+                    <li>l'&acirc;ge de la scolarisation</li>
                 </ul>
             </div>
             <div class="col">
                 <h3>La Ville</h3>
                 <p>La Ville :</p>
                 <ul>
-                    <li>Détient les bâtiments scolaires, se charge de leur construction, de leur entretien et de leur équipement (mobilier, fournitures scolaires, manuels, matériel informatique…)</li>
+                    <li>D&eacute;tient les b&acirc;timents scolaires, se charge de leur construction, de leur entretien et de leur &eacute;quipement (mobilier, fournitures scolaires, manuels, mat&eacute;riel informatique&hellip;)</li>
                     <li>Emploie le personnel de service et de restauration, les gardiens, les AESH</li>
-                    <li>Atsem en maternelle, les animateurs sur les temps périscolaires.</li>
+                    <li>Atsem en maternelle, les animateurs sur les temps p&eacute;riscolaires.</li>
                 </ul>
             </div>
         </div>
 
         <div class="callout">
             <div class="callout-title">Questions des parents de Victor Hugo :</div>
-            <p>Deux questions ont été posées sur les remplacements des enseignants absents et sur la capacité à assurer une continuité d'enseignement aux enfants.</p>
-            <p>La réponse apportée est que ce sujet est hors du périmètre de la mairie et dépend de l'Éducation nationale. Il n'a donc pas été possible d'apporter de réponse concrète ou d'avoir d'impact sur ces questions lors de cette réunion.</p>
-            <p>Il a été rappelé que la mairie recrute en revanche le personnel ATSEM et le personnel périscolaire, qui relèvent de sa compétence.</p>
+            <p>Deux questions ont &eacute;t&eacute; pos&eacute;es sur les remplacements des enseignants absents et sur la capacit&eacute; &agrave; assurer une continuit&eacute; d'enseignement aux enfants.</p>
+            <p>La r&eacute;ponse apport&eacute;e est que ce sujet est hors du p&eacute;rim&egrave;tre de la mairie et d&eacute;pend de l'&Eacute;ducation nationale. Il n'a donc pas &eacute;t&eacute; possible d'apporter de r&eacute;ponse concr&egrave;te ou d'avoir d'impact sur ces questions lors de cette r&eacute;union.</p>
+            <p>Il a &eacute;t&eacute; rappel&eacute; que la mairie recrute en revanche le personnel ATSEM et le personnel p&eacute;riscolaire, qui rel&egrave;vent de sa comp&eacute;tence.</p>
         </div>
     </section>
 
@@ -423,27 +816,27 @@
     <section class="section" id="chiffres">
         <h2>2. Quelques chiffres</h2>
 
-        <h3>Nombre d'écoles</h3>
+        <h3>Nombre d'&eacute;coles</h3>
         <div class="stats-grid">
             <div class="stat-card">
                 <div class="number">20</div>
-                <div class="label">Écoles maternelles</div>
+                <div class="label">&Eacute;coles maternelles</div>
             </div>
             <div class="stat-card">
                 <div class="number">17</div>
-                <div class="label">Écoles élémentaires</div>
+                <div class="label">&Eacute;coles &eacute;l&eacute;mentaires</div>
             </div>
             <div class="stat-card">
                 <div class="number">7</div>
-                <div class="label">Écoles primaires (maternelle + élémentaire)</div>
+                <div class="label">&Eacute;coles primaires (maternelle + &eacute;l&eacute;mentaire)</div>
             </div>
         </div>
 
-        <h3>Effectifs à la rentrée 2025/26</h3>
+        <h3>Effectifs &agrave; la rentr&eacute;e 2025/26</h3>
         <div class="stats-grid">
             <div class="stat-card">
                 <div class="number">8 919</div>
-                <div class="label">Élèves au total</div>
+                <div class="label">&Eacute;l&egrave;ves au total</div>
             </div>
             <div class="stat-card">
                 <div class="number">3 427</div>
@@ -451,7 +844,7 @@
             </div>
             <div class="stat-card">
                 <div class="number">5 492</div>
-                <div class="label">En élémentaire</div>
+                <div class="label">En &eacute;l&eacute;mentaire</div>
             </div>
         </div>
 
@@ -459,204 +852,204 @@
         <div class="stats-grid">
             <div class="stat-card">
                 <div class="number">19,09</div>
-                <div class="label">Élèves / classe en maternelle</div>
+                <div class="label">&Eacute;l&egrave;ves / classe en maternelle</div>
             </div>
             <div class="stat-card">
                 <div class="number">22,80</div>
-                <div class="label">Élèves / classe en élémentaire (hors REP)</div>
+                <div class="label">&Eacute;l&egrave;ves / classe en &eacute;l&eacute;mentaire (hors REP)</div>
             </div>
             <div class="stat-card">
                 <div class="number">12,92</div>
-                <div class="label">Élèves / classe en REP (CP-CE1)</div>
+                <div class="label">&Eacute;l&egrave;ves / classe en REP (CP-CE1)</div>
             </div>
             <div class="stat-card">
                 <div class="number">20,71</div>
-                <div class="label">Élèves / classe en REP (CE2-CM2)</div>
+                <div class="label">&Eacute;l&egrave;ves / classe en REP (CE2-CM2)</div>
             </div>
         </div>
 
         <div class="remark">
-            <p><strong>Remarque évoquée :</strong> La Ville indique une baisse progressive des effectifs ces dernières années.</p>
+            <p><strong>Remarque &eacute;voqu&eacute;e :</strong> La Ville indique une baisse progressive des effectifs ces derni&egrave;res ann&eacute;es.</p>
         </div>
     </section>
 
     <!-- 3. Le conseil d'école -->
     <section class="section" id="conseil">
-        <h2>3. Le conseil d'école</h2>
+        <h2>3. Le conseil d'&eacute;cole</h2>
 
-        <h3>Rôle</h3>
+        <h3>R&ocirc;le</h3>
         <ul>
-            <li>Le conseil d'école établit et vote le règlement intérieur de l'école.</li>
-            <li>Il participe à l'élaboration et adopte le projet d'école</li>
-            <li>Il donne son avis sur les questions concernant la vie de l'école, notamment sur les sujets suivants :
+            <li>Le conseil d'&eacute;cole &eacute;tablit et vote le r&egrave;glement int&eacute;rieur de l'&eacute;cole.</li>
+            <li>Il participe &agrave; l'&eacute;laboration et adopte le projet d'&eacute;cole</li>
+            <li>Il donne son avis sur les questions concernant la vie de l'&eacute;cole, notamment sur les sujets suivants :
                 <ul>
-                    <li>Actions pédagogiques et éducatives</li>
-                    <li>Utilisation des moyens alloués à l'école</li>
-                    <li>Conditions d'intégration des enfants handicapés</li>
-                    <li>Activités périscolaires</li>
+                    <li>Actions p&eacute;dagogiques et &eacute;ducatives</li>
+                    <li>Utilisation des moyens allou&eacute;s &agrave; l'&eacute;cole</li>
+                    <li>Conditions d'int&eacute;gration des enfants handicap&eacute;s</li>
+                    <li>Activit&eacute;s p&eacute;riscolaires</li>
                     <li>Restauration scolaire</li>
-                    <li>Hygiène scolaire</li>
-                    <li>Protection et sécurité des enfants dans le cadre scolaire et périscolaire</li>
-                    <li>Respect et la mise en application des valeurs et des principes de la République.</li>
+                    <li>Hygi&egrave;ne scolaire</li>
+                    <li>Protection et s&eacute;curit&eacute; des enfants dans le cadre scolaire et p&eacute;riscolaire</li>
+                    <li>Respect et la mise en application des valeurs et des principes de la R&eacute;publique.</li>
                 </ul>
             </li>
         </ul>
 
-        <p><strong>Fréquence :</strong> trois fois par an.</p>
+        <p><strong>Fr&eacute;quence :</strong> trois fois par an.</p>
 
         <h3>Composition</h3>
         <ul>
-            <li>Directeur/trice de l'école, qui préside le conseil</li>
-            <li>Ensemble des enseignants affectés à l'école</li>
+            <li>Directeur/trice de l'&eacute;cole, qui pr&eacute;side le conseil</li>
+            <li>Ensemble des enseignants affect&eacute;s &agrave; l'&eacute;cole</li>
             <li>Maire / Conseiller municipal</li>
-            <li>Représentants élus des parents d'élèves (autant de représentants que l'école comporte de classes)</li>
-            <li>Délégué départemental de l'éducation nationale (DDEN)</li>
+            <li>Repr&eacute;sentants &eacute;lus des parents d'&eacute;l&egrave;ves (autant de repr&eacute;sentants que l'&eacute;cole comporte de classes)</li>
+            <li>D&eacute;l&eacute;gu&eacute; d&eacute;partemental de l'&eacute;ducation nationale (DDEN)</li>
         </ul>
         <p>L'ensemble de ces membres a le droit de vote.</p>
-        <p>L'ordre du jour complet (questions des parents comprises) doit être transmis à la Ville par la direction de l'école au plus tard <strong>8 jours avant</strong>.</p>
-        <p><strong>Fréquence:</strong> 3 fois dans l'année scolaire</p>
+        <p>L'ordre du jour complet (questions des parents comprises) doit &ecirc;tre transmis &agrave; la Ville par la direction de l'&eacute;cole au plus tard <strong>8 jours avant</strong>.</p>
+        <p><strong>Fr&eacute;quence:</strong> 3 fois dans l'ann&eacute;e scolaire</p>
 
         <div class="callout">
             <div class="callout-title">Victor Hugo</div>
-            <p>Nous avons signalé pendant la réunion que des élus municipaux n'étaient pas présents et qu'il n'était pas clair qui était représentant élu pour notre école.</p>
-            <p>La Ville a indiqué qu'une mise à jour de la liste des élus serait effectuée sur le site internet et sera transmise aux RPE par mail.</p>
-            <p>Concernant leur présence aux conseils d'école, celle-ci reste variable selon les élus. Il a toutefois été précisé qu'ils ont pour consigne de se mobiliser et d'être présents dans les écoles autant que possible.</p>
+            <p>Nous avons signal&eacute; pendant la r&eacute;union que des &eacute;lus municipaux n'&eacute;taient pas pr&eacute;sents et qu'il n'&eacute;tait pas clair qui &eacute;tait repr&eacute;sentant &eacute;lu pour notre &eacute;cole.</p>
+            <p>La Ville a indiqu&eacute; qu'une mise &agrave; jour de la liste des &eacute;lus serait effectu&eacute;e sur le site internet et sera transmise aux RPE par mail.</p>
+            <p>Concernant leur pr&eacute;sence aux conseils d'&eacute;cole, celle-ci reste variable selon les &eacute;lus. Il a toutefois &eacute;t&eacute; pr&eacute;cis&eacute; qu'ils ont pour consigne de se mobiliser et d'&ecirc;tre pr&eacute;sents dans les &eacute;coles autant que possible.</p>
         </div>
     </section>
 
     <!-- 4. Mise à disposition de locaux -->
     <section class="section" id="locaux">
-        <h2>4. Mise à disposition de locaux</h2>
-        <p>Possibilité pour les représentants de parents d'élèves d'utiliser des locaux scolaires sur demande, notamment pour des réunions.</p>
+        <h2>4. Mise &agrave; disposition de locaux</h2>
+        <p>Possibilit&eacute; pour les repr&eacute;sentants de parents d'&eacute;l&egrave;ves d'utiliser des locaux scolaires sur demande, notamment pour des r&eacute;unions.</p>
     </section>
 
     <!-- 5. Le temps du midi et la restauration scolaire -->
     <section class="section" id="restauration">
         <h2>5. Le temps du midi et la restauration scolaire</h2>
 
-        <h3>Modalités d'inscription</h3>
+        <h3>Modalit&eacute;s d'inscription</h3>
         <ul>
-            <li>Inscription préalable pour l'année scolaire suivante (entre mi-juin et fin août)</li>
+            <li>Inscription pr&eacute;alable pour l'ann&eacute;e scolaire suivante (entre mi-juin et fin ao&ucirc;t)</li>
             <li>Choix d'un forfait entre 1 et 4 jours</li>
-            <li>Possibilité de modifier le forfait en cours d'année (délai de prise en compte : 4 semaines)</li>
-            <li>Repas non facturé en cas d'absence justifiée (Enfant malade avec justificatif du médecin dès 1 jour de maladie, perte d'emploi, événement familial avec justificatif, radiation scolaire, déménagement)</li>
+            <li>Possibilit&eacute; de modifier le forfait en cours d'ann&eacute;e (d&eacute;lai de prise en compte : 4 semaines)</li>
+            <li>Repas non factur&eacute; en cas d'absence justifi&eacute;e (Enfant malade avec justificatif du m&eacute;decin d&egrave;s 1 jour de maladie, perte d'emploi, &eacute;v&eacute;nement familial avec justificatif, radiation scolaire, d&eacute;m&eacute;nagement)</li>
         </ul>
 
         <h3>Visites du temps du midi et de la restauration</h3>
-        <p>Il est possible pour les parents élus de visiter les cuisines des écoles, d'observer le déroulement du temps du midi ou de visiter la cuisine centrale (UCPA).</p>
+        <p>Il est possible pour les parents &eacute;lus de visiter les cuisines des &eacute;coles, d'observer le d&eacute;roulement du temps du midi ou de visiter la cuisine centrale (UCPA).</p>
 
-        <h4>Conditions pour les visites dans les écoles :</h4>
+        <h4>Conditions pour les visites dans les &eacute;coles :</h4>
         <ul>
-            <li>2 visites par année scolaire</li>
-            <li>2 à 3 parents par visite</li>
-            <li>Demande par mail à la directrice ou au directeur au moins 3 jours avant, avec copie à :
+            <li>2 visites par ann&eacute;e scolaire</li>
+            <li>2 &agrave; 3 parents par visite</li>
+            <li>Demande par mail &agrave; la directrice ou au directeur au moins 3 jours avant, avec copie &agrave; :
                 <ul>
                     <li><a class="email" href="mailto:nadjdine.bacar@mairie-nanterre.fr">nadjdine.bacar@mairie-nanterre.fr</a></li>
                     <li><a class="email" href="mailto:johann.leleu@mairie-nanterre.fr">johann.leleu@mairie-nanterre.fr</a></li>
                 </ul>
-                (en précisant si vous souhaitez déjeuner sur place)
+                (en pr&eacute;cisant si vous souhaitez d&eacute;jeuner sur place)
             </li>
         </ul>
 
         <h4>Visite de la cuisine centrale (UCPA) :</h4>
-        <p>Demande à adresser à <a class="email" href="mailto:johann.leleu@mairie-nanterre.fr">johann.leleu@mairie-nanterre.fr</a> ou <a class="email" href="mailto:ucpa@mairie-nanterre.fr">ucpa@mairie-nanterre.fr</a>.</p>
+        <p>Demande &agrave; adresser &agrave; <a class="email" href="mailto:johann.leleu@mairie-nanterre.fr">johann.leleu@mairie-nanterre.fr</a> ou <a class="email" href="mailto:ucpa@mairie-nanterre.fr">ucpa@mairie-nanterre.fr</a>.</p>
 
-        <h3>Précisions apportées</h3>
-        <p>En cas d'absence justifiée d'un enfant à la cantine (par exemple en cas de maladie), un justificatif est normalement demandé pour permettre le remboursement du repas. Il a été précisé que la mairie se montre en pratique assez flexible sur ce point. Il est bien compris qu'il n'est pas toujours possible d'obtenir un certificat médical le jour même, et des justificatifs simples, comme une capture d'écran d'un rendez-vous Doctolib, une attestation sur l'honneur, peuvent être acceptés.</p>
+        <h3>Pr&eacute;cisions apport&eacute;es</h3>
+        <p>En cas d'absence justifi&eacute;e d'un enfant &agrave; la cantine (par exemple en cas de maladie), un justificatif est normalement demand&eacute; pour permettre le remboursement du repas. Il a &eacute;t&eacute; pr&eacute;cis&eacute; que la mairie se montre en pratique assez flexible sur ce point. Il est bien compris qu'il n'est pas toujours possible d'obtenir un certificat m&eacute;dical le jour m&ecirc;me, et des justificatifs simples, comme une capture d'&eacute;cran d'un rendez-vous Doctolib, une attestation sur l'honneur, peuvent &ecirc;tre accept&eacute;s.</p>
 
-        <p>Lorsque les enfants ne vont pas à la cantine pour des raisons extérieures à leur situation personnelle, par exemple en cas de grève ou d'absence d'enseignant, l'information est en principe transmise par la direction de l'école et les repas sont alors décomptés automatiquement. Il a toutefois été signalé en réunion que ces informations ne remontent pas toujours correctement. La mairie en a pris note et a reconnu qu'il s'agit principalement d'un sujet de communication entre les écoles et les services municipaux. Il est donc recommandé aux familles de vérifier les facturations, car des erreurs peuvent se produire.</p>
+        <p>Lorsque les enfants ne vont pas &agrave; la cantine pour des raisons ext&eacute;rieures &agrave; leur situation personnelle, par exemple en cas de gr&egrave;ve ou d'absence d'enseignant, l'information est en principe transmise par la direction de l'&eacute;cole et les repas sont alors d&eacute;compt&eacute;s automatiquement. Il a toutefois &eacute;t&eacute; signal&eacute; en r&eacute;union que ces informations ne remontent pas toujours correctement. La mairie en a pris note et a reconnu qu'il s'agit principalement d'un sujet de communication entre les &eacute;coles et les services municipaux. Il est donc recommand&eacute; aux familles de v&eacute;rifier les facturations, car des erreurs peuvent se produire.</p>
 
         <div class="remark">
-            <p>Enfin, la mairie a indiqué qu'une expérimentation est en cours dans deux écoles, avec un système de pointage des enfants sur tablette au moment du déjeuner. L'objectif est de fiabiliser les présences et d'éviter les décalages entre les pointages manuels et la facturation, qui génèrent aujourd'hui un certain nombre d'erreurs. Si les résultats sont concluants, ce dispositif pourrait être étendu à d'autres écoles, mais cela ne devrait pas intervenir avant l'année prochaine.</p>
+            <p>Enfin, la mairie a indiqu&eacute; qu'une exp&eacute;rimentation est en cours dans deux &eacute;coles, avec un syst&egrave;me de pointage des enfants sur tablette au moment du d&eacute;jeuner. L'objectif est de fiabiliser les pr&eacute;sences et d'&eacute;viter les d&eacute;calages entre les pointages manuels et la facturation, qui g&eacute;n&egrave;rent aujourd'hui un certain nombre d'erreurs. Si les r&eacute;sultats sont concluants, ce dispositif pourrait &ecirc;tre &eacute;tendu &agrave; d'autres &eacute;coles, mais cela ne devrait pas intervenir avant l'ann&eacute;e prochaine.</p>
         </div>
     </section>
 
     <!-- 6. Centres de vacances et classes de découverte -->
     <section class="section" id="vacances">
-        <h2>6. Centres de vacances et classes de découverte</h2>
+        <h2>6. Centres de vacances et classes de d&eacute;couverte</h2>
 
         <h3>5 centres de vacances</h3>
-        <p>5 centres de vacances labélisés refuge Ligue de Protection des Oiseaux et Clé verte (engagement développement durable), pour des capacités d'accueil de 17 à 182 lits:</p>
+        <p>5 centres de vacances labellis&eacute;s refuge Ligue de Protection des Oiseaux et Cl&eacute; verte (engagement d&eacute;veloppement durable), pour des capacit&eacute;s d'accueil de 17 &agrave; 182 lits:</p>
         <ul>
             <li>Hautefeuille (Yonne)</li>
-            <li>Garchy (Nièvre)</li>
-            <li>La Bourboule (Puy-de-Dôme)</li>
-            <li>Saint Hilaire de Riez (Vendée)</li>
+            <li>Garchy (Ni&egrave;vre)</li>
+            <li>La Bourboule (Puy-de-D&ocirc;me)</li>
+            <li>Saint Hilaire de Riez (Vend&eacute;e)</li>
             <li>La Couture Boussey (Eure)</li>
         </ul>
 
-        <h3>Classes de découverte</h3>
+        <h3>Classes de d&eacute;couverte</h3>
         <ul>
-            <li>30 classes de découvertes organisées par la Ville en 2025 dont 24 dans les centres de vacances communaux pour 551 élèves de la grande section au CM2</li>
-            <li>Des séjours entre 8 et 16 jours en fonction de l'âge des enfants.</li>
+            <li>30 classes de d&eacute;couvertes organis&eacute;es par la Ville en 2025 dont 24 dans les centres de vacances communaux pour 551 &eacute;l&egrave;ves de la grande section au CM2</li>
+            <li>Des s&eacute;jours entre 8 et 16 jours en fonction de l'&acirc;ge des enfants.</li>
         </ul>
 
-        <h3>Séjours de vacances</h3>
+        <h3>S&eacute;jours de vacances</h3>
         <ul>
-            <li>Pour les enfants et les jeunes de 4 à 15 ans</li>
-            <li>28 séjours labélisés colo apprenantes.</li>
+            <li>Pour les enfants et les jeunes de 4 &agrave; 15 ans</li>
+            <li>28 s&eacute;jours labellis&eacute;s colo apprenantes.</li>
         </ul>
-        <p>En moyenne 1500 enfants partent en séjour chaque année.</p>
-        <p>Les tarifs de ces séjours sont calculés en fonction de la carte famille.</p>
-        <p>Les préinscriptions pour les séjours de Printemps : du 20 octobre au 11 février.</p>
+        <p>En moyenne 1500 enfants partent en s&eacute;jour chaque ann&eacute;e.</p>
+        <p>Les tarifs de ces s&eacute;jours sont calcul&eacute;s en fonction de la carte famille.</p>
+        <p>Les pr&eacute;inscriptions pour les s&eacute;jours de Printemps : du 20 octobre au 11 f&eacute;vrier.</p>
         <div class="tip">
-            <p><strong>Note :</strong> Il est toujours possible de s'inscrire après le 11 février s'il reste des places disponibles</p>
+            <p><strong>Note :</strong> Il est toujours possible de s'inscrire apr&egrave;s le 11 f&eacute;vrier s'il reste des places disponibles</p>
         </div>
     </section>
 
     <!-- 7. Le numérique dans les écoles -->
     <section class="section" id="numerique">
-        <h2>7. Le numérique dans les écoles</h2>
+        <h2>7. Le num&eacute;rique dans les &eacute;coles</h2>
 
-        <p>La Ville déploie un plan d'équipement des écoles d'un socle numérique de base qui comprend des équipements fixes pour chaque classe élémentaire et des équipements mobiles mutualisables.</p>
-        <p>Cela se fait de manière concertée avec l'Education Nationale (IEN, Directeurs d'école, délégués numériques…)</p>
+        <p>La Ville d&eacute;ploie un plan d'&eacute;quipement des &eacute;coles d'un socle num&eacute;rique de base qui comprend des &eacute;quipements fixes pour chaque classe &eacute;l&eacute;mentaire et des &eacute;quipements mobiles mutualisables.</p>
+        <p>Cela se fait de mani&egrave;re concert&eacute;e avec l'Education Nationale (IEN, Directeurs d'&eacute;cole, d&eacute;l&eacute;gu&eacute;s num&eacute;riques&hellip;)</p>
 
-        <h3>A l'école élémentaire</h3>
+        <h3>A l'&eacute;cole &eacute;l&eacute;mentaire</h3>
         <ul>
             <li>Une classe mobile de 16 tablettes</li>
             <li>Une classe mobile de 16 ordinateurs portables</li>
-            <li>Une vidéoprojecteur avec PC portable</li>
-            <li>Installation progressive de vidéoprojecteurs interactifs dans toutes les classes</li>
+            <li>Une vid&eacute;oprojecteur avec PC portable</li>
+            <li>Installation progressive de vid&eacute;oprojecteurs interactifs dans toutes les classes</li>
         </ul>
 
-        <h3>Dans toutes les écoles maternelles et élémentaires</h3>
+        <h3>Dans toutes les &eacute;coles maternelles et &eacute;l&eacute;mentaires</h3>
         <ul>
-            <li>Mise en place de <strong>ONE</strong>, Environnement numérique de travail qui facilite les échanges et la communication entre l'équipe éducative et les parents.</li>
+            <li>Mise en place de <strong>ONE</strong>, Environnement num&eacute;rique de travail qui facilite les &eacute;changes et la communication entre l'&eacute;quipe &eacute;ducative et les parents.</li>
         </ul>
 
         <div class="callout">
-            <div class="callout-title">Spécifique à Victor Hugo</div>
-            <p>Nous utilisons actuellement le système TouteMonAnnée, qui n'est pas l'outil ONE déployé par la Ville. Il est donc possible que certaines communications nous échappent, la Ville utilisant principalement ONE pour échanger avec les familles. Ce point sera abordé lors du prochain conseil d'école de Victor Hugo afin de voir comment mieux nous aligner avec les pratiques des autres écoles.</p>
-            <p>Dans certaines écoles, et a priori également à Victor Hugo, des enseignants demandent parfois aux parents de fournir des copies couleur pour les classes maternelles, faute d'imprimante couleur dans l'établissement. Les représentants de parents ont fait part de leur regret sur ce point, en soulignant qu'un tel équipement pourrait être utile pour des enfants de cet âge et représenter un investissement raisonnable.</p>
-            <p>La mairie s'est montrée peu réceptive à cette demande, indiquant que le coût ne se limite pas à l'achat du matériel mais inclut aussi l'entretien et les consommables, et que ce sujet ne faisait pas partie des priorités actuelles. Dans certaines écoles, des initiatives de parents visant à financer une imprimante ont été évoquées, mais la mairie a clairement exprimé son désaccord avec ce type de pratique, notamment en raison des coûts de fonctionnement à long terme.</p>
-            <p>Cette discussion a conduit à aborder plus largement la question des budgets. La mairie n'a pas communiqué de chiffres précis par élève ou par classe, mais a rappelé que les écoles disposent d'un budget pour les fournitures scolaires et qu'en principe il ne devrait pas être demandé de matériel aux parents. Par exemple, la demande de ramettes de papier, signalée dans certaines écoles, ne correspond pas aux pratiques censées être en vigueur. En cas de difficulté ou de besoin particulier, il est recommandé d'en discuter directement avec la direction de l'école.</p>
+            <div class="callout-title">Sp&eacute;cifique &agrave; Victor Hugo</div>
+            <p>Nous utilisons actuellement le syst&egrave;me TouteMonAnn&eacute;e, qui n'est pas l'outil ONE d&eacute;ploy&eacute; par la Ville. Il est donc possible que certaines communications nous &eacute;chappent, la Ville utilisant principalement ONE pour &eacute;changer avec les familles. Ce point sera abord&eacute; lors du prochain conseil d'&eacute;cole de Victor Hugo afin de voir comment mieux nous aligner avec les pratiques des autres &eacute;coles.</p>
+            <p>Dans certaines &eacute;coles, et a priori &eacute;galement &agrave; Victor Hugo, des enseignants demandent parfois aux parents de fournir des copies couleur pour les classes maternelles, faute d'imprimante couleur dans l'&eacute;tablissement. Les repr&eacute;sentants de parents ont fait part de leur regret sur ce point, en soulignant qu'un tel &eacute;quipement pourrait &ecirc;tre utile pour des enfants de cet &acirc;ge et repr&eacute;senter un investissement raisonnable.</p>
+            <p>La mairie s'est montr&eacute;e peu r&eacute;ceptive &agrave; cette demande, indiquant que le co&ucirc;t ne se limite pas &agrave; l'achat du mat&eacute;riel mais inclut aussi l'entretien et les consommables, et que ce sujet ne faisait pas partie des priorit&eacute;s actuelles. Dans certaines &eacute;coles, des initiatives de parents visant &agrave; financer une imprimante ont &eacute;t&eacute; &eacute;voqu&eacute;es, mais la mairie a clairement exprim&eacute; son d&eacute;saccord avec ce type de pratique, notamment en raison des co&ucirc;ts de fonctionnement &agrave; long terme.</p>
+            <p>Cette discussion a conduit &agrave; aborder plus largement la question des budgets. La mairie n'a pas communiqu&eacute; de chiffres pr&eacute;cis par &eacute;l&egrave;ve ou par classe, mais a rappel&eacute; que les &eacute;coles disposent d'un budget pour les fournitures scolaires et qu'en principe il ne devrait pas &ecirc;tre demand&eacute; de mat&eacute;riel aux parents. Par exemple, la demande de ramettes de papier, signal&eacute;e dans certaines &eacute;coles, ne correspond pas aux pratiques cens&eacute;es &ecirc;tre en vigueur. En cas de difficult&eacute; ou de besoin particulier, il est recommand&eacute; d'en discuter directement avec la direction de l'&eacute;cole.</p>
         </div>
     </section>
 
     <!-- 8. Projets et activités -->
     <section class="section" id="projets">
-        <h2>8. Projets et activités</h2>
+        <h2>8. Projets et activit&eacute;s</h2>
 
-        <p>Plus de projets ont été soutenus ou proposés par la Ville à destination des écoles pour l'année scolaire 2025/2026: parcours proposés par les services municipaux, au bénéfice de près de <strong>4200 élèves</strong> :</p>
+        <p>Plus de projets ont &eacute;t&eacute; soutenus ou propos&eacute;s par la Ville &agrave; destination des &eacute;coles pour l'ann&eacute;e scolaire 2025/2026: parcours propos&eacute;s par les services municipaux, au b&eacute;n&eacute;fice de pr&egrave;s de <strong>4200 &eacute;l&egrave;ves</strong> :</p>
 
         <ul class="tag-list">
             <li>projets culturels</li>
             <li>parcours sportifs</li>
             <li>projets avec l'Agora (Aquaponie et petits makers du climat)</li>
-            <li>séjours en classes de découverte</li>
+            <li>s&eacute;jours en classes de d&eacute;couverte</li>
             <li>projets avec la Maison des femmes</li>
             <li>projets sur l'environnement</li>
             <li>projets autour du handicap</li>
-            <li>projets autour du numérique</li>
-            <li>projets sur la santé</li>
+            <li>projets autour du num&eacute;rique</li>
+            <li>projets sur la sant&eacute;</li>
         </ul>
 
-        <h3>Question soulevée sur la piscine pour les Grandes Sections :</h3>
-        <p>Concernant la piscine pour les classes de grande section, il a été rappelé que ces séances ne relèvent pas d'une obligation de l'Éducation nationale (contrairement aux classes de primaire). Il s'agissait d'un dispositif mis en place par la Ville pour proposer une activité supplémentaire aux enfants.</p>
+        <h3>Question soulev&eacute;e sur la piscine pour les Grandes Sections :</h3>
+        <p>Concernant la piscine pour les classes de grande section, il a &eacute;t&eacute; rappel&eacute; que ces s&eacute;ances ne rel&egrave;vent pas d'une obligation de l'&Eacute;ducation nationale (contrairement aux classes de primaire). Il s'agissait d'un dispositif mis en place par la Ville pour proposer une activit&eacute; suppl&eacute;mentaire aux enfants.</p>
 
-        <p>Aujourd'hui, ce dispositif est suspendu en raison d'une pénurie importante d'encadrants diplomés dans les piscines municipales. Il s'agit d'un problème de recrutement au sein des services des sports, qui rencontrent des difficultés à pourvoir de nombreux postes, une situation qui touche d'ailleurs de nombreuses collectivités.</p>
+        <p>Aujourd'hui, ce dispositif est suspendu en raison d'une p&eacute;nurie importante d'encadrants diplom&eacute;s dans les piscines municipales. Il s'agit d'un probl&egrave;me de recrutement au sein des services des sports, qui rencontrent des difficult&eacute;s &agrave; pourvoir de nombreux postes, une situation qui touche d'ailleurs de nombreuses collectivit&eacute;s.</p>
 
-        <p>Il a été précisé que ce n'est pas une question de budget et que la volonté de maintenir ces activités existe, mais que leur reprise dépendra du retour à des effectifs suffisants. Les postes de maître nageur sont aujourd'hui vacants et non supprimés. À ce stade, aucune visibilité n'a pu être donnée sur une éventuelle reprise des séances de piscine pour les grandes sections.</p>
+        <p>Il a &eacute;t&eacute; pr&eacute;cis&eacute; que ce n'est pas une question de budget et que la volont&eacute; de maintenir ces activit&eacute;s existe, mais que leur reprise d&eacute;pendra du retour &agrave; des effectifs suffisants. Les postes de ma&icirc;tre nageur sont aujourd'hui vacants et non supprim&eacute;s. &Agrave; ce stade, aucune visibilit&eacute; n'a pu &ecirc;tre donn&eacute;e sur une &eacute;ventuelle reprise des s&eacute;ances de piscine pour les grandes sections.</p>
     </section>
 
     <!-- 10. Dispositifs d'aide aux familles -->
@@ -666,65 +1059,330 @@
         <p><strong>Moyens et dispositifs municipaux d'aide aux parents</strong></p>
 
         <h3>Service social scolaire</h3>
-        <p>Le service social scolaire a pour première mission d'accompagner les parents et les enfants:</p>
+        <p>Le service social scolaire a pour premi&egrave;re mission d'accompagner les parents et les enfants:</p>
         <ul>
-            <li>Dynamiser et soutenir les liens entre l'école, le quartier, les familles et les enfants,</li>
+            <li>Dynamiser et soutenir les liens entre l'&eacute;cole, le quartier, les familles et les enfants,</li>
             <li>Accompagner l'exercice de la fonction parentale,</li>
-            <li>Soutenir les parents dans l'organisation matérielle et familiale,</li>
-            <li>Faciliter l'accès à la santé, la culture, aux loisirs et aux vacances.</li>
+            <li>Soutenir les parents dans l'organisation mat&eacute;rielle et familiale,</li>
+            <li>Faciliter l'acc&egrave;s &agrave; la sant&eacute;, la culture, aux loisirs et aux vacances.</li>
         </ul>
-        <p>Les travailleurs sociaux sont implantés dans les écoles.</p>
+        <p>Les travailleurs sociaux sont implant&eacute;s dans les &eacute;coles.</p>
 
-        <h3>La réussite éducative</h3>
+        <h3>La r&eacute;ussite &eacute;ducative</h3>
         <ul>
-            <li>Le Programme de réussite éducative (PRE) vise à remédier à un ensemble de fragilités rencontrées par des enfants et jeunes en leur proposant un suivi personnalisé à travers un parcours de réussite éducative.</li>
-            <li><strong>Public:</strong> Enfants de 2 à 16 ans et leur famille, en priorité vivant ou scolarisés des quartiers en politique de la Ville (Parc, Chemin-de-l'île, Université, Petit Nanterre, Anatole France.)</li>
-            <li>Ces actions sont dispensées par l'ensemble des acteurs de la communauté socio-éducative. Elles répondent aux besoins de l'enfant identifiés au préalable : santé, accompagnement scolaire et éducatif, prévention du décrochage scolaire, soutien à la parentalité, loisirs, actions culturelles et sportives…</li>
+            <li>Le Programme de r&eacute;ussite &eacute;ducative (PRE) vise &agrave; rem&eacute;dier &agrave; un ensemble de fragilit&eacute;s rencontr&eacute;es par des enfants et jeunes en leur proposant un suivi personnalis&eacute; &agrave; travers un parcours de r&eacute;ussite &eacute;ducative.</li>
+            <li><strong>Public:</strong> Enfants de 2 &agrave; 16 ans et leur famille, en priorit&eacute; vivant ou scolaris&eacute;s des quartiers en politique de la Ville (Parc, Chemin-de-l'&icirc;le, Universit&eacute;, Petit Nanterre, Anatole France.)</li>
+            <li>Ces actions sont dispens&eacute;es par l'ensemble des acteurs de la communaut&eacute; socio-&eacute;ducative. Elles r&eacute;pondent aux besoins de l'enfant identifi&eacute;s au pr&eacute;alable : sant&eacute;, accompagnement scolaire et &eacute;ducatif, pr&eacute;vention du d&eacute;crochage scolaire, soutien &agrave; la parentalit&eacute;, loisirs, actions culturelles et sportives&hellip;</li>
         </ul>
     </section>
 
     <!-- 11. Autres questions -->
-    <section class="section" id="questions">
+    <section class="section" id="questions-mairie">
         <h2>11. Autres questions (Victor Hugo)</h2>
 
-        <p>Plusieurs questions spécifiques à l'école Victor Hugo ont été posées lors de la réunion.</p>
+        <p>Plusieurs questions sp&eacute;cifiques &agrave; l'&eacute;cole Victor Hugo ont &eacute;t&eacute; pos&eacute;es lors de la r&eacute;union.</p>
 
-        <h3>1. Distribution de bonbons et sucreries pendant le périscolaire</h3>
-        <p>La question de la distribution de bonbons et sucreries a été soulevée auprès de la personne en charge du périscolaire. La réponse a été claire : ce type de pratique ne correspond pas à la philosophie portée par la mairie. Un rappel sera réalisé auprès des directeurs du centre de loisirs.</p>
-        <p>Le point a été signalé et les responsables ont indiqué qu'ils seraient vigilants. Nous disposons désormais d'un contact identifié à qui remonter directement ce type de situation, en complément de la direction du périscolaire de Victor Hugo si nécessaire.</p>
+        <h3>1. Distribution de bonbons et sucreries pendant le p&eacute;riscolaire</h3>
+        <p>La question de la distribution de bonbons et sucreries a &eacute;t&eacute; soulev&eacute;e aupr&egrave;s de la personne en charge du p&eacute;riscolaire. La r&eacute;ponse a &eacute;t&eacute; claire : ce type de pratique ne correspond pas &agrave; la philosophie port&eacute;e par la mairie. Un rappel sera r&eacute;alis&eacute; aupr&egrave;s des directeurs du centre de loisirs.</p>
+        <p>Le point a &eacute;t&eacute; signal&eacute; et les responsables ont indiqu&eacute; qu'ils seraient vigilants. Nous disposons d&eacute;sormais d'un contact identifi&eacute; &agrave; qui remonter directement ce type de situation, en compl&eacute;ment de la direction du p&eacute;riscolaire de Victor Hugo si n&eacute;cessaire.</p>
         <div class="tip">
-            <p>Les parents sont donc invités à nous signaler toute situation précise afin que nous puissions la faire remonter.</p>
+            <p>Les parents sont donc invit&eacute;s &agrave; nous signaler toute situation pr&eacute;cise afin que nous puissions la faire remonter.</p>
         </div>
 
-        <h3>2. Ouverture d'un centre de loisirs à Victor Hugo pendant les vacances</h3>
-        <p>La possibilité d'ouvrir un centre de loisirs à Victor Hugo, plutôt que d'orienter les enfants vers Joliot Curie, a été évoquée. La mairie a indiqué que cette demande avait déjà été étudiée l'an dernier et qu'elle avait été rejetée. Il n'est pas prévu de la réexaminer pour le moment.</p>
-        <p>La raison principale est le nombre d'enfants concerné, jugé insuffisant pour ouvrir une structure, car certains coûts (gardiennage, entretien, fonctionnement) ne peuvent pas être mutualisés. Victor Hugo n'est pas un cas isolé : plusieurs petites écoles sont regroupées dans des centres de loisirs communs.</p>
-        <p>La mairie a précisé que les capacités d'accueil à Joliot Curie sont suffisantes, même si elle comprend que cela puisse être moins pratique pour certaines familles.</p>
+        <h3>2. Ouverture d'un centre de loisirs &agrave; Victor Hugo pendant les vacances</h3>
+        <p>La possibilit&eacute; d'ouvrir un centre de loisirs &agrave; Victor Hugo, plut&ocirc;t que d'orienter les enfants vers Joliot Curie, a &eacute;t&eacute; &eacute;voqu&eacute;e. La mairie a indiqu&eacute; que cette demande avait d&eacute;j&agrave; &eacute;t&eacute; &eacute;tudi&eacute;e l'an dernier et qu'elle avait &eacute;t&eacute; rejet&eacute;e. Il n'est pas pr&eacute;vu de la r&eacute;examiner pour le moment.</p>
+        <p>La raison principale est le nombre d'enfants concern&eacute;, jug&eacute; insuffisant pour ouvrir une structure, car certains co&ucirc;ts (gardiennage, entretien, fonctionnement) ne peuvent pas &ecirc;tre mutualis&eacute;s. Victor Hugo n'est pas un cas isol&eacute; : plusieurs petites &eacute;coles sont regroup&eacute;es dans des centres de loisirs communs.</p>
+        <p>La mairie a pr&eacute;cis&eacute; que les capacit&eacute;s d'accueil &agrave; Joliot Curie sont suffisantes, m&ecirc;me si elle comprend que cela puisse &ecirc;tre moins pratique pour certaines familles.</p>
 
-        <h3>3. Communication entre l'école et le périscolaire</h3>
-        <p>Des difficultés de communication entre l'école et le périscolaire, avec des pertes d'information, ont été signalées. Ce point a également été remonté lors de la réunion. La mairie a indiqué être déjà informée de ces dysfonctionnements à Victor Hugo et prévoit d'en échanger avec les équipes concernées.</p>
+        <h3>3. Communication entre l'&eacute;cole et le p&eacute;riscolaire</h3>
+        <p>Des difficult&eacute;s de communication entre l'&eacute;cole et le p&eacute;riscolaire, avec des pertes d'information, ont &eacute;t&eacute; signal&eacute;es. Ce point a &eacute;galement &eacute;t&eacute; remont&eacute; lors de la r&eacute;union. La mairie a indiqu&eacute; &ecirc;tre d&eacute;j&agrave; inform&eacute;e de ces dysfonctionnements &agrave; Victor Hugo et pr&eacute;voit d'en &eacute;changer avec les &eacute;quipes concern&eacute;es.</p>
         <div class="tip">
-            <p>Les parents qui constatent des situations précises peuvent continuer à nous les signaler afin qu'elles soient documentées et transmises.</p>
+            <p>Les parents qui constatent des situations pr&eacute;cises peuvent continuer &agrave; nous les signaler afin qu'elles soient document&eacute;es et transmises.</p>
         </div>
 
-        <h3>4. Sorties scolaires organisées avec le soutien de la mairie</h3>
-        <p>Un point a été demandé sur les sorties scolaires. Il a été précisé que la mairie met à disposition en début d'année des propositions de spectacles, de cinéma ou de sorties. Les enseignants doivent ensuite s'inscrire pour en bénéficier.</p>
-        <p>Peu de détails complémentaires ont été apportés sur le fonctionnement précis. Si des questions spécifiques se posent, il est possible de les faire remonter afin d'obtenir des informations plus détaillées.</p>
+        <h3>4. Sorties scolaires organis&eacute;es avec le soutien de la mairie</h3>
+        <p>Un point a &eacute;t&eacute; demand&eacute; sur les sorties scolaires. Il a &eacute;t&eacute; pr&eacute;cis&eacute; que la mairie met &agrave; disposition en d&eacute;but d'ann&eacute;e des propositions de spectacles, de cin&eacute;ma ou de sorties. Les enseignants doivent ensuite s'inscrire pour en b&eacute;n&eacute;ficier.</p>
+        <p>Peu de d&eacute;tails compl&eacute;mentaires ont &eacute;t&eacute; apport&eacute;s sur le fonctionnement pr&eacute;cis. Si des questions sp&eacute;cifiques se posent, il est possible de les faire remonter afin d'obtenir des informations plus d&eacute;taill&eacute;es.</p>
 
-        <h3>5. Dérogations pour un changement d'école</h3>
-        <p>La question a été posée sur la possibilité d'obtenir une dérogation pour scolariser deux enfants dans la même école, par exemple lorsqu'un enfant est à Joliot Curie en primaire et un autre à Victor Hugo en maternelle, et sur les critères applicables.</p>
-        <p>La mairie a confirmé que des dérogations existent et qu'une procédure est accessible sur son site. Les demandes sont examinées par une commission, à laquelle participe notamment un représentant de l'Éducation nationale. La période de dépôt des dossiers est en cours actuellement.</p>
-        <p>Les critères d'acceptation sont toutefois précis et relativement restrictifs. Le rapprochement de fratrie est possible principalement lorsque deux enfants sont affectés dans des secteurs scolaires différents et qu'il s'agit d'éviter une scolarisation dans deux zones distinctes. En revanche, lorsque les écoles concernées relèvent du même secteur d'affectation, comme dans l'exemple évoqué, ce motif ne s'applique généralement pas.</p>
-        <p>D'autres situations peuvent être examinées, par exemple lorsque des raisons médicales nécessitent une scolarisation à proximité d'un lieu de soins, ou lorsqu'un membre du corps éducatif souhaite scolariser son enfant dans son lieu de travail.</p>
-        <p>Chaque dossier est étudié individuellement, mais les dérogations ne sont en principe pas accordées pour des motifs de convenance personnelle, afin de préserver un équilibre des effectifs entre les écoles et le bon fonctionnement du service public.</p>
+        <h3>5. D&eacute;rogations pour un changement d'&eacute;cole</h3>
+        <p>La question a &eacute;t&eacute; pos&eacute;e sur la possibilit&eacute; d'obtenir une d&eacute;rogation pour scolariser deux enfants dans la m&ecirc;me &eacute;cole, par exemple lorsqu'un enfant est &agrave; Joliot Curie en primaire et un autre &agrave; Victor Hugo en maternelle, et sur les crit&egrave;res applicables.</p>
+        <p>La mairie a confirm&eacute; que des d&eacute;rogations existent et qu'une proc&eacute;dure est accessible sur son site. Les demandes sont examin&eacute;es par une commission, &agrave; laquelle participe notamment un repr&eacute;sentant de l'&Eacute;ducation nationale. La p&eacute;riode de d&eacute;p&ocirc;t des dossiers est en cours actuellement.</p>
+        <p>Les crit&egrave;res d'acceptation sont toutefois pr&eacute;cis et relativement restrictifs. Le rapprochement de fratrie est possible principalement lorsque deux enfants sont affect&eacute;s dans des secteurs scolaires diff&eacute;rents et qu'il s'agit d'&eacute;viter une scolarisation dans deux zones distinctes. En revanche, lorsque les &eacute;coles concern&eacute;es rel&egrave;vent du m&ecirc;me secteur d'affectation, comme dans l'exemple &eacute;voqu&eacute;, ce motif ne s'applique g&eacute;n&eacute;ralement pas.</p>
+        <p>D'autres situations peuvent &ecirc;tre examin&eacute;es, par exemple lorsque des raisons m&eacute;dicales n&eacute;cessitent une scolarisation &agrave; proximit&eacute; d'un lieu de soins, ou lorsqu'un membre du corps &eacute;ducatif souhaite scolariser son enfant dans son lieu de travail.</p>
+        <p>Chaque dossier est &eacute;tudi&eacute; individuellement, mais les d&eacute;rogations ne sont en principe pas accord&eacute;es pour des motifs de convenance personnelle, afin de pr&eacute;server un &eacute;quilibre des effectifs entre les &eacute;coles et le bon fonctionnement du service public.</p>
     </section>
 
     <div class="footer">
-        <p>Nous restons à votre disposition pour toute question.</p>
-        <p><strong>Hélène et Mandana</strong> — RPE Victor Hugo</p>
+        <p>Nous restons &agrave; votre disposition pour toute question.</p>
+        <p><strong>H&eacute;l&egrave;ne et Mandana</strong> &mdash; RPE Victor Hugo</p>
     </div>
 
 </div>
+</div>
+
+<!-- ======================= TAB 3 : Conseil d'école — 6 novembre 2025 ======================= -->
+<div id="tab-conseil-nov" class="tab-panel">
+<div class="container">
+
+    <nav class="toc">
+        <h2>Ordre du jour</h2>
+        <ol>
+            <li><a href="#nov-structure">Structure et personnel de l'&eacute;cole</a></li>
+            <li><a href="#nov-reglement">R&egrave;glement int&eacute;rieur</a></li>
+            <li><a href="#nov-elections">R&eacute;sultat des &eacute;lections des RPE</a></li>
+            <li><a href="#nov-projets">Projets et &eacute;v&eacute;nements de l'ann&eacute;e</a></li>
+            <li><a href="#nov-questions">Questions diverses</a></li>
+        </ol>
+    </nav>
+
+    <div class="remark">
+        <p><strong>Personnes pr&eacute;sentes</strong></p>
+        <p><strong>Professeurs des &eacute;coles (PE) :</strong> Christophe Job (directeur et PE classe violette), Doroth&eacute;e Commune (PE classe verte)</p>
+        <p><strong>Repr&eacute;sentants des parents d'&eacute;l&egrave;ves (RPE) :</strong> Ana&iuml;s (classe Rose), Mandana (classe Violette), Marie (classe Bleue), Juliette (classe Verte), H&eacute;l&egrave;ne (classe Jaune)</p>
+    </div>
+
+    <!-- 1. Structure et personnel -->
+    <section class="section" id="nov-structure">
+        <h2>1. Structure et personnel de l'&eacute;cole</h2>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="number">117</div>
+                <div class="label">&Eacute;l&egrave;ves</div>
+            </div>
+            <div class="stat-card">
+                <div class="number">5</div>
+                <div class="label">Classes</div>
+            </div>
+        </div>
+
+        <h3>R&eacute;partition des classes</h3>
+        <table style="width:100%; border-collapse:collapse; margin:1rem 0; font-size:0.92rem;">
+            <thead>
+                <tr style="background:var(--blue-light);">
+                    <th style="padding:0.6rem 0.75rem; text-align:left; border-bottom:2px solid var(--gray-200);">Classe</th>
+                    <th style="padding:0.6rem 0.75rem; text-align:left; border-bottom:2px solid var(--gray-200);">ATSEM</th>
+                    <th style="padding:0.6rem 0.75rem; text-align:left; border-bottom:2px solid var(--gray-200);">PE</th>
+                    <th style="padding:0.6rem 0.75rem; text-align:center; border-bottom:2px solid var(--gray-200);">PS</th>
+                    <th style="padding:0.6rem 0.75rem; text-align:center; border-bottom:2px solid var(--gray-200);">MS</th>
+                    <th style="padding:0.6rem 0.75rem; text-align:center; border-bottom:2px solid var(--gray-200);">GS</th>
+                    <th style="padding:0.6rem 0.75rem; text-align:center; border-bottom:2px solid var(--gray-200);">Total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr style="border-bottom:1px solid var(--gray-200);">
+                    <td style="padding:0.5rem 0.75rem; font-weight:600; color:var(--gray-800);">Violette</td>
+                    <td style="padding:0.5rem 0.75rem;">Ayat</td>
+                    <td style="padding:0.5rem 0.75rem;">Christophe</td>
+                    <td style="padding:0.5rem 0.75rem; text-align:center;">12</td>
+                    <td style="padding:0.5rem 0.75rem; text-align:center;">10</td>
+                    <td style="padding:0.5rem 0.75rem; text-align:center;">&mdash;</td>
+                    <td style="padding:0.5rem 0.75rem; text-align:center; font-weight:600;">22</td>
+                </tr>
+                <tr style="border-bottom:1px solid var(--gray-200);">
+                    <td style="padding:0.5rem 0.75rem; font-weight:600; color:var(--gray-800);">Rose</td>
+                    <td style="padding:0.5rem 0.75rem;">Lydie</td>
+                    <td style="padding:0.5rem 0.75rem;">Meriem</td>
+                    <td style="padding:0.5rem 0.75rem; text-align:center;">22</td>
+                    <td style="padding:0.5rem 0.75rem; text-align:center;">&mdash;</td>
+                    <td style="padding:0.5rem 0.75rem; text-align:center;">&mdash;</td>
+                    <td style="padding:0.5rem 0.75rem; text-align:center; font-weight:600;">22</td>
+                </tr>
+                <tr style="border-bottom:1px solid var(--gray-200);">
+                    <td style="padding:0.5rem 0.75rem; font-weight:600; color:var(--gray-800);">Bleue</td>
+                    <td style="padding:0.5rem 0.75rem;">Aur&eacute;lie</td>
+                    <td style="padding:0.5rem 0.75rem;">Chouba&iuml;kat</td>
+                    <td style="padding:0.5rem 0.75rem; text-align:center;">&mdash;</td>
+                    <td style="padding:0.5rem 0.75rem; text-align:center;">23</td>
+                    <td style="padding:0.5rem 0.75rem; text-align:center;">&mdash;</td>
+                    <td style="padding:0.5rem 0.75rem; text-align:center; font-weight:600;">23</td>
+                </tr>
+                <tr style="border-bottom:1px solid var(--gray-200);">
+                    <td style="padding:0.5rem 0.75rem; font-weight:600; color:var(--gray-800);">Jaune</td>
+                    <td style="padding:0.5rem 0.75rem;">&mdash;</td>
+                    <td style="padding:0.5rem 0.75rem;">Marie-Laure</td>
+                    <td style="padding:0.5rem 0.75rem; text-align:center;">&mdash;</td>
+                    <td style="padding:0.5rem 0.75rem; text-align:center;">&mdash;</td>
+                    <td style="padding:0.5rem 0.75rem; text-align:center;">20</td>
+                    <td style="padding:0.5rem 0.75rem; text-align:center; font-weight:600;">20</td>
+                </tr>
+                <tr>
+                    <td style="padding:0.5rem 0.75rem; font-weight:600; color:var(--gray-800);">Verte</td>
+                    <td style="padding:0.5rem 0.75rem;">&mdash;</td>
+                    <td style="padding:0.5rem 0.75rem;">Doroth&eacute;e + Nadia (AESH)</td>
+                    <td style="padding:0.5rem 0.75rem; text-align:center;">&mdash;</td>
+                    <td style="padding:0.5rem 0.75rem; text-align:center;">&mdash;</td>
+                    <td style="padding:0.5rem 0.75rem; text-align:center;">20</td>
+                    <td style="padding:0.5rem 0.75rem; text-align:center; font-weight:600;">20</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h3>Autres personnels</h3>
+        <ul>
+            <li><strong>Psychologue de l'&Eacute;ducation nationale (PSYEN)</strong> &mdash; Nassira Leroule : se d&eacute;place dans l'&eacute;cole 1 matin&eacute;e tous les 15 jours. &Eacute;change avec le corps enseignant et les enfants. Peut &ecirc;tre contact&eacute;e par les parents (voir avec Christophe).</li>
+            <li>1 assistante sociale</li>
+            <li><strong>Aide sp&eacute;cialis&eacute;e &agrave; dominante p&eacute;dagogique (ADP)</strong> : doit intervenir &agrave; partir de mars pour les GS afin d'aider les &eacute;l&egrave;ves en difficult&eacute; (travail en petits groupes de 3 ou 4 &eacute;l&egrave;ves)</li>
+            <li>Gardienne : accueil, ouverture des grilles</li>
+            <li><strong>Directeur du centre :</strong> Salim (en arr&ecirc;t), remplac&eacute; par Ambre qui fait fonction de directrice</li>
+        </ul>
+    </section>
+
+    <!-- 2. Règlement intérieur -->
+    <section class="section" id="nov-reglement">
+        <h2>2. R&egrave;glement int&eacute;rieur</h2>
+        <p>Relecture du r&egrave;glement pour validation avant envoi pour signature des parents.</p>
+        <div class="tip">
+            <p>Il est rappel&eacute; l'importance d'actualiser la fiche de renseignement en cours d'ann&eacute;e si des modifications ont lieu (num&eacute;ro de t&eacute;l&eacute;phone, adresse&hellip;)</p>
+        </div>
+    </section>
+
+    <!-- 3. Élections RPE -->
+    <section class="section" id="nov-elections">
+        <h2>3. R&eacute;sultat des &eacute;lections des repr&eacute;sentants des parents d'&eacute;l&egrave;ves</h2>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="number">57&nbsp;%</div>
+                <div class="label">de participation</div>
+            </div>
+            <div class="stat-card">
+                <div class="number">184</div>
+                <div class="label">inscrits</div>
+            </div>
+            <div class="stat-card">
+                <div class="number">105</div>
+                <div class="label">votants</div>
+            </div>
+            <div class="stat-card">
+                <div class="number">38</div>
+                <div class="label">votes nuls</div>
+            </div>
+        </div>
+
+        <div class="remark">
+            <p><strong>Rappel :</strong> attention &agrave; ne rien &eacute;crire sur le bulletin de vote. Pas de ratures, de signes, d'annotations&hellip; (38 votes nuls pour cette raison)</p>
+        </div>
+    </section>
+
+    <!-- 4. Projets et événements -->
+    <section class="section" id="nov-projets">
+        <h2>4. Projets et &eacute;v&eacute;nements de l'ann&eacute;e</h2>
+
+        <p>L'ann&eacute;e sera rythm&eacute;e par plusieurs sorties, spectacles et temps festifs pens&eacute;s pour faire d&eacute;couvrir de nouvelles choses aux enfants tout en partageant des moments collectifs &agrave; l'&eacute;cole.</p>
+
+        <h3>Sorties et &eacute;v&eacute;nements d&eacute;j&agrave; r&eacute;alis&eacute;s</h3>
+        <ul>
+            <li><strong>10 octobre 2025 &mdash; Sortie &agrave; Saint-Cucufa :</strong> les classes Verte et Violette ont particip&eacute; &agrave; une sortie en for&ecirc;t, rendue possible gr&acirc;ce &agrave; la mise &agrave; disposition d'un car par la mairie (premi&egrave;re fois en 4-5 ans).</li>
+            <li><strong>13 et 16 octobre 2025 &mdash; Spectacle &laquo;&nbsp;Pluie&nbsp;&raquo; :</strong> classes Violette et Rose, &agrave; la Maison de la Musique.</li>
+        </ul>
+
+        <h3>Sorties et &eacute;v&eacute;nements &agrave; venir</h3>
+
+        <div class="callout">
+            <div class="callout-title">Accompagnateurs n&eacute;cessaires</div>
+            <p>Les sorties n&eacute;cessitent des accompagnateurs. Les parents seront sollicit&eacute;s via le carnet de correspondance.</p>
+        </div>
+
+        <ul>
+            <li><strong>28 novembre &mdash; Ferme G&eacute;ante :</strong> la Ferme G&eacute;ante de Nanterre se tiendra dans le centre-ville, comme chaque ann&eacute;e, et proposera diff&eacute;rents ateliers p&eacute;dagogiques pour les enfants des &eacute;coles de la commune. Ce sera l'occasion pour eux de d&eacute;couvrir les animaux de la ferme et de les approcher de pr&egrave;s. Les inscriptions ne sont pas encore ouvertes, mais l'&eacute;cole participera &agrave; l'&eacute;v&eacute;nement en fonction des cr&eacute;neaux qui seront disponibles.</li>
+            <li><strong>18 d&eacute;cembre &mdash; F&ecirc;te de No&euml;l :</strong> l'&eacute;cole organisera une f&ecirc;te sous forme de boum : danse, go&ucirc;ter et cadeaux. Le &laquo;&nbsp;p&egrave;re No&euml;l&nbsp;&raquo; d&eacute;posera dans les classes des livres offerts par la mairie. La f&ecirc;te se d&eacute;roulera pendant le temps scolaire.</li>
+            <li><strong>19 d&eacute;cembre &mdash; Spectacle &laquo;&nbsp;Pomme de pin deviendra sapin&nbsp;&raquo;</strong> pr&eacute;sent&eacute; &agrave; l'&eacute;cole par la compagnie Coconut.</li>
+            <li><strong>30 janvier &mdash; F&ecirc;te de la galette :</strong> entre les enfants et l'&eacute;quipe enseignante.</li>
+            <li><strong>Spectacles :</strong> les classes auront &eacute;galement l'occasion d'assister &agrave; plusieurs spectacles, souvent organis&eacute;s &agrave; la Maison de la Musique de Nanterre.
+                <ul>
+                    <li>&laquo;&nbsp;Pluie&nbsp;&raquo; pour les classes Violette et Rose (a eu lieu en octobre)</li>
+                    <li>&laquo;&nbsp;Collection&nbsp;&raquo; le 10 avril &mdash; classe Jaune</li>
+                    <li>&laquo;&nbsp;Immobile et Rebondi&nbsp;&raquo; le 17 avril &mdash; classe Bleue</li>
+                </ul>
+            </li>
+            <li><strong>Cin&eacute;ma :</strong> une sortie au Cin&eacute;ma Les Lumi&egrave;res de Nanterre est &eacute;galement pr&eacute;vue cette ann&eacute;e. La date n'a pas encore &eacute;t&eacute; fix&eacute;e, mais toutes les classes devraient pouvoir y participer.</li>
+            <li><strong>F&ecirc;te du livre</strong> (mars-avril) : elle s'accompagnera d'une soir&eacute;e conte, durant laquelle des conteurs viendront lire des histoires aux enfants. Une vente de livres sera &eacute;galement organis&eacute;e &agrave; cette occasion, dont une partie des b&eacute;n&eacute;fices sera revers&eacute;e &agrave; la coop&eacute;rative de l'&eacute;cole.</li>
+            <li><strong>Sortie de fin d'ann&eacute;e :</strong> comme chaque ann&eacute;e, une sortie de fin d'ann&eacute;e sera organis&eacute;e pour l'ensemble des classes. Le lieu et la date seront d&eacute;finis une fois que la mairie aura attribu&eacute; le car. Les sorties se d&eacute;roulent g&eacute;n&eacute;ralement dans un rayon d'environ 50 km autour de l'&eacute;cole.</li>
+            <li><strong>19 ou 20 juin &mdash; Kermesse et spectacle de fin d'ann&eacute;e :</strong> la kermesse et le spectacle de fin d'ann&eacute;e cl&ocirc;tureront l'ann&eacute;e scolaire, autour d'un moment sympa r&eacute;unissant enfants, familles et enseignants. L'&eacute;v&eacute;nement aura lieu le 19 ou le 20 juin, soit le vendredi en fin de journ&eacute;e, soit le samedi matin. Cette option &eacute;tant envisag&eacute;e pour &eacute;viter les fortes chaleurs, m&ecirc;me si elle reste &agrave; confirmer en fonction des contraintes logistiques.</li>
+        </ul>
+
+        <div class="remark">
+            <p><strong>Piscine :</strong> les s&eacute;ances habituellement propos&eacute;es aux &eacute;l&egrave;ves de Grande Section ont &eacute;t&eacute; annul&eacute;es cette ann&eacute;e en raison d'un manque de ma&icirc;tres-nageurs disponibles.</p>
+        </div>
+    </section>
+
+    <!-- 5. Questions diverses -->
+    <section class="section" id="nov-questions">
+        <h2>5. Questions diverses</h2>
+
+        <!-- Absences -->
+        <h3>Point sur les absences</h3>
+        <ul>
+            <li><strong>Chouba&iuml;kat :</strong> revient lundi 10/11/25</li>
+            <li><strong>Meriem :</strong> absente, remplacement &agrave; partir de lundi 10/11/25 normalement</li>
+            <li><strong>Marie-Laure :</strong> absente, remplacement &agrave; partir de lundi 10/11/25 normalement pendant 1 mois</li>
+            <li><strong>Doroth&eacute;e :</strong> mi-temps prolong&eacute; jusqu'au 25/01/26, normalement lundi/mardi assur&eacute;s par Sophiane jusqu'au 25/01</li>
+        </ul>
+
+        <!-- Fournitures -->
+        <h3>Fournitures de la classe Bleue de Chouba&iuml;kat</h3>
+        <p>La PE doit fournir la liste du mat&eacute;riel n&eacute;cessaire pour les apprentissages, le mat&eacute;riel sera command&eacute;. La commande sera financ&eacute;e par la coop&eacute;rative de l'&eacute;cole.</p>
+
+        <!-- Communication -->
+        <h3>Communication et transmission des informations</h3>
+        <p>Il est remont&eacute; que des probl&egrave;mes de communication existaient notamment lors des absences des PE.</p>
+        <div class="tip">
+            <p>Il a &eacute;t&eacute; rappel&eacute; de bien v&eacute;rifier les informations sur l'application <strong>Toute Mon Ann&eacute;e</strong>, une messagerie permet de recevoir des messages. D'autre part, les <strong>groupes WhatsApp</strong> des classes sont le moyen le plus rapide d'avoir des informations, il faut donc veiller &agrave; bien s'inscrire sur ces groupes.</p>
+        </div>
+        <p>Christophe rappelle cependant que parfois lui-m&ecirc;me n'a pas les informations : dur&eacute;e de l'absence, remplacement &eacute;ventuel ou pas&hellip;</p>
+
+        <!-- Violence -->
+        <h3>Comportements violents en r&eacute;cr&eacute;ation</h3>
+        <p>Il a &eacute;t&eacute; constat&eacute; et remont&eacute; que des enfants jouent &agrave; la bagarre (au policier, au karat&eacute;, &agrave; Spiderman&hellip;), ces jeux entra&icirc;nent une surench&egrave;re de violence entre les enfants. Malgr&eacute; la surveillance des r&eacute;cr&eacute;ations et les remontrances faites par les PE, les enfants continuent et finissent par vraiment se faire mal et pleurer. Cela perturbe &eacute;galement les enfants ne participant pas &agrave; ces &laquo;&nbsp;jeux&nbsp;&raquo; qui ne peuvent pas profiter pleinement de leur r&eacute;cr&eacute;ation.</p>
+        <div class="callout">
+            <div class="callout-title">Actions d&eacute;cid&eacute;es</div>
+            <p>Sensibilisation &agrave; la maison demand&eacute;e. Un mot sera mis dans les cahiers de correspondance. Les enfants et parents seront pr&eacute;venus et &eacute;ventuellement vus au cas par cas.</p>
+        </div>
+
+        <!-- Sucreries -->
+        <h3>Sucreries</h3>
+        <p>Des parents ont remarqu&eacute; que beaucoup de sucreries circulent pour les anniversaires et au centre. On rappelle qu'il est interdit dans le r&egrave;glement int&eacute;rieur que les &eacute;l&egrave;ves am&egrave;nent de la nourriture, y compris des bonbons.</p>
+        <ul>
+            <li>Par ailleurs, il est demand&eacute; aux parents de ne plus apporter de bonbons pour les anniversaires (le g&acirc;teau suffit).</li>
+            <li>Doroth&eacute;e rappelle que les anniversaires de la classe Verte sont organis&eacute;s par p&eacute;riode et que les parents seront inform&eacute;s dans le carnet des ingr&eacute;dients &agrave; fournir (pour la cuisine) et des dates des ateliers cuisine pour y participer.</li>
+            <li>Enfin, une discussion est &agrave; mener avec le centre pour arr&ecirc;ter les bonbons &laquo;&nbsp;syst&eacute;matiques&nbsp;&raquo;.</li>
+        </ul>
+
+        <!-- Niveau -->
+        <h3>Niveau dans les classes</h3>
+        <div class="remark">
+            <p>Le niveau est particuli&egrave;rement h&eacute;t&eacute;rog&egrave;ne dans les classes, Christophe constate que les &eacute;carts rencontr&eacute;s entre les enfants en difficult&eacute; et les autres semblent &ecirc;tre plus importants que les autres ann&eacute;es. Doroth&eacute;e a remarqu&eacute; la m&ecirc;me chose dans sa classe.</p>
+        </div>
+    </section>
+
+    <div class="footer">
+        <p>Fin du conseil environ 19h.</p>
+        <p>Nous restons &agrave; votre disposition pour toute question.</p>
+        <p>RPE Victor Hugo</p>
+    </div>
+
+</div>
+</div>
+
+<script>
+function switchTab(tabName) {
+    // Hide all panels
+    document.querySelectorAll('.tab-panel').forEach(function(panel) {
+        panel.classList.remove('active');
+    });
+    // Deactivate all buttons
+    document.querySelectorAll('.tab-btn').forEach(function(btn) {
+        btn.classList.remove('active');
+    });
+    // Show selected panel
+    document.getElementById('tab-' + tabName).classList.add('active');
+    // Activate clicked button
+    event.currentTarget.classList.add('active');
+    // Scroll to top
+    window.scrollTo(0, 0);
+}
+</script>
 
 </body>
 </html>
