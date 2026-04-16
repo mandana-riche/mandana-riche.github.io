@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Team Roadmap</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Inter', sans-serif;
+    background: #0f172a;
+    color: #e2e8f0;
+    padding: 20px 16px;
+    width: 1100px;
+  }
+
+  .header { text-align: center; margin-bottom: 16px; }
+  .header h1 {
+    font-size: 1.5rem; font-weight: 800;
+    background: linear-gradient(135deg, #38bdf8, #818cf8, #c084fc);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    margin-bottom: 2px;
+  }
+  .header p { color: #94a3b8; font-size: 0.75rem; }
+
+  /* ── Cycle ── */
+  .cycle-row {
+    display: flex; justify-content: center; align-items: center; gap: 14px;
+    margin-bottom: 20px;
+  }
+  .cnode {
+    padding: 10px 16px; border-radius: 10px; text-align: center;
+    font-weight: 600; font-size: 0.75rem; color: #fff;
+  }
+  .cnode.a { background: linear-gradient(135deg,#2563eb,#7c3aed); }
+  .cnode.b { background: linear-gradient(135deg,#0ea5e9,#2563eb); }
+  .cnode.c { background: linear-gradient(135deg,#8b5cf6,#c026d3); }
+  .cnode sub { font-weight: 400; font-size: 0.65rem; opacity: 0.85; }
+  .arrow { color: #475569; font-size: 1.2rem; }
+
+  /* ── Grid ── */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin-bottom: 14px;
+  }
+
+  .lane {
+    background: #1e293b; border-radius: 10px; overflow: hidden;
+    border: 1px solid #334155; font-size: 0.7rem;
+  }
+  .lh {
+    padding: 8px 10px; font-weight: 700; font-size: 0.78rem;
+    display: flex; align-items: center; gap: 7px;
+  }
+  .av {
+    width: 24px; height: 24px; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 800; font-size: 0.65rem; color: #fff; flex-shrink: 0;
+  }
+  .role { font-size: 0.6rem; font-weight: 400; opacity: 0.65; }
+
+  .lane.m .lh { border-bottom: 2px solid #7c3aed; }
+  .lane.m .av { background: #7c3aed; }
+  .lane.a .lh { border-bottom: 2px solid #2563eb; }
+  .lane.a .av { background: #2563eb; }
+  .lane.n .lh { border-bottom: 2px solid #0ea5e9; }
+  .lane.n .av { background: #0ea5e9; }
+  .lane.mt .lh { border-bottom: 2px solid #f59e0b; }
+  .lane.mt .av { background: #f59e0b; }
+
+  .lb { padding: 8px 10px; }
+  .lb ul { list-style: none; }
+  .lb li {
+    padding: 5px 7px; margin-bottom: 4px;
+    background: #0f172a; border-radius: 6px;
+    line-height: 1.35; color: #cbd5e1;
+    border-left: 2px solid transparent;
+  }
+  .lane.m .lb li { border-left-color: #7c3aed55; }
+  .lane.a .lb li { border-left-color: #2563eb55; }
+  .lane.n .lb li { border-left-color: #0ea5e955; }
+  .lane.mt .lb li { border-left-color: #f59e0b55; }
+
+  .t {
+    display: inline-block; padding: 1px 5px; border-radius: 4px;
+    font-size: 0.58rem; font-weight: 600; text-transform: uppercase;
+    letter-spacing: 0.3px; margin-right: 4px; vertical-align: middle;
+  }
+  .t.ops { background: #7c3aed22; color: #c4b5fd; }
+  .t.tech { background: #2563eb22; color: #93c5fd; }
+  .t.data { background: #0ea5e922; color: #67e8f9; }
+  .t.infra { background: #f59e0b22; color: #fcd34d; }
+  .t.inv { background: #f4364c22; color: #fca5a5; }
+
+  /* ── Bottom ── */
+  .bottom { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .sc {
+    background: #1e293b; border-radius: 10px; overflow: hidden;
+    border: 1px solid #334155; font-size: 0.7rem;
+  }
+  .sh {
+    padding: 8px 10px; font-weight: 700; font-size: 0.78rem;
+    display: flex; align-items: center; gap: 6px;
+  }
+  .sh.imp { border-bottom: 2px solid #10b981; }
+  .sh.lat { border-bottom: 2px solid #64748b; }
+  .sb { padding: 8px 10px; }
+  .sb ul { list-style: none; }
+  .sb li {
+    padding: 5px 7px; margin-bottom: 4px;
+    background: #0f172a; border-radius: 6px;
+    line-height: 1.35; color: #cbd5e1;
+  }
+  .sb.imp li { border-left: 2px solid #10b98155; }
+  .sb.lat li { border-left: 2px solid #64748b55; }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Team Roadmap</h1>
+  <p>Benchmark &middot; Exercises &middot; Vinaigrette</p>
+</div>
+
+<!-- Cycle -->
+<div class="cycle-row">
+  <div class="cnode b">Synthetically create<br>new exercises</div>
+  <span class="arrow">&larr;</span>
+  <div class="cnode c">Improve<br>Vinaigrette</div>
+  <span class="arrow">&larr;</span>
+  <div class="cnode a">Benchmark<br><sub>Real lawyer work</sub></div>
+  <span class="arrow" style="transform:rotate(0)">&circlearrowleft;</span>
+</div>
+
+<!-- 4-column team grid -->
+<div class="grid">
+
+  <!-- Mandana -->
+  <div class="lane m">
+    <div class="lh"><div class="av">M</div> Mandana <span class="role">OPS</span></div>
+    <div class="lb"><ul>
+      <li><span class="t ops">Ops</span> Manual checks of judges' outputs</li>
+      <li><span class="t inv">Investigate</span> 3rd-party harness integration (talk w/ lawyers)</li>
+      <li><span class="t ops">Design</span> Procedural Intelligence design (skills)</li>
+    </ul></div>
+  </div>
+
+  <!-- Amit -->
+  <div class="lane a">
+    <div class="lh"><div class="av">A</div> Amit <span class="role">TECH</span></div>
+    <div class="lb"><ul>
+      <li><span class="t tech">Tech</span> Apply Nico's taxonomy</li>
+      <li><span class="t tech">Tech</span> Case-law citation criteria across exercises</li>
+      <li><span class="t tech">Tech</span> Groundedness score on website + Opal</li>
+      <li><span class="t inv">Inv.</span> Reasoning tokens &mdash; correct definitions?</li>
+      <li><span class="t inv">Inv.</span> Groundedness extraction failures</li>
+      <li><span class="t inv">Inv.</span> Adjudicator skipped runs</li>
+      <li><span class="t tech">Tech</span> Eval set for groundedness agent</li>
+      <li><span class="t tech">Tech</span> Record tool output in trajectories</li>
+      <li><span class="t tech">Later</span> Configurable harness in Emerald</li>
+      <li><span class="t inv">Consider</span> Verbatim citation checks</li>
+    </ul></div>
+  </div>
+
+  <!-- Nico -->
+  <div class="lane n">
+    <div class="lh"><div class="av">N</div> Nico <span class="role">DATA</span></div>
+    <div class="lb"><ul>
+      <li><span class="t data">Filter</span> Which cases d'appel &rarr; exercises</li>
+      <li><span class="t data">Pipeline</span> Filtered cases &rarr; exercises pipeline</li>
+      <li><span class="t data">Tool</span> Extend Opal to verify & correct output</li>
+    </ul></div>
+  </div>
+
+  <!-- Matthieu -->
+  <div class="lane mt">
+    <div class="lh"><div class="av">Mt</div> Matthieu <span class="role">TECH</span></div>
+    <div class="lb"><ul>
+      <li><span class="t infra">Impl.</span> 3rd-party harness integration</li>
+      <li><span class="t infra">Impl.</span> Procedural Intelligence (skill design)</li>
+      <li><span class="t tech">Improve</span> Existing tools</li>
+      <li><span class="t infra">Infra</span> Auth &mdash; MCP tools + OAuth tokens</li>
+      <li><span class="t tech">Grow</span> Case coverage: BOFIP, Administratif</li>
+    </ul>
+    <div style="border-top:1px solid #334155;margin:8px 0 6px;"></div>
+    <div style="font-weight:600;font-size:0.68rem;color:#10b981;margin-bottom:4px;">&#9881; Improvements</div>
+    <ul>
+      <li style="border-left:2px solid #10b98155;">MCP descriptions &rarr; "official" / specialized feel</li>
+      <li style="border-left:2px solid #10b98155;">Improve tool result relevance (page rank)</li>
+      <li style="border-left:2px solid #10b98155;">Better usage instructions (cassation first)</li>
+      <li style="border-left:2px solid #10b98155;">Vinaigrette: MCP feedback on bad format</li>
+    </ul>
+    <div style="border-top:1px solid #334155;margin:8px 0 6px;"></div>
+    <div style="font-weight:600;font-size:0.68rem;color:#64748b;margin-bottom:4px;">&#128337; Later</div>
+    <ul>
+      <li style="border-left:2px solid #64748b55;">Vinaigrette self-verification for groundedness</li>
+      <li style="border-left:2px solid #64748b55;">Synthetically create a doctrine</li>
+    </ul>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
