@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Summer Body 2026 💪</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: linear-gradient(135deg, #fce7f3 0%, #e9d5ff 50%, #fbcfe8 100%);
+    min-height: 100vh;
+  }
+  .glass {
+    background: rgba(255, 255, 255, 0.75);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+  }
+  .gradient-text {
+    background: linear-gradient(135deg, #db2777 0%, #9333ea 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  .btn-primary {
+    background: linear-gradient(135deg, #db2777 0%, #9333ea 100%);
+    color: white;
+    transition: transform 0.1s, box-shadow 0.2s;
+  }
+  .btn-primary:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 20px rgba(219, 39, 119, 0.3);
+  }
+  .btn-primary:active { transform: translateY(0); }
+  .week-card {
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .week-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(147, 51, 234, 0.15);
+  }
+  .week-card.current {
+    border: 2px solid #db2777;
+    box-shadow: 0 0 0 4px rgba(219, 39, 119, 0.2);
+  }
+  .week-card.past { opacity: 0.85; }
+  .week-card.future { opacity: 0.6; }
+  details > summary { list-style: none; cursor: pointer; }
+  details > summary::-webkit-details-marker { display: none; }
+  .chevron { transition: transform 0.2s; }
+  details[open] .chevron { transform: rotate(90deg); }
+  .pill-validated {
+    background: #dcfce7;
+    color: #166534;
+  }
+  .pill-pending {
+    background: #fef3c7;
+    color: #92400e;
+  }
+  .tag-coming {
+    color: #9ca3af;
+    font-style: italic;
+  }
+</style>
+</head>
+<body>
+
+<div class="max-w-6xl mx-auto px-4 py-8">
+
+  <!-- HERO -->
+  <header class="text-center mb-10">
+    <div class="inline-block glass rounded-full px-4 py-1 text-sm font-medium text-purple-700 mb-4">
+      🔥 12 semaines · Ensemble · On lâche rien
+    </div>
+    <h1 class="text-5xl md:text-6xl font-extrabold gradient-text mb-3">Summer Body 2026</h1>
+    <p class="text-gray-600 text-lg">pour les mums de Nanterre 💪</p>
+    <p class="text-gray-500 text-sm mt-1 italic">Constance &gt; Perfection</p>
+    <div id="dateHeader" class="mt-4 text-sm text-gray-500"></div>
+  </header>
+
+  <!-- INTRO -->
+  <section class="glass rounded-2xl p-6 mb-6 shadow-sm">
+    <div class="flex items-start gap-4">
+      <div class="text-3xl">☀️</div>
+      <p class="text-gray-700 leading-relaxed">
+        À l'approche de l'été, on a envie de se sentir bien — et ce n'est pas toujours évident avec nos vies de mamans à deux mille à l'heure.
+        Alors on va le faire <b>ensemble</b>, on va se motiver <b>ensemble</b>, en espérant qu'on soit <b>plus fortes ensemble</b> 💪
+      </p>
+    </div>
+  </section>
+
+  <!-- L'ESPRIT DU CHALLENGE -->
+  <section class="glass rounded-2xl p-6 mb-6 shadow-sm">
+    <details>
+      <summary class="flex justify-between items-center">
+        <h2 class="text-2xl font-bold">✨ L'esprit du challenge</h2>
+        <span class="chevron text-2xl text-purple-600">›</span>
+      </summary>
+      <div class="grid md:grid-cols-2 gap-4 mt-4">
+        <div class="bg-white/70 rounded-xl p-4">
+          <h3 class="font-semibold mb-2">📅 Le format</h3>
+          <ul class="text-sm text-gray-700 space-y-1">
+            <li>• 12 semaines · 3 mois</li>
+            <li>• Nouveau départ chaque lundi</li>
+            <li>• 1 défi sport + 1 défi healthy / semaine</li>
+            <li>• 🎟️ 1 joker / semaine si besoin</li>
+          </ul>
+        </div>
+        <div class="bg-white/70 rounded-xl p-4">
+          <h3 class="font-semibold mb-2">💫 L'état d'esprit</h3>
+          <ul class="text-sm text-gray-700 space-y-1">
+            <li>• Zéro pression · zéro jugement</li>
+            <li>• On se motive, on se soutient</li>
+            <li>• Chacune à son rythme</li>
+            <li>• Plus fortes ensemble 💪</li>
+          </ul>
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <!-- LES FONDAMENTAUX -->
+  <section class="glass rounded-2xl p-6 mb-6 shadow-sm">
+    <details open>
+      <summary class="flex justify-between items-center">
+        <h2 class="text-2xl font-bold">🧱 Les fondamentaux</h2>
+        <span class="chevron text-2xl text-purple-600">›</span>
+      </summary>
+      <p class="text-gray-600 mt-3 mb-4 text-sm">
+        <b>80% du résultat</b> vient de 4 piliers tout simples. Les défis hebdo apporteront le petit plus ✨
+      </p>
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-3 mb-4">
+        <div class="bg-white/70 rounded-xl p-4">
+          <div class="text-2xl mb-2">🥗</div>
+          <h3 class="font-semibold mb-2">Alimentation</h3>
+          <ul class="text-sm text-gray-700 space-y-1">
+            <li>• 4 repas : petit-déj · déj · collation · dîner</li>
+            <li>• Rien en dehors</li>
+            <li>• Équilibré · maison de préférence</li>
+          </ul>
+        </div>
+        <div class="bg-white/70 rounded-xl p-4">
+          <div class="text-2xl mb-2">💧</div>
+          <h3 class="font-semibold mb-2">Hydratation</h3>
+          <ul class="text-sm text-gray-700 space-y-1">
+            <li>• 1,5 L d'eau / jour</li>
+            <li>• Une gourde = game changer</li>
+            <li>• Bonus : très belle peau ✨</li>
+          </ul>
+        </div>
+        <div class="bg-white/70 rounded-xl p-4">
+          <div class="text-2xl mb-2">🏃‍♀️</div>
+          <h3 class="font-semibold mb-2">Mouvement</h3>
+          <ul class="text-sm text-gray-700 space-y-1">
+            <li>• 10 000 pas / jour minimum</li>
+            <li>• 2 séances de sport / semaine</li>
+            <li>• Actives même les jours off</li>
+          </ul>
+        </div>
+        <div class="bg-white/70 rounded-xl p-4">
+          <div class="text-2xl mb-2">😴</div>
+          <h3 class="font-semibold mb-2">Sommeil</h3>
+          <ul class="text-sm text-gray-700 space-y-1">
+            <li>• 7h minimum</li>
+            <li>• Non négociable</li>
+            <li>• Clé pour récup &amp; énergie</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="bg-gradient-to-r from-pink-50 to-purple-50 border border-pink-200 rounded-xl p-4">
+        <div class="flex items-start gap-3">
+          <div class="text-2xl">🎉</div>
+          <div>
+            <h3 class="font-semibold mb-1">2 "trash" par semaine autorisés</h3>
+            <p class="text-sm text-gray-700">
+              Un apéro, un gros goûter d'anniv, un dîner où on se lâche… on a droit à <b>2 moments trash</b> / semaine. L'alcool (max 1–2 fois) compte comme un trash. Tout le reste : on mange sain, maison si possible, et on fait au mieux.
+            </p>
+          </div>
+        </div>
+      </div>
+    </details>
+  </section>
+
+  <!-- PARTICIPANTES -->
+  <section class="glass rounded-2xl p-6 mb-6 shadow-sm">
+    <div class="flex justify-between items-center mb-4">
+      <h2 class="text-2xl font-bold">👯 Les participantes</h2>
+      <span id="participantCount" class="text-sm text-gray-500"></span>
+    </div>
+
+    <div class="mb-5">
+      <h3 class="text-sm font-semibold text-green-700 mb-2">✅ Inscription validée</h3>
+      <div id="validatedList" class="flex flex-wrap gap-2"></div>
+    </div>
+
+    <div class="mb-5">
+      <h3 class="text-sm font-semibold text-amber-700 mb-2">⏳ En attente de validation</h3>
+      <div id="pendingList" class="flex flex-wrap gap-2"></div>
+    </div>
+
+    <div class="flex gap-2 pt-4 border-t border-gray-200">
+      <input id="newParticipant" type="text" placeholder="Prénom..."
+        class="flex-1 px-4 py-2 rounded-xl border-2 border-gray-200 focus:border-pink-500 outline-none"
+        onkeypress="if(event.key==='Enter') addParticipant()">
+      <button onclick="addParticipant()" class="btn-primary px-5 py-2 rounded-xl font-semibold">+ Ajouter</button>
+    </div>
+    <p class="text-xs text-gray-500 mt-2">Astuce : clique sur le statut d'une participante pour la valider ou la remettre en attente.</p>
+  </section>
+
+  <!-- SEMAINE EN COURS -->
+  <section class="glass rounded-2xl p-6 mb-6 shadow-sm">
+    <div class="flex justify-between items-center mb-4 flex-wrap gap-2">
+      <h2 class="text-2xl font-bold">🔥 <span id="currentWeekTitle">Semaine en cours</span></h2>
+      <div class="flex items-center gap-2">
+        <button onclick="changeWeek(-1)" class="px-3 py-1 rounded-lg bg-white/70 hover:bg-white">←</button>
+        <span id="weekSelector" class="text-sm font-semibold text-purple-700 min-w-[100px] text-center"></span>
+        <button onclick="changeWeek(1)" class="px-3 py-1 rounded-lg bg-white/70 hover:bg-white">→</button>
+        <button onclick="goToCurrentWeek()" class="ml-2 text-xs text-purple-600 hover:underline">📍 aujourd'hui</button>
+      </div>
+    </div>
+    <div id="currentWeekPanel"></div>
+  </section>
+
+  <!-- OVERVIEW 12 SEMAINES -->
+  <section class="glass rounded-2xl p-6 mb-6 shadow-sm">
+    <h2 class="text-2xl font-bold mb-4">🗓️ Les 12 semaines</h2>
+    <div id="weeksGrid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-3"></div>
+  </section>
+
+  <!-- NOS PERFORMANCES -->
+  <section class="glass rounded-2xl p-6 mb-6 shadow-sm">
+    <h2 class="text-2xl font-bold mb-4">🏆 Nos performances</h2>
+    <div id="leaderboard"></div>
+  </section>
+
+  <footer class="text-center text-sm text-gray-500 py-6">
+    Fais avec ❤️ pour vous les filles — On lâche rien 🔥
+  </footer>
+</div>
+
+<script>
+// ============================================================================
+// CONFIG
+// ============================================================================
+const DEFIS_READY = false; // Passer à true quand les défis sont définis
+
+const START_DATE = "2026-04-20"; // Lundi 20 avril 2026
+
+const DAYS = ["L", "M", "M", "J", "V", "S", "D"];
+const DAY_NAMES = ["Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi", "Dimanche"];
+
+const WEEKS = [
+  {
+    n: 1,
+    sport: "10 min d'abdos par jour",
+    sportLink: "https://www.youtube.com/watch?v=wkJpGY6CCnM",
+    sportLinkLabel: "📺 La vidéo de la séance",
+    nutrition: "Semaine sans chocolat 🍫🚫",
+  },
+  { n: 2,  sport: "à venir", nutrition: "à venir" },
+  { n: 3,  sport: "à venir", nutrition: "à venir" },
+  { n: 4,  sport: "à venir", nutrition: "à venir" },
+  { n: 5,  sport: "à venir", nutrition: "à venir" },
+  { n: 6,  sport: "à venir", nutrition: "à venir" },
+  { n: 7,  sport: "à venir", nutrition: "à venir" },
+  { n: 8,  sport: "à venir", nutrition: "à venir" },
+  { n: 9,  sport: "à venir", nutrition: "à venir" },
+  { n: 10, sport: "à venir", nutrition: "à venir" },
+  { n: 11, sport: "à venir", nutrition: "à venir" },
+  { n: 12, sport: "à venir", nutrition: "à venir" },
+];
+
+function isComing(v) {
+  return !v || v === "à venir";
+}
+
+// ============================================================================
+// STATE
+// ============================================================================
+const STORAGE_KEY = "challenge3mois_v2";
+
+function defaultState() {
+  return {
+    participants: [
+      { name: "Lila",    validated: true  },
+      { name: "Lise",    validated: true  },
+      { name: "Mandana", validated: true  },
+      { name: "Lorenza", validated: false },
+      { name: "Léa",     validated: false },
+    ],
+    // progress[weekIdx][participantName] = { sport: [bool x7], nutrition: [bool x7] }
+    progress: {},
+    viewWeek: null,
+  };
+}
+
+let state = loadState();
+
+function loadState() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (raw) {
+      const s = JSON.parse(raw);
+      return Object.assign(defaultState(), s);
+    }
+  } catch (e) {}
+  return defaultState();
+}
+
+function saveState() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+}
+
+// ============================================================================
+// PROGRESS HELPERS
+// ============================================================================
+function getWeekProgress(weekIdx, participantName) {
+  if (!state.progress[weekIdx]) state.progress[weekIdx] = {};
+  if (!state.progress[weekIdx][participantName]) {
+    state.progress[weekIdx][participantName] = {};
+  }
+  const p = state.progress[weekIdx][participantName];
+  if (!p.sport)     p.sport     = [false, false, false, false, false, false, false];
+  if (!p.nutrition) p.nutrition = [false, false, false, false, false, false, false];
+  if (p.poids === undefined) p.poids = null;
+  if (!p.pas)       p.pas       = [null, null, null, null, null, null, null];
+  if (p.eau === undefined)   p.eau = null;
+  if (!p.joker)     p.joker     = 0;
+  return p;
+}
+
+function totalSteps(p) {
+  return p.pas.reduce((s, v) => s + (Number(v) || 0), 0);
+}
+
+function totalJokers(participantName) {
+  let n = 0;
+  for (let i = 0; i < 12; i++) {
+    const p = state.progress[i]?.[participantName];
+    if (p?.joker) n += p.joker;
+  }
+  return n;
+}
+
+// ============================================================================
+// DATE UTILS
+// ============================================================================
+function weekDateRange(weekIdx) {
+  const start = new Date(START_DATE + "T00:00:00");
+  start.setDate(start.getDate() + weekIdx * 7);
+  const end = new Date(start);
+  end.setDate(end.getDate() + 6);
+  return { start, end };
+}
+
+function formatDate(d) {
+  return d.toLocaleDateString("fr-FR", { day: "numeric", month: "short" });
+}
+
+function currentWeekIdx() {
+  const start = new Date(START_DATE + "T00:00:00");
+  const now = new Date();
+  now.setHours(0, 0, 0, 0);
+  const diffDays = Math.floor((now - start) / (1000 * 60 * 60 * 24));
+  return Math.max(0, Math.min(11, Math.floor(diffDays / 7)));
+}
+
+function isBeforeStart() {
+  const start = new Date(START_DATE + "T00:00:00");
+  const now = new Date();
+  now.setHours(0, 0, 0, 0);
+  return now < start;
+}
+
+// ============================================================================
+// RENDER
+// ============================================================================
+function render() {
+  renderHeader();
+  renderParticipants();
+  renderCurrentWeek();
+  renderWeeksGrid();
+  renderLeaderboard();
+}
+
+function renderHeader() {
+  const start = new Date(START_DATE + "T00:00:00");
+  const end = new Date(start);
+  end.setDate(end.getDate() + 83);
+  const status = isBeforeStart()
+    ? "Le challenge commence bientôt !"
+    : `Semaine ${currentWeekIdx() + 1} / 12`;
+  document.getElementById("dateHeader").textContent =
+    `📅 Du ${formatDate(start)} au ${formatDate(end)} · ${status}`;
+}
+
+function renderParticipants() {
+  const validated = state.participants.filter(p => p.validated);
+  const pending   = state.participants.filter(p => !p.validated);
+
+  renderParticipantList("validatedList", validated, true);
+  renderParticipantList("pendingList",   pending,   false);
+
+  document.getElementById("participantCount").textContent =
+    state.participants.length
+      ? `${state.participants.length} copine${state.participants.length > 1 ? "s" : ""}`
+      : "";
+}
+
+function renderParticipantList(elementId, list, isValidated) {
+  const el = document.getElementById(elementId);
+  el.innerHTML = "";
+  if (list.length === 0) {
+    el.innerHTML = `<p class="text-xs text-gray-400 italic">${isValidated ? "Aucune inscription validée pour le moment." : "Personne en attente."}</p>`;
+    return;
+  }
+  list.forEach(p => {
+    const i = state.participants.findIndex(x => x.name === p.name);
+    const div = document.createElement("div");
+    div.className = "inline-flex items-center gap-1 bg-white rounded-full pl-1 pr-2 py-1 shadow-sm";
+    div.innerHTML = `
+      <button onclick="toggleValidation(${i})"
+        class="${isValidated ? 'pill-validated' : 'pill-pending'} text-xs font-semibold rounded-full px-2 py-0.5"
+        title="Cliquer pour changer le statut">
+        ${isValidated ? '✅' : '⏳'}
+      </button>
+      <span class="font-semibold px-1">${escapeHtml(p.name)}</span>
+      <button onclick="removeParticipant(${i})" class="w-5 h-5 rounded-full hover:bg-red-100 text-red-500 text-sm font-bold">×</button>
+    `;
+    el.appendChild(div);
+  });
+}
+
+function renderCurrentWeek() {
+  const idx = state.viewWeek !== null ? state.viewWeek : currentWeekIdx();
+  const week = WEEKS[idx];
+  const { start, end } = weekDateRange(idx);
+
+  document.getElementById("currentWeekTitle").textContent = `Semaine ${week.n}`;
+  document.getElementById("weekSelector").textContent = `Sem. ${idx + 1} / 12`;
+
+  const panel = document.getElementById("currentWeekPanel");
+
+  const sportBlock = isComing(week.sport)
+    ? '<div class="tag-coming">à venir</div>'
+    : `<div class="font-semibold text-gray-800">${escapeHtml(week.sport)}</div>${week.sportLink ? `<a href="${week.sportLink}" target="_blank" rel="noopener" class="inline-flex items-center gap-1 text-xs text-pink-600 hover:text-pink-700 hover:underline mt-2 font-medium">${escapeHtml(week.sportLinkLabel || 'voir le lien')} ↗</a>` : ''}`;
+
+  const healthyBlock = isComing(week.nutrition)
+    ? '<div class="tag-coming">à venir</div>'
+    : `<div class="font-semibold text-gray-800">${escapeHtml(week.nutrition)}</div>${week.nutritionLink ? `<a href="${week.nutritionLink}" target="_blank" rel="noopener" class="inline-flex items-center gap-1 text-xs text-purple-600 hover:text-purple-700 hover:underline mt-2 font-medium">${escapeHtml(week.nutritionLinkLabel || 'voir le lien')} ↗</a>` : ''}`;
+
+  const bothComing = isComing(week.sport) && isComing(week.nutrition);
+
+  panel.innerHTML = `
+    <div class="bg-white/70 rounded-xl p-5">
+      <div class="text-xs text-gray-500 uppercase tracking-wider mb-3">📅 ${formatDate(start)} – ${formatDate(end)}</div>
+      <div class="grid md:grid-cols-2 gap-3">
+        <div class="p-4 bg-pink-50 rounded-lg">
+          <div class="text-xs text-gray-500 uppercase tracking-wider mb-2">🏃‍♀️ Sport</div>
+          ${sportBlock}
+        </div>
+        <div class="p-4 bg-purple-50 rounded-lg">
+          <div class="text-xs text-gray-500 uppercase tracking-wider mb-2">🥗 Healthy</div>
+          ${healthyBlock}
+        </div>
+      </div>
+      ${bothComing ? '<p class="text-xs text-gray-500 mt-4">Les défis de cette semaine seront annoncés bientôt 🔒</p>' : ''}
+    </div>
+  `;
+}
+
+function renderWeeksGrid() {
+  const grid = document.getElementById("weeksGrid");
+  grid.innerHTML = "";
+  const curIdx = currentWeekIdx();
+
+  WEEKS.forEach((week, idx) => {
+    let status = "future";
+    if (!isBeforeStart()) {
+      if (idx < curIdx) status = "past";
+      else if (idx === curIdx) status = "current";
+    }
+    const { start, end } = weekDateRange(idx);
+
+    const card = document.createElement("div");
+    card.className = `week-card ${status} bg-white rounded-xl p-4 shadow-sm cursor-pointer`;
+    card.onclick = () => {
+      state.viewWeek = idx;
+      saveState();
+      render();
+      window.scrollTo({ top: document.querySelector("#currentWeekPanel").offsetTop - 100, behavior: "smooth" });
+    };
+    card.innerHTML = `
+      <div class="flex justify-between items-start mb-3">
+        <div>
+          <div class="text-xs uppercase tracking-wider text-gray-400">Semaine ${week.n}</div>
+          <div class="text-xs text-gray-500">${formatDate(start)} – ${formatDate(end)}</div>
+        </div>
+        ${status === "current" ? '<span class="text-xs bg-pink-100 text-pink-700 px-2 py-0.5 rounded-full font-semibold">En cours</span>' : ''}
+        ${status === "past" ? '<span class="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full">Passée</span>' : ''}
+      </div>
+      <div class="text-sm mb-1"><b>🏃‍♀️ Sport :</b> ${isComing(week.sport) ? '<span class="tag-coming">à venir</span>' : escapeHtml(week.sport)}</div>
+      <div class="text-sm"><b>🥗 Healthy :</b> ${isComing(week.nutrition) ? '<span class="tag-coming">à venir</span>' : escapeHtml(week.nutrition)}</div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+function renderLeaderboard() {
+  const el = document.getElementById("leaderboard");
+  const idx = state.viewWeek !== null ? state.viewWeek : currentWeekIdx();
+  const week = WEEKS[idx];
+  const { start, end } = weekDateRange(idx);
+
+  const validated = state.participants.filter(p => p.validated);
+
+  if (validated.length === 0) {
+    el.innerHTML = `
+      <div class="bg-white/70 rounded-xl p-5 text-center">
+        <p class="text-gray-500 italic">Aucune participante validée pour le moment.</p>
+      </div>
+    `;
+    return;
+  }
+
+  const rows = validated.map(p => {
+    const w = getWeekProgress(idx, p.name);
+    const paysCells = w.pas.map((v, d) => `
+      <td class="px-1 py-1">
+        <input type="number" step="100" min="0" value="${v ?? ''}" placeholder="—"
+          class="w-16 text-center px-1 py-1 rounded border border-gray-200 focus:border-pink-500 outline-none text-xs"
+          onchange="updatePas('${escapeQuote(p.name)}', ${idx}, ${d}, this.value)">
+      </td>
+    `).join('');
+
+    const pasTotal = totalSteps(w);
+
+    return `
+      <tr class="border-b border-gray-100 hover:bg-pink-50/30">
+        <td class="py-2 px-2 font-semibold whitespace-nowrap">${escapeHtml(p.name)}</td>
+        <td class="px-1 py-1">
+          <input type="number" step="0.1" min="0" value="${w.poids ?? ''}" placeholder="—"
+            class="w-16 text-center px-1 py-1 rounded border border-gray-200 focus:border-pink-500 outline-none text-xs"
+            onchange="updatePoids('${escapeQuote(p.name)}', ${idx}, this.value)">
+        </td>
+        ${paysCells}
+        <td class="px-2 py-1 text-center text-xs text-gray-500 whitespace-nowrap">${pasTotal > 0 ? pasTotal.toLocaleString('fr-FR') : '—'}</td>
+        <td class="px-1 py-1">
+          <input type="number" step="0.1" min="0" value="${w.eau ?? ''}" placeholder="—"
+            class="w-16 text-center px-1 py-1 rounded border border-gray-200 focus:border-pink-500 outline-none text-xs"
+            onchange="updateEau('${escapeQuote(p.name)}', ${idx}, this.value)">
+        </td>
+        <td class="px-2 py-1 text-center">
+          <span class="text-xs tag-coming">à venir</span>
+        </td>
+        <td class="px-2 py-1 text-center">
+          <span class="text-xs tag-coming">à venir</span>
+        </td>
+        <td class="px-2 py-1 text-center">
+          <button onclick="toggleJoker('${escapeQuote(p.name)}', ${idx})"
+            class="text-lg ${w.joker ? '' : 'opacity-30 grayscale'}"
+            title="${w.joker ? 'Joker utilisé cette semaine' : 'Cliquer si joker utilisé'}">🎟️</button>
+        </td>
+      </tr>
+    `;
+  }).join('');
+
+  // Résumé des jokers sur tout le challenge
+  const jokerSummary = validated.map(p => {
+    const n = totalJokers(p.name);
+    return `<span class="inline-flex items-center gap-1 bg-white rounded-full px-2 py-0.5 text-xs"><b>${escapeHtml(p.name)}</b> · ${n} / 12 🎟️</span>`;
+  }).join(' ');
+
+  el.innerHTML = `
+    <div class="flex justify-between items-center mb-3 flex-wrap gap-2">
+      <div class="text-sm text-gray-600">
+        📅 <b>Semaine ${week.n}</b> · ${formatDate(start)} – ${formatDate(end)}
+      </div>
+      <div class="flex items-center gap-2">
+        <button onclick="changeWeek(-1)" class="px-3 py-1 rounded-lg bg-white/70 hover:bg-white">←</button>
+        <span class="text-sm font-semibold text-purple-700 min-w-[90px] text-center">Sem. ${idx + 1} / 12</span>
+        <button onclick="changeWeek(1)" class="px-3 py-1 rounded-lg bg-white/70 hover:bg-white">→</button>
+      </div>
+    </div>
+
+    <div class="overflow-x-auto bg-white/70 rounded-xl p-3">
+      <table class="w-full text-sm" style="min-width: 880px;">
+        <thead>
+          <tr class="text-xs uppercase tracking-wider text-gray-500 border-b-2 border-gray-200">
+            <th class="text-left py-2 px-2">Participante</th>
+            <th class="py-2 px-1">⚖️ Poids</th>
+            <th class="py-2 px-1" colspan="7">👣 Pas quotidiens</th>
+            <th class="py-2 px-2">Total</th>
+            <th class="py-2 px-1">💧 Eau</th>
+            <th class="py-2 px-2">🏃 Sport</th>
+            <th class="py-2 px-2">🥗 Healthy</th>
+            <th class="py-2 px-2">🎟️ Joker</th>
+          </tr>
+          <tr class="text-[10px] text-gray-400 border-b border-gray-100">
+            <th></th>
+            <th class="font-normal pb-1">(kg)</th>
+            <th class="font-normal pb-1">Lun</th>
+            <th class="font-normal pb-1">Mar</th>
+            <th class="font-normal pb-1">Mer</th>
+            <th class="font-normal pb-1">Jeu</th>
+            <th class="font-normal pb-1">Ven</th>
+            <th class="font-normal pb-1">Sam</th>
+            <th class="font-normal pb-1">Dim</th>
+            <th></th>
+            <th class="font-normal pb-1">(L/j)</th>
+            <th></th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          ${rows}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="mt-4 bg-white/50 rounded-xl p-3">
+      <div class="text-xs text-gray-500 uppercase tracking-wider mb-2">🎟️ Jokers utilisés sur le challenge</div>
+      <div class="flex flex-wrap gap-2">${jokerSummary}</div>
+    </div>
+
+    <p class="text-xs text-gray-500 mt-3">
+      💡 Chaque <b>lundi</b> : noter son poids · Chaque <b>jour</b> : renseigner les pas et l'eau · Cliquer sur 🎟️ si le joker de la semaine a été utilisé.
+      Les colonnes <i>Sport</i> et <i>Healthy</i> se rempliront au fur et à mesure des défis ✨
+    </p>
+  `;
+}
+
+// ============================================================================
+// ACTIONS
+// ============================================================================
+function addParticipant() {
+  const input = document.getElementById("newParticipant");
+  const name = input.value.trim();
+  if (!name) return;
+  if (state.participants.some(p => p.name.toLowerCase() === name.toLowerCase())) {
+    alert("Cette personne est déjà dans la liste !");
+    return;
+  }
+  state.participants.push({ name, validated: false });
+  input.value = "";
+  saveState();
+  render();
+}
+
+function removeParticipant(idx) {
+  const p = state.participants[idx];
+  if (!p) return;
+  if (!confirm(`Retirer ${p.name} du challenge ?`)) return;
+  state.participants.splice(idx, 1);
+  // Nettoyage des progrès
+  Object.keys(state.progress).forEach(wk => {
+    if (state.progress[wk] && state.progress[wk][p.name]) {
+      delete state.progress[wk][p.name];
+    }
+  });
+  saveState();
+  render();
+}
+
+function toggleValidation(idx) {
+  const p = state.participants[idx];
+  if (!p) return;
+  p.validated = !p.validated;
+  saveState();
+  render();
+}
+
+function changeWeek(delta) {
+  const cur = state.viewWeek !== null ? state.viewWeek : currentWeekIdx();
+  state.viewWeek = Math.max(0, Math.min(11, cur + delta));
+  saveState();
+  render();
+}
+
+function updatePoids(name, weekIdx, value) {
+  const p = getWeekProgress(weekIdx, name);
+  p.poids = value === "" ? null : Number(value);
+  saveState();
+  render();
+}
+
+function updatePas(name, weekIdx, dayIdx, value) {
+  const p = getWeekProgress(weekIdx, name);
+  p.pas[dayIdx] = value === "" ? null : Number(value);
+  saveState();
+  render();
+}
+
+function updateEau(name, weekIdx, value) {
+  const p = getWeekProgress(weekIdx, name);
+  p.eau = value === "" ? null : Number(value);
+  saveState();
+  render();
+}
+
+function toggleJoker(name, weekIdx) {
+  const p = getWeekProgress(weekIdx, name);
+  p.joker = p.joker ? 0 : 1;
+  saveState();
+  render();
+}
+
+function escapeQuote(s) {
+  return String(s).replace(/\\/g, "\\\\").replace(/'/g, "\\'").replace(/"/g, '\\"');
+}
+
+function goToCurrentWeek() {
+  state.viewWeek = null;
+  saveState();
+  render();
+}
+
+// ============================================================================
+// HELPERS
+// ============================================================================
+function escapeHtml(s) {
+  return String(s).replace(/[&<>"']/g, c => ({
+    "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+  }[c]));
+}
+
+// ============================================================================
+// INIT
+// ============================================================================
+render();
+</script>
+
+</body>
+</html>
