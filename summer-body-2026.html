@@ -449,6 +449,20 @@ function defaultState() {
 
 let state = loadState();
 
+// Migration : synchroniser les participantes avec la liste par défaut
+(function migrate() {
+  const defaults = defaultState().participants;
+  defaults.forEach(dp => {
+    const existing = state.participants.find(p => p.name === dp.name);
+    if (existing) {
+      existing.validated = dp.validated;
+    } else {
+      state.participants.push(dp);
+    }
+  });
+  saveState();
+})();
+
 function loadState() {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
