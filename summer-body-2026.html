@@ -489,6 +489,14 @@ let state = loadState();
     state.seededMandanaW1Mon = true;
   }
 
+  // Poids Mandana — Semaine 1
+  if (!state.seededMandanaW1Weight) {
+    if (!state.progress[0]) state.progress[0] = {};
+    if (!state.progress[0]["Mandana"]) state.progress[0]["Mandana"] = {};
+    state.progress[0]["Mandana"].poids = 60.8;
+    state.seededMandanaW1Weight = true;
+  }
+
   saveState();
 })();
 
