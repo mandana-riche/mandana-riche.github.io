@@ -497,6 +497,34 @@ let state = loadState();
     state.seededMandanaW1Weight = true;
   }
 
+  // Préremplissage Lorenza — Semaine 1 · Lundi
+  if (!state.seededLorenzaW1Mon) {
+    if (!state.progress[0]) state.progress[0] = {};
+    if (!state.progress[0]["Lorenza"]) state.progress[0]["Lorenza"] = {};
+    const l = state.progress[0]["Lorenza"];
+    l.seanceSport  = l.seanceSport  || [null, null, null, null, null, null, null];
+    l.pas          = l.pas          || [null, null, null, null, null, null, null];
+    l.sport        = l.sport        || [null, null, null, null, null, null, null];
+    l.nutrition    = l.nutrition    || [null, null, null, null, null, null, null];
+    l.ptitDejSain  = l.ptitDejSain  || [null, null, null, null, null, null, null];
+    l.dejSain      = l.dejSain      || [null, null, null, null, null, null, null];
+    l.gouterSain   = l.gouterSain   || [null, null, null, null, null, null, null];
+    l.dinerSain    = l.dinerSain    || [null, null, null, null, null, null, null];
+    l.eau          = l.eau          || [null, null, null, null, null, null, null];
+    l.sportNotes   = l.sportNotes   || ['', '', '', '', '', '', ''];
+    l.seanceSport[0] = 'green';
+    l.sportNotes[0]  = '15min abdos + renfo';
+    l.pas[0]         = 6100;
+    l.sport[0]       = 'green';
+    l.nutrition[0]   = 'green';
+    l.ptitDejSain[0] = 'green';
+    l.dejSain[0]     = 'green';
+    l.gouterSain[0]  = 'red';
+    l.dinerSain[0]   = 'green';
+    l.eau[0]         = 1.5;
+    state.seededLorenzaW1Mon = true;
+  }
+
   saveState();
 })();
 
