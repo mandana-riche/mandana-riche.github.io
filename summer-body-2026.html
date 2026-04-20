@@ -460,6 +460,35 @@ let state = loadState();
       state.participants.push(dp);
     }
   });
+
+  // Préremplissage Mandana — Semaine 1 · Lundi 20/04
+  if (!state.seededMandanaW1Mon) {
+    if (!state.progress[0]) state.progress[0] = {};
+    if (!state.progress[0]["Mandana"]) state.progress[0]["Mandana"] = {};
+    const m = state.progress[0]["Mandana"];
+    m.seanceSport  = m.seanceSport  || [null, null, null, null, null, null, null];
+    m.pas          = m.pas          || [null, null, null, null, null, null, null];
+    m.sport        = m.sport        || [null, null, null, null, null, null, null];
+    m.nutrition    = m.nutrition    || [null, null, null, null, null, null, null];
+    m.ptitDejSain  = m.ptitDejSain  || [null, null, null, null, null, null, null];
+    m.dejSain      = m.dejSain      || [null, null, null, null, null, null, null];
+    m.gouterSain   = m.gouterSain   || [null, null, null, null, null, null, null];
+    m.dinerSain    = m.dinerSain    || [null, null, null, null, null, null, null];
+    m.eau          = m.eau          || [null, null, null, null, null, null, null];
+    m.seanceSport[0] = 'green';
+    m.sportNotes    = m.sportNotes || ['', '', '', '', '', '', ''];
+    m.sportNotes[0] = 'muscu';
+    m.pas[0]         = 11179;
+    m.sport[0]       = 'green';
+    m.nutrition[0]   = 'green';
+    m.ptitDejSain[0] = 'green';
+    m.dejSain[0]     = 'green';
+    m.gouterSain[0]  = 'green';
+    m.dinerSain[0]   = 'green';
+    m.eau[0]         = 1.8;
+    state.seededMandanaW1Mon = true;
+  }
+
   saveState();
 })();
 
@@ -695,11 +724,13 @@ function renderLeaderboard() {
     return;
   }
 
-  function colorCell(name, field, d, value) {
+  function colorCell(name, field, d, value, note) {
     const bg = value === 'green' ? 'bg-green-400' : value === 'red' ? 'bg-red-400' : 'bg-gray-100';
-    return `<td class="text-center px-1 py-1">
+    const noteHtml = note ? `<div class="text-[9px] text-gray-500 mt-0.5 truncate" title="${escapeHtml(note)}">${escapeHtml(note)}</div>` : '';
+    return `<td class="text-center px-1 py-1 align-top">
       <button onclick="cycleDaily('${escapeQuote(name)}', ${idx}, '${field}', ${d})"
-        class="w-7 h-7 rounded ${bg} border border-gray-200 hover:opacity-80 transition-colors"></button>
+        class="w-7 h-7 rounded ${bg} border border-gray-200 hover:opacity-80 transition-colors"${note ? ` title="${escapeHtml(note)}"` : ''}></button>
+      ${noteHtml}
     </td>`;
   }
 
@@ -726,7 +757,7 @@ function renderLeaderboard() {
     `).join('');
     const eauTotal = w.eau.reduce((s, v) => s + (Number(v) || 0), 0);
 
-    const seanceSportRow = DAYS.map((_, d) => colorCell(p.name, 'seanceSport', d, w.seanceSport[d])).join('');
+    const seanceSportRow = DAYS.map((_, d) => colorCell(p.name, 'seanceSport', d, w.seanceSport[d], (w.sportNotes || [])[d])).join('');
     const sportRow = DAYS.map((_, d) => colorCell(p.name, 'sport', d, w.sport[d])).join('');
     const nutritionRow = DAYS.map((_, d) => colorCell(p.name, 'nutrition', d, w.nutrition[d])).join('');
     const ptitDejRow = DAYS.map((_, d) => colorCell(p.name, 'ptitDejSain', d, w.ptitDejSain[d])).join('');
