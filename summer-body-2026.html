@@ -833,6 +833,15 @@ let state = loadState();
     state.seededW1TueLorenza = true;
   }
 
+  // Correction Lorenza Mardi : goûter & dîner en vert
+  if (!state.seededW1TueLorenzaFixGreen) {
+    if (state.progress[0]?.["Lorenza"]) {
+      state.progress[0]["Lorenza"].gouterSain[1] = 'green';
+      state.progress[0]["Lorenza"].dinerSain[1]  = 'green';
+    }
+    state.seededW1TueLorenzaFixGreen = true;
+  }
+
   saveState();
 })();
 
