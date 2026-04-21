@@ -8,9 +8,25 @@
 <style>
   body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    background: linear-gradient(135deg, #fce7f3 0%, #e9d5ff 50%, #fbcfe8 100%);
+    background: linear-gradient(135deg, #fce8dd 0%, #f5dcc1 50%, #e6c9a5 100%);
     min-height: 100vh;
   }
+  /* Palette custom : pêche douce · sable · caramel doré */
+  .text-orange-500 { color: #c87a5c !important; }
+  .text-orange-600 { color: #b06848 !important; }
+  .text-orange-700 { color: #8f5236 !important; }
+  .bg-orange-50  { background-color: #fdf4e9 !important; }
+  .bg-orange-100 { background-color: #f9e5d0 !important; }
+  .bg-orange-200 { background-color: #f3d2b0 !important; }
+  .border-orange-200 { border-color: #f3d2b0 !important; }
+  .focus\:border-orange-500:focus { border-color: #c87a5c !important; }
+  .from-orange-50  { --tw-gradient-from: #fdf4e9 !important; --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(253,244,233,0)) !important; }
+  .from-orange-500 { --tw-gradient-from: #c87a5c !important; --tw-gradient-stops: var(--tw-gradient-from), var(--tw-gradient-to, rgba(200,122,92,0)) !important; }
+  .text-amber-600 { color: #a27c4f !important; }
+  .text-amber-700 { color: #7a5c3a !important; }
+  .bg-amber-50  { background-color: #fbf3e4 !important; }
+  .to-amber-50  { --tw-gradient-to: #fbf3e4 !important; }
+  .to-amber-600 { --tw-gradient-to: #a27c4f !important; }
   .glass {
     background: rgba(255, 255, 255, 0.75);
     backdrop-filter: blur(10px);
@@ -18,19 +34,19 @@
     border: 1px solid rgba(255, 255, 255, 0.4);
   }
   .gradient-text {
-    background: linear-gradient(135deg, #db2777 0%, #9333ea 100%);
+    background: linear-gradient(135deg, #e08768 0%, #d4a055 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
   }
   .btn-primary {
-    background: linear-gradient(135deg, #db2777 0%, #9333ea 100%);
+    background: linear-gradient(135deg, #e08768 0%, #d4a055 100%);
     color: white;
     transition: transform 0.1s, box-shadow 0.2s;
   }
   .btn-primary:hover {
     transform: translateY(-1px);
-    box-shadow: 0 8px 20px rgba(219, 39, 119, 0.3);
+    box-shadow: 0 8px 20px rgba(143, 82, 54, 0.25);
   }
   .btn-primary:active { transform: translateY(0); }
   .week-card {
@@ -38,11 +54,11 @@
   }
   .week-card:hover {
     transform: translateY(-2px);
-    box-shadow: 0 10px 25px rgba(147, 51, 234, 0.15);
+    box-shadow: 0 10px 25px rgba(143, 82, 54, 0.18);
   }
   .week-card.current {
-    border: 2px solid #db2777;
-    box-shadow: 0 0 0 4px rgba(219, 39, 119, 0.2);
+    border: 2px solid #e08768;
+    box-shadow: 0 0 0 4px rgba(224, 135, 104, 0.25);
   }
   .week-card.past { opacity: 0.85; }
   .week-card.future { opacity: 0.6; }
@@ -62,6 +78,51 @@
     color: #9ca3af;
     font-style: italic;
   }
+  .tabs-nav {
+    display: flex;
+    gap: 0.25rem;
+    overflow-x: auto;
+    padding: 0.25rem;
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 1rem;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+  }
+  .tab-btn {
+    flex: 1;
+    min-width: max-content;
+    padding: 0.6rem 1rem;
+    border-radius: 0.75rem;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: #6b7280;
+    white-space: nowrap;
+    transition: all 0.2s;
+    cursor: pointer;
+  }
+  .tab-btn:hover { color: #374151; background: rgba(255,255,255,0.5); }
+  .tab-btn.active {
+    background: linear-gradient(135deg, #e08768 0%, #d4a055 100%);
+    color: white;
+    box-shadow: 0 4px 12px rgba(143, 82, 54, 0.25);
+  }
+  .tab-panel { display: none; }
+  .tab-panel.active { display: block; }
+  .week-expand-card {
+    transition: all 0.2s;
+    cursor: pointer;
+  }
+  .week-expand-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(143, 82, 54, 0.18);
+  }
+  .week-expand-card.current {
+    border: 2px solid #e08768;
+    box-shadow: 0 0 0 4px rgba(224, 135, 104, 0.25);
+  }
+  .week-expand-card.past { opacity: 0.9; }
+  .week-expand-card.future { opacity: 0.65; }
 </style>
 </head>
 <body>
@@ -70,7 +131,7 @@
 
   <!-- HERO -->
   <header class="text-center mb-10">
-    <div class="inline-block glass rounded-full px-4 py-1 text-sm font-medium text-purple-700 mb-4">
+    <div class="inline-block glass rounded-full px-4 py-1 text-sm font-medium text-amber-700 mb-4">
       🔥 12 semaines · Ensemble · On lâche rien
     </div>
     <h1 class="text-5xl md:text-6xl font-extrabold gradient-text mb-3">Summer Body 2026</h1>
@@ -78,6 +139,17 @@
     <p class="text-gray-500 text-sm mt-1 italic">Constance &gt; Perfection</p>
     <div id="dateHeader" class="mt-4 text-sm text-gray-500"></div>
   </header>
+
+  <!-- TABS NAV -->
+  <nav class="tabs-nav mb-6">
+    <button class="tab-btn active" data-tab="challenge">🏠 Le challenge</button>
+    <button class="tab-btn" data-tab="weeks">🗓️ Les 12 semaines</button>
+    <button class="tab-btn" data-tab="performance">🏆 Nos performances</button>
+    <button class="tab-btn" data-tab="articles">📚 Articles</button>
+  </nav>
+
+  <!-- ========== TAB : LE CHALLENGE ========== -->
+  <div class="tab-panel active" data-panel="challenge">
 
   <!-- INTRO -->
   <section class="glass rounded-2xl p-6 mb-6 shadow-sm">
@@ -90,12 +162,15 @@
     </div>
   </section>
 
+  <!-- OÙ ON EN EST -->
+  <section id="statusWidget" class="glass rounded-2xl p-6 mb-6 shadow-sm"></section>
+
   <!-- L'ESPRIT DU CHALLENGE -->
   <section class="glass rounded-2xl p-6 mb-6 shadow-sm">
     <details>
       <summary class="flex justify-between items-center">
         <h2 class="text-2xl font-bold">✨ L'esprit du challenge</h2>
-        <span class="chevron text-2xl text-purple-600">›</span>
+        <span class="chevron text-2xl text-amber-600">›</span>
       </summary>
       <div class="grid md:grid-cols-2 gap-4 mt-4">
         <div class="bg-white/70 rounded-xl p-4">
@@ -129,7 +204,7 @@
         </p>
 
         <details>
-          <summary class="flex items-center gap-2 cursor-pointer text-sm font-semibold text-purple-700 hover:underline mb-2">
+          <summary class="flex items-center gap-2 cursor-pointer text-sm font-semibold text-amber-700 hover:underline mb-2">
             <span class="chevron text-lg">›</span> Voir l'exemple
           </summary>
           <div class="bg-white/70 rounded-xl p-4 shadow-sm mt-2">
@@ -274,10 +349,10 @@
 
   <!-- LES FONDAMENTAUX -->
   <section class="glass rounded-2xl p-6 mb-6 shadow-sm">
-    <details open>
+    <details>
       <summary class="flex justify-between items-center">
         <h2 class="text-2xl font-bold">🧱 Les fondamentaux</h2>
-        <span class="chevron text-2xl text-purple-600">›</span>
+        <span class="chevron text-2xl text-amber-600">›</span>
       </summary>
       <p class="text-gray-600 mt-3 mb-4 text-sm">
         <b>80% du résultat</b> vient de 4 piliers tout simples. Les défis hebdo apporteront le petit plus ✨
@@ -321,7 +396,7 @@
         </div>
       </div>
 
-      <div class="bg-gradient-to-r from-pink-50 to-purple-50 border border-pink-200 rounded-xl p-4">
+      <div class="bg-gradient-to-r from-orange-50 to-amber-50 border border-orange-200 rounded-xl p-4">
         <div class="flex items-start gap-3">
           <div class="text-2xl">🎉</div>
           <div>
@@ -335,57 +410,53 @@
     </details>
   </section>
 
-  <!-- PARTICIPANTES -->
-  <section class="glass rounded-2xl p-6 mb-6 shadow-sm">
-    <div class="flex justify-between items-center mb-4">
-      <h2 class="text-2xl font-bold">👯 Les participantes</h2>
-      <span id="participantCount" class="text-sm text-gray-500"></span>
-    </div>
+  </div><!-- /TAB challenge -->
 
-    <div class="mb-5">
-      <h3 class="text-sm font-semibold text-green-700 mb-2">✅ Inscription validée</h3>
-      <div id="validatedList" class="flex flex-wrap gap-2"></div>
-    </div>
-
-    <div class="mb-5">
-      <h3 class="text-sm font-semibold text-amber-700 mb-2">⏳ En attente de validation</h3>
-      <div id="pendingList" class="flex flex-wrap gap-2"></div>
-    </div>
-
-    <div class="flex gap-2 pt-4 border-t border-gray-200">
-      <input id="newParticipant" type="text" placeholder="Prénom..."
-        class="flex-1 px-4 py-2 rounded-xl border-2 border-gray-200 focus:border-pink-500 outline-none"
-        onkeypress="if(event.key==='Enter') addParticipant()">
-      <button onclick="addParticipant()" class="btn-primary px-5 py-2 rounded-xl font-semibold">+ Ajouter</button>
-    </div>
-    <p class="text-xs text-gray-500 mt-2">Astuce : clique sur le statut d'une participante pour la valider ou la remettre en attente.</p>
-  </section>
-
-  <!-- SEMAINE EN COURS -->
-  <section class="glass rounded-2xl p-6 mb-6 shadow-sm">
-    <div class="flex justify-between items-center mb-4 flex-wrap gap-2">
-      <h2 class="text-2xl font-bold">🔥 <span id="currentWeekTitle">Semaine en cours</span></h2>
-      <div class="flex items-center gap-2">
-        <button onclick="changeWeek(-1)" class="px-3 py-1 rounded-lg bg-white/70 hover:bg-white">←</button>
-        <span id="weekSelector" class="text-sm font-semibold text-purple-700 min-w-[100px] text-center"></span>
-        <button onclick="changeWeek(1)" class="px-3 py-1 rounded-lg bg-white/70 hover:bg-white">→</button>
-        <button onclick="goToCurrentWeek()" class="ml-2 text-xs text-purple-600 hover:underline">📍 aujourd'hui</button>
+  <!-- ========== TAB : LES 12 SEMAINES ========== -->
+  <div class="tab-panel" data-panel="weeks">
+    <section class="glass rounded-2xl p-6 mb-6 shadow-sm">
+      <div class="flex items-center justify-between mb-4 flex-wrap gap-2">
+        <h2 class="text-2xl font-bold">🗓️ Les 12 semaines</h2>
+        <button onclick="scrollToCurrentWeek()" class="text-xs text-amber-600 hover:underline">📍 aller à la semaine en cours</button>
       </div>
-    </div>
-    <div id="currentWeekPanel"></div>
-  </section>
+      <p class="text-sm text-gray-600 mb-4">Clique sur une semaine pour voir le détail des défis et la vidéo associée.</p>
+      <div id="weeksGrid" class="grid md:grid-cols-2 gap-3"></div>
+    </section>
+  </div>
 
-  <!-- OVERVIEW 12 SEMAINES -->
-  <section class="glass rounded-2xl p-6 mb-6 shadow-sm">
-    <h2 class="text-2xl font-bold mb-4">🗓️ Les 12 semaines</h2>
-    <div id="weeksGrid" class="grid md:grid-cols-2 lg:grid-cols-3 gap-3"></div>
-  </section>
+  <!-- ========== TAB : NOS PERFORMANCES ========== -->
+  <div class="tab-panel" data-panel="performance">
+    <section class="glass rounded-2xl p-6 mb-6 shadow-sm">
+      <div class="flex justify-between items-center mb-4 flex-wrap gap-2">
+        <h2 class="text-2xl font-bold">🏆 Nos performances</h2>
+      </div>
+      <div id="leaderboard"></div>
+    </section>
+  </div>
 
-  <!-- NOS PERFORMANCES -->
-  <section class="glass rounded-2xl p-6 mb-6 shadow-sm">
-    <h2 class="text-2xl font-bold mb-4">🏆 Nos performances</h2>
-    <div id="leaderboard"></div>
-  </section>
+  <!-- ========== TAB : ARTICLES ========== -->
+  <div class="tab-panel" data-panel="articles">
+    <section class="glass rounded-2xl p-6 mb-6 shadow-sm">
+      <h2 class="text-2xl font-bold mb-3">📚 Articles &amp; conseils</h2>
+      <p class="text-sm text-gray-600 mb-4">
+        Des petits articles pour comprendre <i>pourquoi</i> on fait ce qu'on fait. Chaque article est sourcé (études scientifiques).
+      </p>
+      <div class="grid md:grid-cols-2 gap-3">
+        <a href="articles/hydration.html" class="block bg-white/70 hover:bg-white rounded-xl p-4 shadow-sm transition-all hover:-translate-y-0.5">
+          <div class="flex items-start gap-3">
+            <div class="text-3xl">💧</div>
+            <div class="flex-1">
+              <div class="text-xs text-amber-600 uppercase tracking-wider mb-1">Article #1</div>
+              <h3 class="font-semibold text-gray-900 mb-1">L'hydratation : pourquoi c'est vital</h3>
+              <p class="text-sm text-gray-600">Impact sur la peau, le cerveau, le poids et la performance sportive.</p>
+              <div class="text-xs text-orange-600 mt-2 font-medium">Lire l'article →</div>
+            </div>
+          </div>
+        </a>
+      </div>
+      <p class="text-xs text-gray-500 mt-4 italic">D'autres articles à venir… 🤞</p>
+    </section>
+  </div>
 
   <footer class="text-center text-sm text-gray-500 py-6">
     Fais avec ❤️ pour vous les filles — On lâche rien 🔥
@@ -614,6 +685,115 @@ let state = loadState();
     state.seededLorenzaW1Mon = true;
   }
 
+  // Force reset canonique Semaine 1 · Lundi — v2
+  if (!state.seededW1MonCanonicalV2) {
+    const forceSet = (name, data) => {
+      if (!state.progress[0]) state.progress[0] = {};
+      if (!state.progress[0][name]) state.progress[0][name] = {};
+      const p = state.progress[0][name];
+      const initArr = () => [null, null, null, null, null, null, null];
+      const initStr = () => ['', '', '', '', '', '', ''];
+      p.seanceSport  = p.seanceSport  || initArr();
+      p.sport        = p.sport        || initArr();
+      p.nutrition    = p.nutrition    || initArr();
+      p.pas          = p.pas          || initArr();
+      p.eau          = p.eau          || initArr();
+      p.ptitDejSain  = p.ptitDejSain  || initArr();
+      p.dejSain      = p.dejSain      || initArr();
+      p.gouterSain   = p.gouterSain   || initArr();
+      p.dinerSain    = p.dinerSain    || initArr();
+      p.sportNotes   = p.sportNotes   || initStr();
+      p.ptitDejNotes = p.ptitDejNotes || initStr();
+      p.dejNotes     = p.dejNotes     || initStr();
+      p.gouterNotes  = p.gouterNotes  || initStr();
+      p.dinerNotes   = p.dinerNotes   || initStr();
+      Object.entries(data).forEach(([k, v]) => {
+        if (Array.isArray(p[k])) p[k][0] = v;
+        else p[k] = v;
+      });
+    };
+
+    forceSet("Mandana", {
+      poids: 60.8,
+      seanceSport: 'green', sportNotes: 'muscu',
+      pas: 11179,
+      sport: 'green', nutrition: 'green',
+      ptitDejSain: 'green', dejSain: 'green', gouterSain: 'green', dinerSain: 'green',
+      eau: 1.8,
+    });
+    forceSet("Lise", {
+      seanceSport: 'green',
+      pas: 8855,
+      sport: null, nutrition: 'green',
+      ptitDejSain: 'green', dejSain: 'green', gouterSain: 'red', dinerSain: 'green',
+      gouterNotes: 'Muffin chocolat pistache',
+      eau: 1.8,
+    });
+    forceSet("Lorenza", {
+      seanceSport: 'green', sportNotes: '15min abdos + renfo',
+      pas: 6100,
+      sport: 'green', nutrition: 'green',
+      ptitDejSain: 'green', dejSain: 'green', gouterSain: 'red', dinerSain: 'green',
+      eau: 1.5,
+    });
+    forceSet("Léa", {
+      poids: 88.10,
+      seanceSport: 'red',
+      pas: 15951,
+      sport: 'green', nutrition: 'green',
+      ptitDejSain: 'green', dejSain: 'green', gouterSain: 'green', dinerSain: 'orange',
+      dinerNotes: 'saucisse purée',
+      eau: 1.5,
+    });
+    state.seededW1MonCanonicalV2 = true;
+  }
+
+  // Semaine 1 · Mardi — Lise & Mandana
+  if (!state.seededW1TueLiseMandana) {
+    const setDay = (name, dayIdx, data) => {
+      if (!state.progress[0]) state.progress[0] = {};
+      if (!state.progress[0][name]) state.progress[0][name] = {};
+      const p = state.progress[0][name];
+      const initArr = () => [null, null, null, null, null, null, null];
+      const initStr = () => ['', '', '', '', '', '', ''];
+      p.seanceSport  = p.seanceSport  || initArr();
+      p.sport        = p.sport        || initArr();
+      p.nutrition    = p.nutrition    || initArr();
+      p.pas          = p.pas          || initArr();
+      p.eau          = p.eau          || initArr();
+      p.ptitDejSain  = p.ptitDejSain  || initArr();
+      p.dejSain      = p.dejSain      || initArr();
+      p.gouterSain   = p.gouterSain   || initArr();
+      p.dinerSain    = p.dinerSain    || initArr();
+      p.sportNotes   = p.sportNotes   || initStr();
+      p.ptitDejNotes = p.ptitDejNotes || initStr();
+      p.dejNotes     = p.dejNotes     || initStr();
+      p.gouterNotes  = p.gouterNotes  || initStr();
+      p.dinerNotes   = p.dinerNotes   || initStr();
+      Object.entries(data).forEach(([k, v]) => {
+        if (Array.isArray(p[k])) p[k][dayIdx] = v;
+      });
+    };
+
+    setDay("Lise", 1, {
+      seanceSport: 'green', sportNotes: '40min marche + 20 min renfo',
+      pas: 12739,
+      sport: 'green', nutrition: 'green',
+      ptitDejSain: 'green', dejSain: 'green', gouterSain: 'green', dinerSain: 'green',
+      eau: 2,
+    });
+    setDay("Mandana", 1, {
+      seanceSport: 'green', sportNotes: 'Footing 50min',
+      pas: 18100,
+      sport: 'green', nutrition: 'green',
+      ptitDejSain: 'green',
+      dejSain: 'orange', dejNotes: 'restaurant : ravioles à la truffe, beaucoup de crème',
+      gouterSain: 'green', dinerSain: 'green',
+      eau: 1.5,
+    });
+    state.seededW1TueLiseMandana = true;
+  }
+
   saveState();
 })();
 
@@ -703,8 +883,7 @@ function isBeforeStart() {
 // ============================================================================
 function render() {
   renderHeader();
-  renderParticipants();
-  renderCurrentWeek();
+  renderStatusWidget();
   renderWeeksGrid();
   renderLeaderboard();
 }
@@ -720,83 +899,57 @@ function renderHeader() {
     `📅 Du ${formatDate(start)} au ${formatDate(end)} · ${status}`;
 }
 
-function renderParticipants() {
-  const validated = state.participants.filter(p => p.validated);
-  const pending   = state.participants.filter(p => !p.validated);
+function renderStatusWidget() {
+  const el = document.getElementById("statusWidget");
+  if (!el) return;
+  const start = new Date(START_DATE + "T00:00:00");
+  const end = new Date(start);
+  end.setDate(end.getDate() + 83);
+  const now = new Date();
+  now.setHours(0, 0, 0, 0);
 
-  renderParticipantList("validatedList", validated, true);
-  renderParticipantList("pendingList",   pending,   false);
-
-  document.getElementById("participantCount").textContent =
-    state.participants.length
-      ? `${state.participants.length} copine${state.participants.length > 1 ? "s" : ""}`
-      : "";
-}
-
-function renderParticipantList(elementId, list, isValidated) {
-  const el = document.getElementById(elementId);
-  el.innerHTML = "";
-  if (list.length === 0) {
-    el.innerHTML = `<p class="text-xs text-gray-400 italic">${isValidated ? "Aucune inscription validée pour le moment." : "Personne en attente."}</p>`;
+  if (isBeforeStart()) {
+    const daysBefore = Math.ceil((start - now) / (1000 * 60 * 60 * 24));
+    el.innerHTML = `
+      <div class="text-center">
+        <div class="text-xs uppercase tracking-wider text-gray-500 mb-1">🚀 Début du challenge</div>
+        <div class="text-3xl font-extrabold gradient-text">J-${daysBefore}</div>
+        <div class="text-sm text-gray-600 mt-1">Rendez-vous le ${formatDate(start)}</div>
+      </div>
+    `;
     return;
   }
-  list.forEach(p => {
-    const i = state.participants.findIndex(x => x.name === p.name);
-    const div = document.createElement("div");
-    div.className = "inline-flex items-center gap-1 bg-white rounded-full pl-1 pr-2 py-1 shadow-sm";
-    div.innerHTML = `
-      <button onclick="toggleValidation(${i})"
-        class="${isValidated ? 'pill-validated' : 'pill-pending'} text-xs font-semibold rounded-full px-2 py-0.5"
-        title="Cliquer pour changer le statut">
-        ${isValidated ? '✅' : '⏳'}
-      </button>
-      <span class="font-semibold px-1">${escapeHtml(p.name)}</span>
-      <button onclick="removeParticipant(${i})" class="w-5 h-5 rounded-full hover:bg-red-100 text-red-500 text-sm font-bold">×</button>
-    `;
-    el.appendChild(div);
-  });
-}
 
-function renderCurrentWeek() {
-  const idx = state.viewWeek !== null ? state.viewWeek : currentWeekIdx();
+  const idx = currentWeekIdx();
   const week = WEEKS[idx];
-  const { start, end } = weekDateRange(idx);
+  const { start: ws, end: we } = weekDateRange(idx);
+  const daysLeft = Math.max(0, Math.ceil((end - now) / (1000 * 60 * 60 * 24)));
+  const weeksLeft = 12 - (idx + 1);
+  const progressPct = Math.min(100, Math.round(((idx + 1) / 12) * 100));
 
-  document.getElementById("currentWeekTitle").textContent = `Semaine ${week.n}`;
-  document.getElementById("weekSelector").textContent = `Sem. ${idx + 1} / 12`;
-
-  const panel = document.getElementById("currentWeekPanel");
-
-  const sportBlock = isComing(week.sport)
-    ? '<div class="tag-coming">à venir</div>'
-    : `<div class="font-semibold text-gray-800">${escapeHtml(week.sport)}</div>${week.sportLink ? `<a href="${week.sportLink}" target="_blank" rel="noopener" class="inline-flex items-center gap-1 text-xs text-pink-600 hover:text-pink-700 hover:underline mt-2 font-medium">${escapeHtml(week.sportLinkLabel || 'voir le lien')} ↗</a>` : ''}`;
-
-  const healthyBlock = isComing(week.nutrition)
-    ? '<div class="tag-coming">à venir</div>'
-    : `<div class="font-semibold text-gray-800">${escapeHtml(week.nutrition)}</div>${week.nutritionLink ? `<a href="${week.nutritionLink}" target="_blank" rel="noopener" class="inline-flex items-center gap-1 text-xs text-purple-600 hover:text-purple-700 hover:underline mt-2 font-medium">${escapeHtml(week.nutritionLinkLabel || 'voir le lien')} ↗</a>` : ''}`;
-
-  const bothComing = isComing(week.sport) && isComing(week.nutrition);
-
-  panel.innerHTML = `
-    <div class="bg-white/70 rounded-xl p-5">
-      <div class="text-xs text-gray-500 uppercase tracking-wider mb-3">📅 ${formatDate(start)} – ${formatDate(end)}</div>
-      <div class="grid md:grid-cols-2 gap-3">
-        <div class="p-4 bg-pink-50 rounded-lg">
-          <div class="text-xs text-gray-500 uppercase tracking-wider mb-2">🏃‍♀️ Sport</div>
-          ${sportBlock}
-        </div>
-        <div class="p-4 bg-purple-50 rounded-lg">
-          <div class="text-xs text-gray-500 uppercase tracking-wider mb-2">🥗 Healthy</div>
-          ${healthyBlock}
-        </div>
+  el.innerHTML = `
+    <div class="flex items-center justify-between flex-wrap gap-4 mb-3">
+      <div>
+        <div class="text-xs uppercase tracking-wider text-gray-500 mb-1">🔥 On en est où ?</div>
+        <div class="text-2xl font-extrabold gradient-text">Semaine ${week.n} / 12</div>
+        <div class="text-xs text-gray-500 mt-1">${formatDate(ws)} – ${formatDate(we)}</div>
       </div>
-      ${bothComing ? '<p class="text-xs text-gray-500 mt-4">Les défis de cette semaine seront annoncés bientôt 🔒</p>' : ''}
+      <div class="text-right">
+        <div class="text-xs uppercase tracking-wider text-gray-500 mb-1">⏳ Jours restants</div>
+        <div class="text-2xl font-extrabold text-amber-700">${daysLeft}</div>
+        <div class="text-xs text-gray-500 mt-1">${weeksLeft} semaine${weeksLeft > 1 ? 's' : ''} à venir</div>
+      </div>
     </div>
+    <div class="w-full bg-gray-200 rounded-full h-2 overflow-hidden">
+      <div class="h-full rounded-full bg-gradient-to-r from-orange-500 to-amber-600" style="width: ${progressPct}%"></div>
+    </div>
+    <div class="text-xs text-gray-500 mt-2 text-center">${progressPct}% du chemin parcouru 💪</div>
   `;
 }
 
 function renderWeeksGrid() {
   const grid = document.getElementById("weeksGrid");
+  if (!grid) return;
   grid.innerHTML = "";
   const curIdx = currentWeekIdx();
 
@@ -807,29 +960,55 @@ function renderWeeksGrid() {
       else if (idx === curIdx) status = "current";
     }
     const { start, end } = weekDateRange(idx);
+    const isOpen = status === "current";
 
-    const card = document.createElement("div");
-    card.className = `week-card ${status} bg-white rounded-xl p-4 shadow-sm cursor-pointer`;
-    card.onclick = () => {
-      state.viewWeek = idx;
-      saveState();
-      render();
-      window.scrollTo({ top: document.querySelector("#currentWeekPanel").offsetTop - 100, behavior: "smooth" });
-    };
+    const sportBlock = isComing(week.sport)
+      ? '<span class="tag-coming text-sm">à venir</span>'
+      : `<div class="text-sm font-semibold text-gray-800">${escapeHtml(week.sport)}</div>${week.sportLink ? `<a href="${week.sportLink}" target="_blank" rel="noopener" onclick="event.stopPropagation()" class="inline-flex items-center gap-1 text-xs text-orange-600 hover:text-orange-700 hover:underline mt-2 font-medium">${escapeHtml(week.sportLinkLabel || 'voir le lien')} ↗</a>` : ''}`;
+
+    const healthyBlock = isComing(week.nutrition)
+      ? '<span class="tag-coming text-sm">à venir</span>'
+      : `<div class="text-sm font-semibold text-gray-800">${escapeHtml(week.nutrition)}</div>${week.nutritionLink ? `<a href="${week.nutritionLink}" target="_blank" rel="noopener" onclick="event.stopPropagation()" class="inline-flex items-center gap-1 text-xs text-amber-600 hover:text-amber-700 hover:underline mt-2 font-medium">${escapeHtml(week.nutritionLinkLabel || 'voir le lien')} ↗</a>` : ''}`;
+
+    const card = document.createElement("details");
+    card.className = `week-expand-card ${status} bg-white rounded-xl shadow-sm overflow-hidden`;
+    card.dataset.weekIdx = idx;
+    if (isOpen) card.open = true;
+
     card.innerHTML = `
-      <div class="flex justify-between items-start mb-3">
+      <summary class="p-4 list-none cursor-pointer flex justify-between items-start">
         <div>
           <div class="text-xs uppercase tracking-wider text-gray-400">Semaine ${week.n}</div>
           <div class="text-xs text-gray-500">${formatDate(start)} – ${formatDate(end)}</div>
         </div>
-        ${status === "current" ? '<span class="text-xs bg-pink-100 text-pink-700 px-2 py-0.5 rounded-full font-semibold">En cours</span>' : ''}
-        ${status === "past" ? '<span class="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full">Passée</span>' : ''}
+        <div class="flex items-center gap-2">
+          ${status === "current" ? '<span class="text-xs bg-orange-100 text-orange-700 px-2 py-0.5 rounded-full font-semibold">En cours</span>' : ''}
+          ${status === "past" ? '<span class="text-xs bg-gray-100 text-gray-600 px-2 py-0.5 rounded-full">Passée</span>' : ''}
+          <span class="chevron text-xl text-amber-600">›</span>
+        </div>
+      </summary>
+      <div class="px-4 pb-4 grid md:grid-cols-2 gap-3">
+        <div class="p-3 bg-orange-50 rounded-lg">
+          <div class="text-[10px] text-gray-500 uppercase tracking-wider mb-1">🏃‍♀️ Défi sport</div>
+          ${sportBlock}
+        </div>
+        <div class="p-3 bg-amber-50 rounded-lg">
+          <div class="text-[10px] text-gray-500 uppercase tracking-wider mb-1">🥗 Défi healthy</div>
+          ${healthyBlock}
+        </div>
       </div>
-      <div class="text-sm mb-1"><b>🏃‍♀️ Sport :</b> ${isComing(week.sport) ? '<span class="tag-coming">à venir</span>' : escapeHtml(week.sport)}</div>
-      <div class="text-sm"><b>🥗 Healthy :</b> ${isComing(week.nutrition) ? '<span class="tag-coming">à venir</span>' : escapeHtml(week.nutrition)}</div>
     `;
     grid.appendChild(card);
   });
+}
+
+function scrollToCurrentWeek() {
+  const idx = currentWeekIdx();
+  const card = document.querySelector(`.week-expand-card[data-week-idx="${idx}"]`);
+  if (card) {
+    card.open = true;
+    card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
 }
 
 function renderLeaderboard() {
@@ -849,13 +1028,14 @@ function renderLeaderboard() {
     return;
   }
 
-  function colorCell(name, field, d, value, note) {
-    const bg = value === 'green' ? 'bg-green-400' : value === 'orange' ? 'bg-orange-400' : value === 'red' ? 'bg-red-400' : 'bg-gray-100';
-    const noteHtml = note ? `<div class="text-[9px] text-gray-500 mt-0.5 truncate" title="${escapeHtml(note)}">${escapeHtml(note)}</div>` : '';
-    return `<td class="text-center px-1 py-1 align-top">
-      <button onclick="cycleDaily('${escapeQuote(name)}', ${idx}, '${field}', ${d})"
-        class="w-7 h-7 rounded ${bg} border border-gray-200 hover:opacity-80 transition-colors"${note ? ` title="${escapeHtml(note)}"` : ''}></button>
-      ${noteHtml}
+  function colorCell(name, field, d, value, noteIdx) {
+    const bg = value === 'green' ? 'bg-green-400' : value === 'orange' ? 'bg-orange-400' : value === 'red' ? 'bg-red-400' : 'bg-gray-200';
+    const badge = noteIdx ? `<sup class="text-[9px] text-gray-500 ml-0.5">${noteIdx}</sup>` : '';
+    return `<td class="text-center px-1 py-1 align-middle">
+      <span class="inline-flex items-center justify-center whitespace-nowrap">
+        <button onclick="cycleDaily('${escapeQuote(name)}', ${idx}, '${field}', ${d})"
+          class="w-4 h-4 rounded-full ${bg} border border-gray-300 hover:scale-125 transition-transform"></button>${badge}
+      </span>
     </td>`;
   }
 
@@ -863,32 +1043,71 @@ function renderLeaderboard() {
     const w = getWeekProgress(idx, p.name);
     const pasTotal = totalSteps(w);
 
+    // Collecte des notes par jour + index de référence
+    const noteCatalogue = [
+      { colorField: 'seanceSport', notes: w.sportNotes,   emoji: '💪' },
+      { colorField: 'ptitDejSain', notes: w.ptitDejNotes, emoji: '☀️' },
+      { colorField: 'dejSain',     notes: w.dejNotes,     emoji: '🥗' },
+      { colorField: 'gouterSain',  notes: w.gouterNotes,  emoji: '🍎' },
+      { colorField: 'dinerSain',   notes: w.dinerNotes,   emoji: '🍽️' },
+    ];
+    const noteIdxMap = {};
+    const notesByDay = {};
+    let noteCounter = 0;
+    for (let d = 0; d < 7; d++) {
+      for (const { colorField, notes, emoji } of noteCatalogue) {
+        if (notes && notes[d]) {
+          noteCounter++;
+          noteIdxMap[`${colorField}-${d}`] = noteCounter;
+          if (!notesByDay[d]) notesByDay[d] = [];
+          notesByDay[d].push({ idx: noteCounter, emoji, text: notes[d] });
+        }
+      }
+    }
+    const hasAnyNote = noteCounter > 0;
+
     const dayHeaders = DAYS.map((d, i) => `<th class="font-normal text-[10px] text-gray-400 px-1 py-1">${d}</th>`).join('');
 
     const pasRow = w.pas.map((v, d) => `
-      <td class="px-1 py-1">
+      <td class="text-center px-1 py-1 align-middle">
         <input type="number" step="100" min="0" value="${v ?? ''}" placeholder="—"
-          class="w-14 text-center px-1 py-1 rounded border border-gray-200 focus:border-pink-500 outline-none text-xs"
+          class="w-14 text-center px-1 py-0.5 rounded border border-gray-200 focus:border-orange-500 outline-none text-xs"
           onchange="updatePas('${escapeQuote(p.name)}', ${idx}, ${d}, this.value)">
       </td>
     `).join('');
 
     const eauRow = w.eau.map((v, d) => `
-      <td class="px-1 py-1">
+      <td class="text-center px-1 py-1 align-middle">
         <input type="number" step="0.1" min="0" value="${v ?? ''}" placeholder="—"
-          class="w-14 text-center px-1 py-1 rounded border border-gray-200 focus:border-pink-500 outline-none text-xs"
+          class="w-14 text-center px-1 py-0.5 rounded border border-gray-200 focus:border-orange-500 outline-none text-xs"
           onchange="updateEau('${escapeQuote(p.name)}', ${idx}, ${d}, this.value)">
       </td>
     `).join('');
     const eauTotal = w.eau.reduce((s, v) => s + (Number(v) || 0), 0);
 
-    const seanceSportRow = DAYS.map((_, d) => colorCell(p.name, 'seanceSport', d, w.seanceSport[d], (w.sportNotes || [])[d])).join('');
+    const seanceSportRow = DAYS.map((_, d) => colorCell(p.name, 'seanceSport', d, w.seanceSport[d], noteIdxMap[`seanceSport-${d}`])).join('');
     const sportRow = DAYS.map((_, d) => colorCell(p.name, 'sport', d, w.sport[d])).join('');
     const nutritionRow = DAYS.map((_, d) => colorCell(p.name, 'nutrition', d, w.nutrition[d])).join('');
-    const ptitDejRow = DAYS.map((_, d) => colorCell(p.name, 'ptitDejSain', d, w.ptitDejSain[d], (w.ptitDejNotes || [])[d])).join('');
-    const dejRow = DAYS.map((_, d) => colorCell(p.name, 'dejSain', d, w.dejSain[d], (w.dejNotes || [])[d])).join('');
-    const gouterRow = DAYS.map((_, d) => colorCell(p.name, 'gouterSain', d, w.gouterSain[d], (w.gouterNotes || [])[d])).join('');
-    const dinerRow = DAYS.map((_, d) => colorCell(p.name, 'dinerSain', d, w.dinerSain[d], (w.dinerNotes || [])[d])).join('');
+    const ptitDejRow = DAYS.map((_, d) => colorCell(p.name, 'ptitDejSain', d, w.ptitDejSain[d], noteIdxMap[`ptitDejSain-${d}`])).join('');
+    const dejRow = DAYS.map((_, d) => colorCell(p.name, 'dejSain', d, w.dejSain[d], noteIdxMap[`dejSain-${d}`])).join('');
+    const gouterRow = DAYS.map((_, d) => colorCell(p.name, 'gouterSain', d, w.gouterSain[d], noteIdxMap[`gouterSain-${d}`])).join('');
+    const dinerRow = DAYS.map((_, d) => colorCell(p.name, 'dinerSain', d, w.dinerSain[d], noteIdxMap[`dinerSain-${d}`])).join('');
+
+    const notesRow = hasAnyNote ? `
+      <tr>
+        <td class="text-[10px] text-gray-500 py-1 pr-2 align-top font-medium">📝 Notes</td>
+        ${DAYS.map((_, d) => {
+          const ns = notesByDay[d];
+          if (!ns) return '<td class="px-1 py-1"></td>';
+          return `<td class="px-1 py-1 align-top text-center">
+            <div class="text-[9px] text-gray-500 leading-tight break-words">
+              ${ns.map(n => `<div><sup class="text-gray-400">${n.idx}</sup> ${n.emoji} ${escapeHtml(n.text)}</div>`).join('')}
+            </div>
+          </td>`;
+        }).join('')}
+        <td></td>
+      </tr>
+    ` : '';
 
     return `
       <div class="bg-white/70 rounded-xl p-4 shadow-sm">
@@ -898,7 +1117,7 @@ function renderLeaderboard() {
             <div class="flex items-center gap-1">
               <span class="text-xs text-gray-500">⚖️</span>
               <input type="number" step="0.1" min="0" value="${w.poids ?? ''}" placeholder="kg"
-                class="w-16 text-center px-1 py-1 rounded border border-gray-200 focus:border-pink-500 outline-none text-xs"
+                class="w-16 text-center px-1 py-1 rounded border border-gray-200 focus:border-orange-500 outline-none text-xs"
                 onchange="updatePoids('${escapeQuote(p.name)}', ${idx}, this.value)">
             </div>
             <button onclick="toggleJoker('${escapeQuote(p.name)}', ${idx})"
@@ -907,66 +1126,73 @@ function renderLeaderboard() {
           </div>
         </div>
         <div class="overflow-x-auto">
-          <table class="w-full text-sm">
+          <table class="w-full text-sm" style="table-layout: fixed;">
+            <colgroup>
+              <col style="width: 110px;">
+              <col><col><col><col><col><col><col>
+              <col style="width: 54px;">
+            </colgroup>
             <thead>
               <tr>
-                <th class="text-left text-xs text-gray-500 py-1 pr-2 w-28"></th>
+                <th class="text-left text-xs text-gray-500 py-1 pr-2"></th>
                 ${dayHeaders}
                 <th class="font-normal text-[10px] text-gray-400 px-2"></th>
               </tr>
             </thead>
             <tbody>
               <tr class="border-t border-gray-100">
-                <td class="text-xs text-gray-600 py-1 pr-2">💪 Séance sport</td>
+                <td class="text-xs text-gray-600 py-1 pr-2 align-middle">💪 Séance sport</td>
                 ${seanceSportRow}
-                <td class="text-xs text-gray-500 text-center px-2">${w.seanceSport.filter(v => v === 'green').length}/7</td>
+                <td class="text-xs text-gray-500 text-center px-2 align-middle">${w.seanceSport.filter(v => v === 'green').length}/7</td>
               </tr>
               <tr class="border-t border-gray-100">
-                <td class="text-xs text-gray-600 py-1 pr-2">👣 Pas</td>
+                <td class="text-xs text-gray-600 py-1 pr-2 align-middle">👣 Pas</td>
                 ${pasRow}
-                <td class="text-xs text-gray-500 text-center px-2 whitespace-nowrap">${pasTotal > 0 ? pasTotal.toLocaleString('fr-FR') : '—'}</td>
+                <td class="text-xs text-gray-500 text-center px-2 whitespace-nowrap align-middle">${pasTotal > 0 ? pasTotal.toLocaleString('fr-FR') : '—'}</td>
               </tr>
               <tr>
                 <td colspan="9" class="py-2"><hr class="border-gray-200"></td>
               </tr>
               <tr class="border-t border-gray-100">
-                <td class="text-xs text-gray-600 py-1 pr-2">🏃 Défi sport</td>
+                <td class="text-xs text-gray-600 py-1 pr-2 align-middle">🏃 Défi sport</td>
                 ${sportRow}
-                <td class="text-xs text-gray-500 text-center px-2">${w.sport.filter(v => v === 'green').length}/7</td>
+                <td class="text-xs text-gray-500 text-center px-2 align-middle">${w.sport.filter(v => v === 'green').length}/7</td>
               </tr>
               <tr class="border-t border-gray-100">
-                <td class="text-xs text-gray-600 py-1 pr-2">🥗 Défi healthy</td>
+                <td class="text-xs text-gray-600 py-1 pr-2 align-middle">🥗 Défi healthy</td>
                 ${nutritionRow}
-                <td class="text-xs text-gray-500 text-center px-2">${w.nutrition.filter(v => v === 'green').length}/7</td>
+                <td class="text-xs text-gray-500 text-center px-2 align-middle">${w.nutrition.filter(v => v === 'green').length}/7</td>
               </tr>
               <tr>
                 <td colspan="9" class="py-2"><hr class="border-gray-200"></td>
               </tr>
               <tr class="border-t border-gray-100">
-                <td class="text-xs text-gray-600 py-1 pr-2">☀️ Petit-déj sain</td>
+                <td class="text-xs text-gray-600 py-1 pr-2 align-middle">☀️ Petit-déj sain</td>
                 ${ptitDejRow}
-                <td class="text-xs text-gray-500 text-center px-2">${w.ptitDejSain.filter(v => v === 'green').length}/7</td>
+                <td class="text-xs text-gray-500 text-center px-2 align-middle">${w.ptitDejSain.filter(v => v === 'green').length}/7</td>
               </tr>
               <tr class="border-t border-gray-100">
-                <td class="text-xs text-gray-600 py-1 pr-2">🥗 Déjeuner sain</td>
+                <td class="text-xs text-gray-600 py-1 pr-2 align-middle">🥗 Déjeuner sain</td>
                 ${dejRow}
-                <td class="text-xs text-gray-500 text-center px-2">${w.dejSain.filter(v => v === 'green').length}/7</td>
+                <td class="text-xs text-gray-500 text-center px-2 align-middle">${w.dejSain.filter(v => v === 'green').length}/7</td>
               </tr>
               <tr class="border-t border-gray-100">
-                <td class="text-xs text-gray-600 py-1 pr-2">🍎 Goûter sain</td>
+                <td class="text-xs text-gray-600 py-1 pr-2 align-middle">🍎 Goûter sain</td>
                 ${gouterRow}
-                <td class="text-xs text-gray-500 text-center px-2">${w.gouterSain.filter(v => v === 'green').length}/7</td>
+                <td class="text-xs text-gray-500 text-center px-2 align-middle">${w.gouterSain.filter(v => v === 'green').length}/7</td>
               </tr>
               <tr class="border-t border-gray-100">
-                <td class="text-xs text-gray-600 py-1 pr-2">🍽️ Dîner sain</td>
+                <td class="text-xs text-gray-600 py-1 pr-2 align-middle">🍽️ Dîner sain</td>
                 ${dinerRow}
-                <td class="text-xs text-gray-500 text-center px-2">${w.dinerSain.filter(v => v === 'green').length}/7</td>
+                <td class="text-xs text-gray-500 text-center px-2 align-middle">${w.dinerSain.filter(v => v === 'green').length}/7</td>
               </tr>
               <tr class="border-t border-gray-100">
-                <td class="text-xs text-gray-600 py-1 pr-2">💧 Eau (L)</td>
+                <td class="text-xs text-gray-600 py-1 pr-2 align-middle">💧 Eau (L)</td>
                 ${eauRow}
-                <td class="text-xs text-gray-500 text-center px-2 whitespace-nowrap">${eauTotal > 0 ? eauTotal.toFixed(1) + 'L' : '—'}</td>
+                <td class="text-xs text-gray-500 text-center px-2 whitespace-nowrap align-middle">${eauTotal > 0 ? eauTotal.toFixed(1) + 'L' : '—'}</td>
               </tr>
+              ${notesRow ? '<tr><td colspan="9" class="pt-2"><div class="border-t border-gray-100"></div></td></tr>' : ''}
+              ${notesRow}
             </tbody>
           </table>
         </div>
@@ -987,7 +1213,7 @@ function renderLeaderboard() {
       </div>
       <div class="flex items-center gap-2">
         <button onclick="changeWeek(-1)" class="px-3 py-1 rounded-lg bg-white/70 hover:bg-white">←</button>
-        <span class="text-sm font-semibold text-purple-700 min-w-[90px] text-center">Sem. ${idx + 1} / 12</span>
+        <span class="text-sm font-semibold text-amber-700 min-w-[90px] text-center">Sem. ${idx + 1} / 12</span>
         <button onclick="changeWeek(1)" class="px-3 py-1 rounded-lg bg-white/70 hover:bg-white">→</button>
       </div>
     </div>
@@ -1010,43 +1236,6 @@ function renderLeaderboard() {
 // ============================================================================
 // ACTIONS
 // ============================================================================
-function addParticipant() {
-  const input = document.getElementById("newParticipant");
-  const name = input.value.trim();
-  if (!name) return;
-  if (state.participants.some(p => p.name.toLowerCase() === name.toLowerCase())) {
-    alert("Cette personne est déjà dans la liste !");
-    return;
-  }
-  state.participants.push({ name, validated: false });
-  input.value = "";
-  saveState();
-  render();
-}
-
-function removeParticipant(idx) {
-  const p = state.participants[idx];
-  if (!p) return;
-  if (!confirm(`Retirer ${p.name} du challenge ?`)) return;
-  state.participants.splice(idx, 1);
-  // Nettoyage des progrès
-  Object.keys(state.progress).forEach(wk => {
-    if (state.progress[wk] && state.progress[wk][p.name]) {
-      delete state.progress[wk][p.name];
-    }
-  });
-  saveState();
-  render();
-}
-
-function toggleValidation(idx) {
-  const p = state.participants[idx];
-  if (!p) return;
-  p.validated = !p.validated;
-  saveState();
-  render();
-}
-
 function changeWeek(delta) {
   const cur = state.viewWeek !== null ? state.viewWeek : currentWeekIdx();
   state.viewWeek = Math.max(0, Math.min(11, cur + delta));
@@ -1108,6 +1297,23 @@ function escapeHtml(s) {
     "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
   }[c]));
 }
+
+// ============================================================================
+// TABS
+// ============================================================================
+function switchTab(tabName) {
+  document.querySelectorAll('.tab-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.tab === tabName);
+  });
+  document.querySelectorAll('.tab-panel').forEach(p => {
+    p.classList.toggle('active', p.dataset.panel === tabName);
+  });
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+document.querySelectorAll('.tab-btn').forEach(btn => {
+  btn.addEventListener('click', () => switchTab(btn.dataset.tab));
+});
 
 // ============================================================================
 // INIT
