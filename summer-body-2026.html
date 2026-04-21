@@ -1117,18 +1117,14 @@ function renderLeaderboard() {
     const dayHeaders = DAYS.map((d, i) => `<th class="font-normal text-[10px] text-gray-400 px-1 py-1">${d}</th>`).join('');
 
     const pasRow = w.pas.map((v, d) => `
-      <td class="text-center px-1 py-1 align-middle">
-        <input type="number" step="100" min="0" value="${v ?? ''}" placeholder="—"
-          class="w-14 text-center px-1 py-0.5 rounded border border-gray-200 focus:border-orange-500 outline-none text-xs"
-          onchange="updatePas('${escapeQuote(p.name)}', ${idx}, ${d}, this.value)">
+      <td class="text-center px-1 py-1 align-middle text-xs text-gray-700">
+        ${v != null ? Number(v).toLocaleString('fr-FR') : '<span class="text-gray-300">—</span>'}
       </td>
     `).join('');
 
     const eauRow = w.eau.map((v, d) => `
-      <td class="text-center px-1 py-1 align-middle">
-        <input type="number" step="0.1" min="0" value="${v ?? ''}" placeholder="—"
-          class="w-14 text-center px-1 py-0.5 rounded border border-gray-200 focus:border-orange-500 outline-none text-xs"
-          onchange="updateEau('${escapeQuote(p.name)}', ${idx}, ${d}, this.value)">
+      <td class="text-center px-1 py-1 align-middle text-xs text-gray-700">
+        ${v != null ? v : '<span class="text-gray-300">—</span>'}
       </td>
     `).join('');
     const eauTotal = w.eau.reduce((s, v) => s + (Number(v) || 0), 0);
@@ -1142,7 +1138,7 @@ function renderLeaderboard() {
     const dinerRow = DAYS.map((_, d) => colorCell(p.name, 'dinerSain', d, w.dinerSain[d], noteIdxMap[`dinerSain-${d}`])).join('');
 
     const notesRow = hasAnyNote ? `
-      <tr>
+      <tr class="hidden md:table-row">
         <td class="text-[10px] text-gray-500 py-1 pr-2 align-top font-medium">📝 Notes</td>
         ${DAYS.map((_, d) => {
           const ns = notesByDay[d];
@@ -1155,6 +1151,22 @@ function renderLeaderboard() {
         }).join('')}
         <td></td>
       </tr>
+    ` : '';
+
+    const notesBlockMobile = hasAnyNote ? `
+      <div class="md:hidden mt-3 pt-3 border-t border-gray-100">
+        <div class="text-xs text-gray-500 font-medium mb-2">📝 Notes</div>
+        <div class="space-y-2">
+          ${Object.entries(notesByDay).map(([d, ns]) => `
+            <div class="text-xs text-gray-600">
+              <div class="font-semibold text-gray-700">${DAY_NAMES[d]}</div>
+              <ul class="pl-3 space-y-0.5 mt-0.5">
+                ${ns.map(n => `<li><sup class="text-gray-400">${n.idx}</sup> ${n.emoji} ${escapeHtml(n.text)}</li>`).join('')}
+              </ul>
+            </div>
+          `).join('')}
+        </div>
+      </div>
     ` : '';
 
     return `
@@ -1239,11 +1251,12 @@ function renderLeaderboard() {
                 ${eauRow}
                 <td class="text-xs text-gray-500 text-center px-2 whitespace-nowrap align-middle">${eauTotal > 0 ? eauTotal.toFixed(1) + 'L' : '—'}</td>
               </tr>
-              ${notesRow ? '<tr><td colspan="9" class="pt-2"><div class="border-t border-gray-100"></div></td></tr>' : ''}
+              ${notesRow ? '<tr class="hidden md:table-row"><td colspan="9" class="pt-2"><div class="border-t border-gray-100"></div></td></tr>' : ''}
               ${notesRow}
             </tbody>
           </table>
         </div>
+        ${notesBlockMobile}
       </div>
     `;
   }).join('');
