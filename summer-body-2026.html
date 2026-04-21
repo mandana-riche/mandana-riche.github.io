@@ -556,6 +556,16 @@ let state = loadState();
     state.seededLiseW1Mon = true;
   }
 
+  // Note goûter Lise — Semaine 1 · Lundi
+  if (!state.seededLiseW1MonGouterNote) {
+    if (!state.progress[0]) state.progress[0] = {};
+    if (!state.progress[0]["Lise"]) state.progress[0]["Lise"] = {};
+    const li = state.progress[0]["Lise"];
+    li.gouterNotes = li.gouterNotes || ['', '', '', '', '', '', ''];
+    li.gouterNotes[0] = 'Muffin chocolat pistache';
+    state.seededLiseW1MonGouterNote = true;
+  }
+
   // Préremplissage Lorenza — Semaine 1 · Lundi
   if (!state.seededLorenzaW1Mon) {
     if (!state.progress[0]) state.progress[0] = {};
@@ -855,10 +865,10 @@ function renderLeaderboard() {
     const seanceSportRow = DAYS.map((_, d) => colorCell(p.name, 'seanceSport', d, w.seanceSport[d], (w.sportNotes || [])[d])).join('');
     const sportRow = DAYS.map((_, d) => colorCell(p.name, 'sport', d, w.sport[d])).join('');
     const nutritionRow = DAYS.map((_, d) => colorCell(p.name, 'nutrition', d, w.nutrition[d])).join('');
-    const ptitDejRow = DAYS.map((_, d) => colorCell(p.name, 'ptitDejSain', d, w.ptitDejSain[d])).join('');
-    const dejRow = DAYS.map((_, d) => colorCell(p.name, 'dejSain', d, w.dejSain[d])).join('');
-    const gouterRow = DAYS.map((_, d) => colorCell(p.name, 'gouterSain', d, w.gouterSain[d])).join('');
-    const dinerRow = DAYS.map((_, d) => colorCell(p.name, 'dinerSain', d, w.dinerSain[d])).join('');
+    const ptitDejRow = DAYS.map((_, d) => colorCell(p.name, 'ptitDejSain', d, w.ptitDejSain[d], (w.ptitDejNotes || [])[d])).join('');
+    const dejRow = DAYS.map((_, d) => colorCell(p.name, 'dejSain', d, w.dejSain[d], (w.dejNotes || [])[d])).join('');
+    const gouterRow = DAYS.map((_, d) => colorCell(p.name, 'gouterSain', d, w.gouterSain[d], (w.gouterNotes || [])[d])).join('');
+    const dinerRow = DAYS.map((_, d) => colorCell(p.name, 'dinerSain', d, w.dinerSain[d], (w.dinerNotes || [])[d])).join('');
 
     return `
       <div class="bg-white/70 rounded-xl p-4 shadow-sm">
