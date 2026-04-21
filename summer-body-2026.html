@@ -794,6 +794,45 @@ let state = loadState();
     state.seededW1TueLiseMandana = true;
   }
 
+  // Semaine 1 · Mardi — Lorenza
+  if (!state.seededW1TueLorenza) {
+    const setDay = (name, dayIdx, data) => {
+      if (!state.progress[0]) state.progress[0] = {};
+      if (!state.progress[0][name]) state.progress[0][name] = {};
+      const p = state.progress[0][name];
+      const initArr = () => [null, null, null, null, null, null, null];
+      const initStr = () => ['', '', '', '', '', '', ''];
+      p.seanceSport  = p.seanceSport  || initArr();
+      p.sport        = p.sport        || initArr();
+      p.nutrition    = p.nutrition    || initArr();
+      p.pas          = p.pas          || initArr();
+      p.eau          = p.eau          || initArr();
+      p.ptitDejSain  = p.ptitDejSain  || initArr();
+      p.dejSain      = p.dejSain      || initArr();
+      p.gouterSain   = p.gouterSain   || initArr();
+      p.dinerSain    = p.dinerSain    || initArr();
+      p.sportNotes   = p.sportNotes   || initStr();
+      p.ptitDejNotes = p.ptitDejNotes || initStr();
+      p.dejNotes     = p.dejNotes     || initStr();
+      p.gouterNotes  = p.gouterNotes  || initStr();
+      p.dinerNotes   = p.dinerNotes   || initStr();
+      Object.entries(data).forEach(([k, v]) => {
+        if (Array.isArray(p[k])) p[k][dayIdx] = v;
+      });
+    };
+
+    setDay("Lorenza", 1, {
+      seanceSport: 'green', sportNotes: '50min course + 20min renfo',
+      pas: 9136,
+      sport: 'green', nutrition: 'green',
+      ptitDejSain: 'green', dejSain: 'green',
+      gouterSain: 'orange', gouterNotes: 'part de gâteau yaourt maison allégé en sucre + banane',
+      dinerSain: 'orange', dinerNotes: 'tarte salée maison (beaucoup de légumes, un peu trop de fromage)',
+      eau: 1.5,
+    });
+    state.seededW1TueLorenza = true;
+  }
+
   saveState();
 })();
 
