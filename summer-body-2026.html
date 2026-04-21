@@ -523,6 +523,16 @@ let state = loadState();
     state.seededLeaW1Mon = true;
   }
 
+  // Note dîner Léa — Semaine 1 · Lundi
+  if (!state.seededLeaW1MonDinerNote) {
+    if (!state.progress[0]) state.progress[0] = {};
+    if (!state.progress[0]["Léa"]) state.progress[0]["Léa"] = {};
+    const le = state.progress[0]["Léa"];
+    le.dinerNotes = le.dinerNotes || ['', '', '', '', '', '', ''];
+    le.dinerNotes[0] = 'saucisse purée';
+    state.seededLeaW1MonDinerNote = true;
+  }
+
   // Poids Léa — Semaine 1
   if (!state.seededLeaW1Weight) {
     if (!state.progress[0]) state.progress[0] = {};
