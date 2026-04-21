@@ -1114,7 +1114,24 @@ function renderLeaderboard() {
     }
     const hasAnyNote = noteCounter > 0;
 
-    const dayHeaders = DAYS.map((d, i) => `<th class="font-normal text-[10px] text-gray-400 px-1 py-1">${d}</th>`).join('');
+    const isPerfectDay = (d) =>
+      w.seanceSport[d] === 'green' &&
+      w.sport[d]       === 'green' &&
+      w.nutrition[d]   === 'green' &&
+      w.ptitDejSain[d] === 'green' &&
+      w.dejSain[d]     === 'green' &&
+      w.gouterSain[d]  === 'green' &&
+      w.dinerSain[d]   === 'green' &&
+      Number(w.pas[d]) > 10000 &&
+      Number(w.eau[d]) > 1.5;
+
+    const dayHeaders = DAYS.map((dLabel, d) => {
+      const perfect = isPerfectDay(d);
+      return `<th class="font-normal text-[10px] text-gray-400 px-1 py-1">
+        <div>${dLabel}</div>
+        ${perfect ? '<div class="text-sm leading-none mt-0.5" title="Journée parfaite ! 🎉">🏆</div>' : ''}
+      </th>`;
+    }).join('');
 
     const pasRow = w.pas.map((v, d) => `
       <td class="text-center px-1 py-1 align-middle text-xs text-gray-700">
