@@ -566,6 +566,16 @@ let state = loadState();
     state.seededLiseW1Mon = true;
   }
 
+  // Forcer séance sport Lise — Semaine 1 · Lundi
+  if (!state.seededLiseW1MonSportFix) {
+    if (!state.progress[0]) state.progress[0] = {};
+    if (!state.progress[0]["Lise"]) state.progress[0]["Lise"] = {};
+    const li = state.progress[0]["Lise"];
+    li.seanceSport = li.seanceSport || [null, null, null, null, null, null, null];
+    li.seanceSport[0] = 'green';
+    state.seededLiseW1MonSportFix = true;
+  }
+
   // Note goûter Lise — Semaine 1 · Lundi
   if (!state.seededLiseW1MonGouterNote) {
     if (!state.progress[0]) state.progress[0] = {};
