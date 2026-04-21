@@ -523,6 +523,14 @@ let state = loadState();
     state.seededLeaW1Mon = true;
   }
 
+  // Poids Léa — Semaine 1
+  if (!state.seededLeaW1Weight) {
+    if (!state.progress[0]) state.progress[0] = {};
+    if (!state.progress[0]["Léa"]) state.progress[0]["Léa"] = {};
+    state.progress[0]["Léa"].poids = 88.10;
+    state.seededLeaW1Weight = true;
+  }
+
   // Préremplissage Lise — Semaine 1 · Lundi
   if (!state.seededLiseW1Mon) {
     if (!state.progress[0]) state.progress[0] = {};
