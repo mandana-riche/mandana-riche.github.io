@@ -497,6 +497,31 @@ let state = loadState();
     state.seededMandanaW1Weight = true;
   }
 
+  // Préremplissage Lise — Semaine 1 · Lundi
+  if (!state.seededLiseW1Mon) {
+    if (!state.progress[0]) state.progress[0] = {};
+    if (!state.progress[0]["Lise"]) state.progress[0]["Lise"] = {};
+    const li = state.progress[0]["Lise"];
+    li.seanceSport  = li.seanceSport  || [null, null, null, null, null, null, null];
+    li.pas          = li.pas          || [null, null, null, null, null, null, null];
+    li.sport        = li.sport        || [null, null, null, null, null, null, null];
+    li.nutrition    = li.nutrition    || [null, null, null, null, null, null, null];
+    li.ptitDejSain  = li.ptitDejSain  || [null, null, null, null, null, null, null];
+    li.dejSain      = li.dejSain      || [null, null, null, null, null, null, null];
+    li.gouterSain   = li.gouterSain   || [null, null, null, null, null, null, null];
+    li.dinerSain    = li.dinerSain    || [null, null, null, null, null, null, null];
+    li.eau          = li.eau          || [null, null, null, null, null, null, null];
+    li.seanceSport[0] = 'green';
+    li.pas[0]         = 8855;
+    li.nutrition[0]   = 'green';
+    li.ptitDejSain[0] = 'green';
+    li.dejSain[0]     = 'green';
+    li.gouterSain[0]  = 'red';
+    li.dinerSain[0]   = 'green';
+    li.eau[0]         = 1.8;
+    state.seededLiseW1Mon = true;
+  }
+
   // Préremplissage Lorenza — Semaine 1 · Lundi
   if (!state.seededLorenzaW1Mon) {
     if (!state.progress[0]) state.progress[0] = {};
