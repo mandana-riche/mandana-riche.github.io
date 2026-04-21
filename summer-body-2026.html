@@ -122,7 +122,7 @@
       <div class="mt-6">
         <h3 class="font-semibold text-lg mb-2">📊 On va se tracker !</h3>
         <p class="text-sm text-gray-700 mb-3">
-          Chaque semaine, on suit nos progrès ensemble. Un clic sur une case pour la passer en <span class="inline-block w-4 h-4 rounded bg-green-400 align-middle"></span> <b>vert</b> (validé) ou <span class="inline-block w-4 h-4 rounded bg-red-400 align-middle"></span> <b>rouge</b> (raté / trash). Un 2e clic pour changer, un 3e pour effacer. Simple !
+          Chaque semaine, on suit nos progrès ensemble. Un clic sur une case pour la passer en <span class="inline-block w-4 h-4 rounded bg-green-400 align-middle"></span> <b>vert</b> (validé), <span class="inline-block w-4 h-4 rounded bg-orange-400 align-middle"></span> <b>orange</b> (mitigé / à débattre) ou <span class="inline-block w-4 h-4 rounded bg-red-400 align-middle"></span> <b>rouge</b> (raté / trash). Clic suivant pour changer, clic final pour effacer.
         </p>
         <p class="text-sm text-gray-600 mb-4">
           Voilà à quoi ressemble une semaine bien remplie (avec 2 repas trash et 1 joker utilisé) :
@@ -440,7 +440,7 @@ function defaultState() {
       { name: "Lise",    validated: true  },
       { name: "Mandana", validated: true  },
       { name: "Lorenza", validated: true  },
-      { name: "Léa",     validated: false },
+      { name: "Léa",     validated: true  },
     ],
     progress: {},
     viewWeek: null,
@@ -495,6 +495,32 @@ let state = loadState();
     if (!state.progress[0]["Mandana"]) state.progress[0]["Mandana"] = {};
     state.progress[0]["Mandana"].poids = 60.8;
     state.seededMandanaW1Weight = true;
+  }
+
+  // Préremplissage Léa — Semaine 1 · Lundi
+  if (!state.seededLeaW1Mon) {
+    if (!state.progress[0]) state.progress[0] = {};
+    if (!state.progress[0]["Léa"]) state.progress[0]["Léa"] = {};
+    const le = state.progress[0]["Léa"];
+    le.seanceSport  = le.seanceSport  || [null, null, null, null, null, null, null];
+    le.pas          = le.pas          || [null, null, null, null, null, null, null];
+    le.sport        = le.sport        || [null, null, null, null, null, null, null];
+    le.nutrition    = le.nutrition    || [null, null, null, null, null, null, null];
+    le.ptitDejSain  = le.ptitDejSain  || [null, null, null, null, null, null, null];
+    le.dejSain      = le.dejSain      || [null, null, null, null, null, null, null];
+    le.gouterSain   = le.gouterSain   || [null, null, null, null, null, null, null];
+    le.dinerSain    = le.dinerSain    || [null, null, null, null, null, null, null];
+    le.eau          = le.eau          || [null, null, null, null, null, null, null];
+    le.seanceSport[0] = 'red';
+    le.pas[0]         = 15951;
+    le.sport[0]       = 'green';
+    le.nutrition[0]   = 'green';
+    le.ptitDejSain[0] = 'green';
+    le.dejSain[0]     = 'green';
+    le.gouterSain[0]  = 'green';
+    le.dinerSain[0]   = 'orange';
+    le.eau[0]         = 1.5;
+    state.seededLeaW1Mon = true;
   }
 
   // Préremplissage Lise — Semaine 1 · Lundi
@@ -786,7 +812,7 @@ function renderLeaderboard() {
   }
 
   function colorCell(name, field, d, value, note) {
-    const bg = value === 'green' ? 'bg-green-400' : value === 'red' ? 'bg-red-400' : 'bg-gray-100';
+    const bg = value === 'green' ? 'bg-green-400' : value === 'orange' ? 'bg-orange-400' : value === 'red' ? 'bg-red-400' : 'bg-gray-100';
     const noteHtml = note ? `<div class="text-[9px] text-gray-500 mt-0.5 truncate" title="${escapeHtml(note)}">${escapeHtml(note)}</div>` : '';
     return `<td class="text-center px-1 py-1 align-top">
       <button onclick="cycleDaily('${escapeQuote(name)}', ${idx}, '${field}', ${d})"
@@ -1014,7 +1040,7 @@ function updateEau(name, weekIdx, dayIdx, value) {
 function cycleDaily(name, weekIdx, field, dayIdx) {
   const p = getWeekProgress(weekIdx, name);
   const cur = p[field][dayIdx];
-  p[field][dayIdx] = cur === null ? 'green' : cur === 'green' ? 'red' : null;
+  p[field][dayIdx] = cur === null ? 'green' : cur === 'green' ? 'orange' : cur === 'orange' ? 'red' : null;
   saveState();
   render();
 }
