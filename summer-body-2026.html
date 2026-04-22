@@ -842,6 +842,99 @@ let state = loadState();
     state.seededW1TueLorenzaFixGreen = true;
   }
 
+  // Semaine 1 · Mardi — Léa
+  if (!state.seededW1TueLea) {
+    const setDay = (name, dayIdx, data) => {
+      if (!state.progress[0]) state.progress[0] = {};
+      if (!state.progress[0][name]) state.progress[0][name] = {};
+      const p = state.progress[0][name];
+      const initArr = () => [null, null, null, null, null, null, null];
+      const initStr = () => ['', '', '', '', '', '', ''];
+      p.seanceSport  = p.seanceSport  || initArr();
+      p.sport        = p.sport        || initArr();
+      p.nutrition    = p.nutrition    || initArr();
+      p.pas          = p.pas          || initArr();
+      p.eau          = p.eau          || initArr();
+      p.ptitDejSain  = p.ptitDejSain  || initArr();
+      p.dejSain      = p.dejSain      || initArr();
+      p.gouterSain   = p.gouterSain   || initArr();
+      p.dinerSain    = p.dinerSain    || initArr();
+      p.sportNotes   = p.sportNotes   || initStr();
+      p.ptitDejNotes = p.ptitDejNotes || initStr();
+      p.dejNotes     = p.dejNotes     || initStr();
+      p.gouterNotes  = p.gouterNotes  || initStr();
+      p.dinerNotes   = p.dinerNotes   || initStr();
+      Object.entries(data).forEach(([k, v]) => {
+        if (Array.isArray(p[k])) p[k][dayIdx] = v;
+      });
+    };
+
+    setDay("Léa", 1, {
+      seanceSport: 'red',
+      pas: 15951,
+      sport: 'green', nutrition: 'green',
+      ptitDejSain: 'green', dejSain: 'green',
+      gouterSain: 'red',
+      dinerSain: 'red', dinerNotes: 'moules frites',
+      eau: 1.5,
+    });
+    state.seededW1TueLea = true;
+  }
+
+  // Semaine 1 · Mercredi — Mandana & Lorenza
+  if (!state.seededW1WedMandanaLorenza) {
+    const setDay = (name, dayIdx, data) => {
+      if (!state.progress[0]) state.progress[0] = {};
+      if (!state.progress[0][name]) state.progress[0][name] = {};
+      const p = state.progress[0][name];
+      const initArr = () => [null, null, null, null, null, null, null];
+      const initStr = () => ['', '', '', '', '', '', ''];
+      p.seanceSport  = p.seanceSport  || initArr();
+      p.sport        = p.sport        || initArr();
+      p.nutrition    = p.nutrition    || initArr();
+      p.pas          = p.pas          || initArr();
+      p.eau          = p.eau          || initArr();
+      p.ptitDejSain  = p.ptitDejSain  || initArr();
+      p.dejSain      = p.dejSain      || initArr();
+      p.gouterSain   = p.gouterSain   || initArr();
+      p.dinerSain    = p.dinerSain    || initArr();
+      p.sportNotes   = p.sportNotes   || initStr();
+      p.ptitDejNotes = p.ptitDejNotes || initStr();
+      p.dejNotes     = p.dejNotes     || initStr();
+      p.gouterNotes  = p.gouterNotes  || initStr();
+      p.dinerNotes   = p.dinerNotes   || initStr();
+      Object.entries(data).forEach(([k, v]) => {
+        if (Array.isArray(p[k])) p[k][dayIdx] = v;
+      });
+    };
+
+    setDay("Mandana", 2, {
+      seanceSport: 'green', sportNotes: 'Muscu + 9km marche tapis',
+      pas: 12000,
+      sport: 'green', nutrition: 'green',
+      ptitDejSain: 'green', dejSain: 'green', gouterSain: 'green', dinerSain: 'green',
+      eau: 1.8,
+    });
+    setDay("Lorenza", 2, {
+      seanceSport: 'green', sportNotes: 'Footing 30min + 20min renfo',
+      pas: 16960,
+      sport: 'green', nutrition: 'green',
+      ptitDejSain: 'green',
+      dejSain: 'red', dejNotes: 'pain pita poulet rôti, aïoli, babaganoush, légumes grillés',
+      gouterSain: 'green', gouterNotes: 'pas de goûter',
+      dinerSain: 'green',
+      eau: 1.5,
+    });
+    setDay("Lise", 2, {
+      seanceSport: 'green', sportNotes: '40min natation',
+      pas: 13585,
+      sport: 'green', nutrition: 'green',
+      ptitDejSain: 'green', dejSain: 'green', gouterSain: 'green', dinerSain: 'green',
+      eau: 1.8,
+    });
+    state.seededW1WedMandanaLorenza = true;
+  }
+
   saveState();
 })();
 
