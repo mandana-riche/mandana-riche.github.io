@@ -703,6 +703,7 @@ let state = loadState();
       p.gouterSain   = p.gouterSain   || initArr();
       p.dinerSain    = p.dinerSain    || initArr();
       p.sportNotes   = p.sportNotes   || initStr();
+      p.pasNotes     = p.pasNotes     || initStr();
       p.ptitDejNotes = p.ptitDejNotes || initStr();
       p.dejNotes     = p.dejNotes     || initStr();
       p.gouterNotes  = p.gouterNotes  || initStr();
@@ -766,6 +767,7 @@ let state = loadState();
       p.gouterSain   = p.gouterSain   || initArr();
       p.dinerSain    = p.dinerSain    || initArr();
       p.sportNotes   = p.sportNotes   || initStr();
+      p.pasNotes     = p.pasNotes     || initStr();
       p.ptitDejNotes = p.ptitDejNotes || initStr();
       p.dejNotes     = p.dejNotes     || initStr();
       p.gouterNotes  = p.gouterNotes  || initStr();
@@ -812,6 +814,7 @@ let state = loadState();
       p.gouterSain   = p.gouterSain   || initArr();
       p.dinerSain    = p.dinerSain    || initArr();
       p.sportNotes   = p.sportNotes   || initStr();
+      p.pasNotes     = p.pasNotes     || initStr();
       p.ptitDejNotes = p.ptitDejNotes || initStr();
       p.dejNotes     = p.dejNotes     || initStr();
       p.gouterNotes  = p.gouterNotes  || initStr();
@@ -860,6 +863,7 @@ let state = loadState();
       p.gouterSain   = p.gouterSain   || initArr();
       p.dinerSain    = p.dinerSain    || initArr();
       p.sportNotes   = p.sportNotes   || initStr();
+      p.pasNotes     = p.pasNotes     || initStr();
       p.ptitDejNotes = p.ptitDejNotes || initStr();
       p.dejNotes     = p.dejNotes     || initStr();
       p.gouterNotes  = p.gouterNotes  || initStr();
@@ -899,6 +903,7 @@ let state = loadState();
       p.gouterSain   = p.gouterSain   || initArr();
       p.dinerSain    = p.dinerSain    || initArr();
       p.sportNotes   = p.sportNotes   || initStr();
+      p.pasNotes     = p.pasNotes     || initStr();
       p.ptitDejNotes = p.ptitDejNotes || initStr();
       p.dejNotes     = p.dejNotes     || initStr();
       p.gouterNotes  = p.gouterNotes  || initStr();
@@ -909,8 +914,8 @@ let state = loadState();
     };
 
     setDay("Mandana", 2, {
-      seanceSport: 'green', sportNotes: 'Muscu + 9km marche tapis',
-      pas: 12000,
+      seanceSport: 'green', sportNotes: 'Muscu',
+      pas: 12000, pasNotes: '9.5km marche sur tapis',
       sport: 'green', nutrition: 'green',
       ptitDejSain: 'green', dejSain: 'green', gouterSain: 'green', dinerSain: 'green',
       eau: 1.8,
@@ -933,6 +938,18 @@ let state = loadState();
       eau: 1.8,
     });
     state.seededW1WedMandanaLorenza = true;
+  }
+
+  // Correction Mandana Mercredi : séparer note sport / note pas
+  if (!state.seededW1WedMandanaNotesFix) {
+    if (state.progress[0]?.["Mandana"]) {
+      const m = state.progress[0]["Mandana"];
+      m.sportNotes = m.sportNotes || ['', '', '', '', '', '', ''];
+      m.pasNotes   = m.pasNotes   || ['', '', '', '', '', '', ''];
+      m.sportNotes[2] = 'Muscu';
+      m.pasNotes[2]   = '9.5km marche sur tapis';
+    }
+    state.seededW1WedMandanaNotesFix = true;
   }
 
   saveState();
@@ -1187,6 +1204,7 @@ function renderLeaderboard() {
     // Collecte des notes par jour + index de référence
     const noteCatalogue = [
       { colorField: 'seanceSport', notes: w.sportNotes,   emoji: '💪' },
+      { colorField: 'pas',         notes: w.pasNotes,     emoji: '👣' },
       { colorField: 'ptitDejSain', notes: w.ptitDejNotes, emoji: '☀️' },
       { colorField: 'dejSain',     notes: w.dejNotes,     emoji: '🥗' },
       { colorField: 'gouterSain',  notes: w.gouterNotes,  emoji: '🍎' },
@@ -1226,11 +1244,15 @@ function renderLeaderboard() {
       </th>`;
     }).join('');
 
-    const pasRow = w.pas.map((v, d) => `
+    const pasRow = w.pas.map((v, d) => {
+      const noteIdx = noteIdxMap[`pas-${d}`];
+      const badge = noteIdx ? `<sup class="text-[9px] text-gray-400 ml-0.5">${noteIdx}</sup>` : '';
+      return `
       <td class="text-center px-1 py-1 align-middle text-xs text-gray-700">
-        ${v != null ? Number(v).toLocaleString('fr-FR') : '<span class="text-gray-300">—</span>'}
+        ${v != null ? Number(v).toLocaleString('fr-FR') : '<span class="text-gray-300">—</span>'}${badge}
       </td>
-    `).join('');
+    `;
+    }).join('');
 
     const eauRow = w.eau.map((v, d) => `
       <td class="text-center px-1 py-1 align-middle text-xs text-gray-700">
