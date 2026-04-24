@@ -952,6 +952,69 @@ let state = loadState();
     state.seededW1WedMandanaNotesFix = true;
   }
 
+  // Semaine 1 · Jeudi — Léa, Mandana & Lise
+  if (!state.seededW1ThuLeaMandanaLise) {
+    const setDay = (name, dayIdx, data) => {
+      if (!state.progress[0]) state.progress[0] = {};
+      if (!state.progress[0][name]) state.progress[0][name] = {};
+      const p = state.progress[0][name];
+      const initArr = () => [null, null, null, null, null, null, null];
+      const initStr = () => ['', '', '', '', '', '', ''];
+      p.seanceSport  = p.seanceSport  || initArr();
+      p.sport        = p.sport        || initArr();
+      p.nutrition    = p.nutrition    || initArr();
+      p.pas          = p.pas          || initArr();
+      p.eau          = p.eau          || initArr();
+      p.ptitDejSain  = p.ptitDejSain  || initArr();
+      p.dejSain      = p.dejSain      || initArr();
+      p.gouterSain   = p.gouterSain   || initArr();
+      p.dinerSain    = p.dinerSain    || initArr();
+      p.sportNotes   = p.sportNotes   || initStr();
+      p.pasNotes     = p.pasNotes     || initStr();
+      p.ptitDejNotes = p.ptitDejNotes || initStr();
+      p.dejNotes     = p.dejNotes     || initStr();
+      p.gouterNotes  = p.gouterNotes  || initStr();
+      p.dinerNotes   = p.dinerNotes   || initStr();
+      Object.entries(data).forEach(([k, v]) => {
+        if (Array.isArray(p[k])) p[k][dayIdx] = v;
+      });
+    };
+
+    setDay("Léa", 3, {
+      seanceSport: 'red',
+      pas: 9506,
+      sport: 'green', sportNotes: 'séance abdo 10 min',
+      nutrition: 'red',
+      ptitDejSain: 'green',
+      dejSain: 'red',
+      gouterSain: 'green', gouterNotes: 'pas de goûter',
+      dinerSain: 'red',
+      eau: 1.5,
+    });
+    setDay("Mandana", 3, {
+      seanceSport: 'green', sportNotes: 'Footing 5km',
+      pas: 15405,
+      sport: 'red',
+      nutrition: 'red',
+      ptitDejSain: 'green',
+      dejSain: 'green',
+      gouterSain: 'red', gouterNotes: 'gâteau au chocolat fait par Kyan avec la nounou (recette peu sucrée), j\'ai craqué',
+      dinerSain: 'green', dinerNotes: 'traiteur chinois pour la famille, j\'ai mangé ma salade + saumon dans mon coin',
+      eau: 1.5,
+    });
+    setDay("Lise", 3, {
+      pas: 14894,
+      sport: 'red',
+      nutrition: 'green',
+      ptitDejSain: 'green',
+      dejSain: 'green',
+      gouterSain: 'green',
+      dinerSain: 'red', dinerNotes: 'apéro chips bonbon la totale !!!',
+      eau: 1.8,
+    });
+    state.seededW1ThuLeaMandanaLise = true;
+  }
+
   saveState();
 })();
 
